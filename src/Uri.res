@@ -1,0 +1,1 @@
+let encodeComponent = Js.Global.encodeURIComponent
