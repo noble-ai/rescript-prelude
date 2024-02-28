@@ -1,3 +1,5 @@
+///doc/ # Float
+
 let toLocaleString: float => string = %raw(`(x) => x.toLocaleString()`)
 
 let fromString = Belt.Float.fromString

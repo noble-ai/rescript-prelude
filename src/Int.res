@@ -1,3 +1,5 @@
+///doc/ # Int
+
 type t = int
 let toString = Belt.Int.toString
 

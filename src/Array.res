@@ -1,3 +1,4 @@
+///doc/ # Array
 // Reexport
 type t<'a> = array<'a>
 let get = Belt.Array.get

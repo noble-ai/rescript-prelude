@@ -1,3 +1,5 @@
+///doc/ # Option
+
 include Belt.Option
 
 @deprecated("please use map->getWithDefault for ease of refactoring")

@@ -1,3 +1,5 @@
+///doc/ # String
+
 // Just like Array.splitAt
 let splitAt = (str: string, i: int) => {
   let a = str->Js.String2.slice(~from=0, ~to_=i)

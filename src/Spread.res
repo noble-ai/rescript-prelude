@@ -1,3 +1,5 @@
+///doc/ # Spread
+
 @react.component
 let make = (~style: option<ReactDOMStyle.t>=?, ~props, ~children: React.element) => {
   switch style {

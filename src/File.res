@@ -1,3 +1,4 @@
+///doc/ # File
 type t
 
 @new external make: unit => t = "File"

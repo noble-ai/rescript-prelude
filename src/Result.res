@@ -1,3 +1,4 @@
+///doc/ # Result
 include Belt.Result
 
 let ok = x => Ok(x)

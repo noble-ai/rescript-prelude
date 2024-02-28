@@ -1,3 +1,4 @@
+///doc/ # Dict
 type t<'a> = Js.Dict.t<'a>
 let empty = Js.Dict.empty
 // Immutable set.  Mutable set causes react state to not be invalidated which is a problem for react.

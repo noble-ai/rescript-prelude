@@ -1,3 +1,5 @@
+///doc/ # Int
+
 type t = Js.Json.t
 let stringify = Js.Json.stringify
 

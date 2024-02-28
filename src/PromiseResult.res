@@ -1,3 +1,4 @@
+///doc/ # PromiseResult
 type result<'ok, 'err> = Result.t<'ok, 'err>
 type t<'ok, 'err> = Promise.t<result<'ok, 'err>>
 

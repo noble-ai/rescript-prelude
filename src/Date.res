@@ -1,3 +1,4 @@
+///doc/ # Date
 type t = Js.Date.t
 let fromFloat = Js.Date.fromFloat
 let valueOf = Js.Date.valueOf

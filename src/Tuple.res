@@ -1,3 +1,5 @@
+///doc/ # Tuple
+
 // This module contains both flattened and recursive definitions of Tuple, with equivalent operators for both.
 
 let fst2 = ((a,_)) => a

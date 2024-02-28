@@ -1,3 +1,5 @@
+///doc/ # Promise
+
 type t<'a> = Js.Promise.t<'a>
 type error = Js.Promise.error
 external void: t<'a> => unit = "%identity"

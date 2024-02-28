@@ -1,3 +1,5 @@
+///doc/ # FormData
+
 type t
 
 @new external make: unit => t = "FormData"
