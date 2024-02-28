@@ -6,7 +6,7 @@
   "repository": "https://github.com/noble-ai/rescript-prelude",
   "author": "Alex Mouton (alex.mouton@noble.ai)",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "build": "rescript build",
     "start": "rescript build -w",
