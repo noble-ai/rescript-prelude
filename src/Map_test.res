@@ -59,7 +59,7 @@ describe("Map", () => {
 	 })
 
 	 describe("Complex", () => {
-			let value = MapTuple.fromIterable([((1, 2), 1), ((3, 4), 2)]->Array.toIterable)
+			let value = MapTuple.fromArray([((1, 2), 1), ((3, 4), 2)])
 			it("get", () => {
 				 expect(value->MapTuple.get((1, 2)))->toBe(Some(1))
 				 expect(value->MapTuple.get((3, 4)))->toBe(Some(2))

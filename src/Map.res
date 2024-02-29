@@ -66,10 +66,10 @@ module Complex = (ToString: ToString) => {
   type keys = t<string, ToString.t>
   type values<'value> = t<string, 'value>
   type t<'value> = (keys, values<'value>)
-  let fromIterable = iterable => {
+  let fromArray = iterable => {
     let keys: keys = make()
     let values: values<'value> = make()
-    iterable->Iterable.forEach(((key, value)) => {
+    iterable->Array.forEach(((key, value)) => {
       Mut.set(keys, ToString.toString(key), key)
       Mut.set(values, ToString.toString(key), value)
     })
