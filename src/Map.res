@@ -111,7 +111,15 @@ module Complex = (ToString: ToString) => {
 		(keys, values)
 	}
 
-	let set = (map, key, value) => map->clone->Mut.set(key, value)
-	let delete = (map, key) => map->clone->Mut.delete(key)
+	let set = (map, key, value): t<'a> => {
+		let new = map->clone->Mut.set(key, value)
+		new
+	}
+
+	let delete = (map, key): t<'a> => {
+		let new = map->clone->Mut.delete(key)
+		new
+	}
+
 	let clear = make
 }
