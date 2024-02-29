@@ -112,12 +112,14 @@ module Complex = (ToString: ToString) => {
 	}
 
 	let set = (map, key, value): t<'a> => {
-		let new = map->clone->Mut.set(key, value)
+		let new = map->clone
+		new->Mut.set(key, value)
 		new
 	}
 
 	let delete = (map, key): t<'a> => {
-		let new = map->clone->Mut.delete(key)
+		let new = map->clone
+		new->Mut.delete(key)
 		new
 	}
 
