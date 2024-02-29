@@ -1,6 +1,10 @@
 ///doc/ # Array
 // Reexport
 type t<'a> = array<'a>
+
+@scope("Array") external fromIterable: Iterable.t<'t> => t<'t> = "from"
+external toIterable: t<'t> => Iterable.t<'t> = "%identity"
+
 let get = Belt.Array.get
 let getUnsafe = Belt.Array.getUnsafe
 let getBy = Belt.Array.getBy
