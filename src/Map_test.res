@@ -50,6 +50,12 @@ describe("Map", () => {
 				 expect(value->Map.has("b"))->toBe(true)
 				 expect(value->Map.has("c"))->toBe(false)
 			})
+
+			describe("#reduce", () => {
+				it("correct reduce", () => {
+					expect(value->Map.reduce((acc, _key, value) => acc + value, 0))->toBe(3)
+				})
+			})
 	 })
 
 	 describe("Complex", () => {
@@ -75,6 +81,12 @@ describe("Map", () => {
 				 expect(value->MapTuple.has((1, 2)))->toBe(true)
 				 expect(value->MapTuple.has((3, 4)))->toBe(true)
 				 expect(value->MapTuple.has((5, 6)))->toBe(false)
+			})
+
+			describe("#reduce", () => {
+				it("correct reduce", () => {
+					expect(value->MapTuple.reduce((acc, _key, value) => acc + value, 0))->toBe(3)
+				})
 			})
 	 })
 })
