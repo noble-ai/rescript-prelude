@@ -1,239 +1,302 @@
 ///doc/ # Array
-// Reexport
 type t<'a> = array<'a>
 
+///doc/ ## Consruction
 @scope("Array") external fromIterable: Iterable.t<'t> => t<'t> = "from"
+let return = (a: 'a): t<'a> => [a]
+
+// Spread operator comes up as a fast copy similar to slice but i havnt checked.  -AxM
+let clone: t<'a> => t<'a> = %raw("(x) => [...x]")
+
+// [0..i) excludes i
+// TODO: return t<option<()>> to avoid keys - AxM
+let range: int => t<int> = %raw(`(i) => [...Array(i).keys()]`)
+
+@deprecated("Use range instead")
+let rangeInclusive: int => t<int> = %raw(`(i) => [...Array(i + 1).keys()]`)
+let rangeInclusive = (n: int) => {
+  if n >= 0 {
+    rangeInclusive(n)
+  } else {
+    []
+  }
+}
+
+///doc/ ## Deconstruction
 external toIterable: t<'t> => Iterable.t<'t> = "%identity"
 
-let get = Belt.Array.get
-let getUnsafe = Belt.Array.getUnsafe
-let getBy = Belt.Array.getBy
-let getExn = Belt.Array.getExn
-let getIndexBy = Belt.Array.getIndexBy
+///doc/ ## Investigation
+@get external length: t<'a> => int = "length"
+@send external includes: (t<'a>, 'a) => bool = "includes"
 
-let length = Js.Array2.length
+@send external forEach: (t<'a>, 'a => unit) => unit = "forEach"
+@send external forEachi: (t<'a>, ('a, int) => unit) => unit = "forEach"
 
-let reverse = Belt.Array.reverse
-let clone: array<'a> => array<'a> = %raw("(x) => [...x]")
+let get: (t<'a>, int) => option<'a> = %raw(`(x, i) => x[i]`)
+let getUnsafe: (t<'a>, int) => 'a = %raw(`(x, i) => x[i]`)
+let getExn = (x, i) => x->get(i)->Option.getExn(~desc="Array.getExn")
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+@send external indexOf: (t<'a>, 'a) => int = "indexOf"
+// indexOf uses strict equality for comparison which does not play well with rescripts more-but-not-always value based situations.[{a: 3}, {a: 4}].indexOf({a: 4}) == -1.
+@deprecated("Use findIndex instead")
+let indexOf = (arr, x) => {
+  let v = arr->indexOf(x)
+  v == -1 ? None : Some(v)
+}
+let y = () => indexOf(["a", "b", "c"], "b") // Some(1)
+
+@send external findIndex: (t<'a>, 'a => bool) => int = "findIndex"
+let findIndex = (arr, pred) => {
+  switch findIndex(arr, pred) {
+  | -1 => None
+  | x => Some(x)
+  }
+}
+
+@deprecated("Use findIndex instead")
+let getIndexBy = findIndex
+
+// Rename to all to match Promise, Result
+@send external all: (t<'a>, 'a => bool) => bool = "every"
+@deprecated("Use all instead")
+let every = all
+
+@send external alli: (t<'a>, ('a, int) => bool) => bool = "every"
+@deprecated("Use alli instead")
+let everyi = alli
+
+@send external some: (t<'a>, 'a => bool) => bool = "some"
+@send external somei: (t<'a>, ('a, int) => bool) => bool = "some"
+
+let isEmpty = (arr: t<'a>) => arr->length == 0
+
+///doc/ ## Mut
+module Mut = {
+  @send external sort: t<'a> => t<'a> = "sort"
+  @send external reverse: t<'a> => t<'a> = "reverse"
+  @send @variadic external splice: ( t<'a>, ~index: int, ~remove: int, array<'a>) => t<'a> = "splice"
+  let splice_ = (arr, ~index, ~remove, items) => splice(arr, ~index, ~remove, items)->ignore
+  @send external push: (t<'a>, 'a) => int = "push"
+  let push_ = (arr, x) => push(arr, x)->ignore
+  @send @variadic external pushMany: (t<'a>, array<'a>) => int = "push"
+  let pushMany_ = (arr, items) => pushMany(arr, items)->ignore
+}
+
+///doc/ ## Transformation
+// TODO: set needs to consider default values for new elements between current length and index - AxM
+// let set = (arr: t<'a>, el: 'a, index: int): t<'a> => {
+//   let begin = arr->slice(~start=0, ~end_=index)
+//   let end = arr->sliceFrom(index + 1)
+//   Array.join([begin, [el], end])
+// }
 
 // Immutable version. prefer immutable in this file. use raw for mutable tricks for now. -AxM
-let unsafeSet = (arr, index, x) => {
+let setUnsafe = (arr, index, x) => {
   let arr = clone(arr)
   Js.Array2.unsafe_set(arr, index, x)
   arr
 }
 
-let map = Js.Array2.map
-let mapi = Js.Array2.mapi
-let forEach = Js.Array2.forEach
-let forEachi = Js.Array2.forEachi
+@send external map: (t<'a>, 'a => 'b) => t<'b> = "map"
+@send external mapi: (t<'a>, ('a, int) => 'b) => t<'b> = "map"
+let const = (xs: t<'x>, b: 'b) => xs->map(_ => b)
 
+@send external bind: (t<'a>, 'a => t<'b>) => t<'b> = "flatMap"
+@send external bindi: (t<'a>, ('a, int) => t<'b>) => t<'b> = "flatMap"
+external identity: 'a => 'a = "%identity"
+let join = (arr: t<t<'a>>): t<'a> => bind(arr, identity)
 
-let filter = Js.Array2.filter
-let includes = Js.Array2.includes
-let joinWith = Js.Array2.joinWith
-let find = Js.Array2.find
-let reduce = Js.Array2.reduce
-let reducei = Js.Array2.reducei
-let indexOf = Js.Array2.indexOf
-let reverseInPlace = Js.Array2.reverseInPlace
-let every = Js.Array2.every
-let pushMany = Js.Array2.pushMany
-let push = Js.Array2.push
-let spliceInPlace = Js.Array2.spliceInPlace
-let findIndex = Js.Array2.findIndex
+@deprecated("use join instead")
+let flatten = join
+
+@send external filter: (t<'a>, 'a => bool) => t<'a> = "filter"
 
 let keepMap = (arr, fn) => {
   let v = []
-  arr->Js.Array2.forEach(x => {
+  arr->forEach(x => {
     switch fn(x) {
-    | Some(y) => v->Js.Array2.push(y)->ignore
+    | Some(y) => v->Mut.push(y)->ignore
     | None => ()
     }
   })
   v
 }
 
-@send external bind: (Js.Array.t<'a>, 'a => Js.Array.t<'b>) => Js.Array.t<'b> = "flatMap"
-@send
-external bindi: (Js.Array.t<'a>, ('a, int) => Js.Array.t<'b>) => Js.Array.t<'b> = "flatMap"
+let catOptions: (t<option<'a>>) => t<'a> = keepMap(_, identity)
 
-external identity: 'a => 'a = "%identity"
+let keepBind = (a: t<option<'a>>, fn: 'a => option<'b>): t<'b> =>
+  a->keepMap(Option.bind(_, fn))
 
-// [0..i) excludes i
-let range: int => array<int> = %raw(`(i) => [...Array(i).keys()]`)
-let rangeInclusive: int => array<int> = %raw(`(i) => [...Array(i + 1).keys()]`)
-let rangeInclusive = (n: int) => {
-  if n >= 0 {
-    rangeInclusive(n)
-  } else {
-    [] 
-  }
+@send external first: (t<'a>, 'a => bool) => option<'a> = "find"
+@send external firsti: (t<'a>, ('a, int) => bool) => option<'a> = "find"
+@deprecated("Use first instead")
+let find = first
+@deprecated("Use firsti instead")
+let findi = firsti
+
+let firstOption = (arr: t<'a>, fn: 'a => option<'b>): option<'b> => {
+  arr->first(y => y->fn->Option.isSome)->Option.bind(fn)
 }
 
-let flatten = (arr: array<array<'a>>): array<'a> => bind(arr, identity)
-let join = flatten
+let firstEq = (arr: t<'a>, x: 'a) => arr->find(y => y == x)
+@depreacted("Use firstEq instead")
+let findEq = firstEq
 
-let return = (a: 'a): array<'a> => [a]
+let firstBy = (arr: t<'a>, fn: 'a => 'b, b: 'b) => {
+  arr->find(y => fn(y) == b)
+}
+@deprecated("Use firstBy instead")
+let findBy = firstBy
 
-let const = (xs: array<'x>, b: 'b) => xs->Js.Array2.map(_ => b)
+@send external last: (t<'a>, 'a => bool) => option<'a> = "findLast"
+@send external lasti: (t<'a>, ('a, int) => bool) => option<'a> = "findLast"
+@deprecated("Use last instead")
+let findLast = last
+@deprecated("Use lasti instead")
+let findLasti = lasti
 
-let toIndices = Js.Array2.mapi(_, (_, i) => i)
+// Join is a common term for monads, and this function is fairly specific so give it the more specific name
+@send external joinWith: (t<string>, string) => string = "join"
 
-// consistent naming with Promise etc.
-let all = Js.Array2.every
-let alli = Js.Array2.everyi
-let some = Js.Array2.some
-let somei = Js.Array2.somei
+@send external reduce: (t<'a>, ('b, 'a) => 'b, 'b) => 'b = "reduce"
+@send external reducei: (t<'a>, ('b, 'a, int) => 'b, 'b) => 'b = "reduce"
 
-@send external sort: array<'a>  =>  array<'a> = "toSorted"
-@send external sortCmp: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
+@send external reverse: t<'a> => t<'a> = "toReversed"
+
+let toIndices = mapi(_, (_, i) => i)
+
+@send external sort: t<'a> => t<'a> = "toSorted"
+@send external sortCmp: (t<'a>, ('a, 'a) => int) => t<'a> = "toSorted"
 
 let slice = Js.Array2.slice
 let sliceFrom = Js.Array2.sliceFrom
-let head = get(_, 0) 
-let tail = (arr: array<'a>): array<'a> => arr->Js.Array2.sliceFrom(1)
-let stem = (arr: array<'a>): array<'a> => arr->Js.Array2.slice(~start=0, ~end_=-1)
-let last = (arr: array<'a>): option<'a> => arr->get(arr->length - 1)
-let take = (arr: array<'a>, int): array<'a> => arr->Js.Array2.slice(~start=0, ~end_=int)
 
-let zipAdjacent = (arr: array<'a>): array<('a, 'a)> => {
+let head = get(_, 0)
+let tail = (arr: t<'a>): t<'a> => arr->Js.Array2.sliceFrom(1)
+let stem = (arr: t<'a>): t<'a> => arr->Js.Array2.slice(~start=0, ~end_=-1)
+let last = (arr: t<'a>): option<'a> => arr->get(arr->length - 1)
+let take = (arr: t<'a>, int): t<'a> => arr->Js.Array2.slice(~start=0, ~end_=int)
+
+let zipAdjacent = (arr: t<'a>): t<('a, 'a)> => {
   arr->tail->Js.Array2.mapi((a, i) => (arr->getUnsafe(i), a))
 }
 
-let findEq = (arr: array<'a>, x: 'a) => {
-  arr->Js.Array2.find(y => y == x)
-}
-
-let findBy = (arr: array<'a>, fn: 'a => 'b, b: 'b) => {
-  arr->Js.Array2.find(y => fn(y) == b)
-}
-
-let first = (arr: array<'a>, fn: 'a => option<'b>): option<'b> => {
-  arr->Js.Array2.find(y => y->fn->Option.isSome)->Option.bind(fn)
+let partition: (t<'a>, ('a, int) => bool) => (t<'a>, t<'a>) = (arr, pred) => {
+  let t = []
+  let f = []
+  arr->forEachi((x, i) => pred(x, i) ? t->Mut.push(x)->ignore : f->Mut.push(x)->ignore)
+  (t, f)
 }
 
 type evenOdd<'a> = {
-  even: array<'a>,
-  odd: array<'a>,
+  even: t<'a>,
+  odd: t<'a>,
 }
 
-let partition = Belt.Array.partition
-let partitionIndexEvenOdd = (arr: array<'a>) => {
+@deprecated("Use partition with your own predicate instead")
+let partitionIndexEvenOdd = (arr: t<'a>): evenOdd<'a> => {
   // TODO: reduce instead? who cares Alex.
-  let odd = arr->Js.Array2.filteri((_, i) => @doesNotRaise mod(i, 2) == 0)
-  let even = arr->Js.Array2.filteri((_, i) => @doesNotRaise mod(i, 2) != 0)
-  {even: even, odd: odd}
+  let odd = arr->Js.Array2.filteri((_, i) => (@doesNotRaise mod(i, 2)) == 0)
+  let even = arr->Js.Array2.filteri((_, i) => (@doesNotRaise mod(i, 2)) != 0)
+  {even, odd}
 }
 
 // make each pair in a cross product of two arrays
 let cross = (a, b) => {
-  a->bind(a => b->Js.Array2.map(b => (a, b)))
+  a->bind(a => b->map(b => (a, b)))
 }
 
-let splitAt = (arr: array<'a>, i: int) => {
-  let a = arr->Js.Array2.slice(~start=0, ~end_=i)
-  let b = arr->Js.Array2.slice(~start=i, ~end_={arr->length})
+let splitAt = (arr: t<'a>, i: int) => {
+  let a = arr->slice(~start=0, ~end_=i)
+  let b = arr->slice(~start=i, ~end_={arr->length})
   (a, b)
 }
 
-external identity: 'a => 'a = "%identity"
-
-let catOptions = (arr: array<option<'a>>): array<'a> => {
-  arr->keepMap(identity)
-}
-
-let keepBind = (a: array<option<'a>>, fn: 'a => option<'b>): array<'b> =>
-  a->Js.Array2.map(a => a->Option.bind(fn))->catOptions
-
-let intercalate: (array<'a>, 'a) => array<'a> = (arr, i) => {
+let intercalate: (t<'a>, 'a) => t<'a> = (arr, i) => {
   let length: int = arr->length
   switch length {
   | l if l <= 1 => arr
-  | _ => arr->bind(a => [a, i])->Js.Array2.slice(~start=0, ~end_=length + (length - 1))
+  | _ => arr->bind(a => [a, i])->slice(~start=0, ~end_=length + (length - 1))
   }
 }
 
-let intercalateWithGenerator: (array<'a>, int => 'a) => array<'a> = (arr, gen) => {
+let intercalateWithGenerator: (t<'a>, int => 'a) => t<'a> = (arr, gen) => {
   let length: int = arr->length
   switch length {
   | l if l <= 1 => arr
   | _ =>
-    arr
-    ->bindi((a, idx) => [a, gen(idx)])
-    ->Js.Array2.slice(~start=0, ~end_=length + (length - 1))
+    arr->bindi((a, idx) => [a, gen(idx)])->Js.Array2.slice(~start=0, ~end_=length + (length - 1))
   }
 }
 
-let tap: (array<'a>, array<'a> => unit) => array<'a> = (a, fn) => {
+let tap: (t<'a>, t<'a> => unit) => t<'a> = (a, fn) => {
   fn(a)
   a
 }
 
-let tapMap: (array<'a>, 'a => unit) => array<'a> = (a, fn) => {
+let tapMap: (t<'a>, 'a => unit) => t<'a> = (a, fn) => {
   Js.Array2.forEach(a, fn)
   a
 }
 
-// TODO: set needs to consider default values for new elements between current length and index - AxM
-// let set = (arr: array<'a>, el: 'a, index: int): array<'a> => {
-//   let begin = arr->Js.Array2.slice(~start=0, ~end_=index)
-//   let end = arr->Js.Array2.sliceFrom(index + 1)
-//   Array.join([begin, [el], end])
-// }
+let concat: (t<'a>, t<'a>) => t<'a> = %raw(`(a, b) => [...a, ...b]`)
+let append: (t<'a>, 'a) => t<'a> = %raw(`(arr, a) => [...arr, a]`)
+let prepend: ('a, t<'a>) => t<'a> = %raw(`(a, arr) => [a, ...arr]`)
 
-let concat = (a: array<'a>, b: array<'a>): array<'a> => Js.Array2.concat(a, b)
-let append = (acc: array<'a>, a: 'a) => Js.Array2.concat(acc, [a])
-let isEmpty = (arr: array<'a>) => arr->length == 0
+// @send external splice: (t<'a>, int, int, t<'a>) => t<'a> = "toSpliced"
+let splice: (t<'a>, ~index: int, ~remove: int, t<'a>) => t<'a> = (arr, ~index, ~remove, items) => {
+  arr
+  ->clone
+  ->tap(Mut.splice_(_, ~index, ~remove, items))
+} 
 
-let replace = (arr: array<'a>, el: 'a, index: int): array<'a> => {
-  switch index {
-  | i if i < 0 => arr
-  | i if i >= arr->length => arr
-  | _ => {
-      let begin = arr->Js.Array2.slice(~start=0, ~end_=index)
-      let end = arr->Js.Array2.sliceFrom(index + 1)
-      Js.Array2.concatMany(begin, [[el], end])
-    }
+let replace = (arr: t<'a>, el: 'a, index: int): t<'a> => {
+  if index < 0 || index > arr->length - 1 {
+    arr
+  } else {
+    splice(arr, ~index, ~remove=1, [el])
   }
 }
 
-let insert = (arr: array<'a>, el: 'a, index: int): array<'a> => {
-  switch (arr, index) {
-  | ([], 0) => [el]
-  | (_, index) if index < 0 => arr
-  | (_, index) if index >= arr->length => arr
-  | (arr, index) => {
-      let begin = arr->Js.Array2.slice(~start=0, ~end_=index)
-      let end = arr->Js.Array2.sliceFrom(index)
-      Js.Array2.concatMany(begin, [[el], end])
-    }
+let insert = (arr: t<'a>, el: 'a, index: int): t<'a> => {
+  // Allows insert at end of array, but avoids sparse array
+  if index < 0 || index > (arr->length + 1) {
+    arr
+  } else {
+    splice(arr, ~index, ~remove=0, [el])
   }
 }
 
-let remove = (arr: array<'a>, index: int): array<'a> => {
-  switch (arr, index) {
-  | ([], 0) => []
-  | (_, index) if index < 0 => arr
-  | (_, index) if index >= arr->length => arr
-  | (arr, index) => {
-      let begin = arr->slice(~start=0, ~end_=index)
-      let end = arr->sliceFrom(index + 1)
-      concat(begin, end)
-    }
+let remove = (arr: t<'a>, index: int): t<'a> => {
+  if index < 0 || index > arr->length - 1 {
+    arr
+  } else {
+    splice(arr, ~index, ~remove=1, [])
   }
 }
 
 // generate combinations of a fixed size
-let rec generateCombinations = (arr: array<'a>, ~begin=[], ~size: int) => {
+let rec combinations = (arr: t<'a>, ~begin=[], ~size: int) => {
   switch size {
-  | s if s == 0 => [begin]
+  | 0 => [begin]
   | _ =>
     arr->bindi((v, i) => {
       let begin = begin->append(v)
       let length = arr->length
       let arr = arr->slice(~start=i + 1, ~end_=length + (length - 1))
-      arr->generateCombinations(~size=size - 1, ~begin)
+      arr->combinations(~size=size - 1, ~begin)
     })
   }
 }
+
+@deprecated("Use combinations instead")
+// FIXME: this is just here to exercise the docs framework - AxM
+@ocaml.doc("
+  * Sign a message with a key.
+  *
+  * @param message - A message to be signed
+  * @param key - The key with which to sign the message
+  * @returns A signed message
+ ")
+let generateCombinations = combinations
