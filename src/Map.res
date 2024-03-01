@@ -80,7 +80,7 @@ module Complex = (ToString: ToString) => {
   let entries = ((keys, values)) => {
     let result = []
     keys->forEach((value, key, _) => {
-      let _ = result->Array.push((value, values->getUnsafe(key)))
+      let _ = result->Array.Mut.push((value, values->getUnsafe(key)))
     })
     result->Array.toIterable
   }

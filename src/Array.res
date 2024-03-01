@@ -32,6 +32,17 @@ external toIterable: t<'t> => Iterable.t<'t> = "%identity"
 @send external forEach: (t<'a>, 'a => unit) => unit = "forEach"
 @send external forEachi: (t<'a>, ('a, int) => unit) => unit = "forEach"
 
+let tap: (t<'a>, t<'a> => unit) => t<'a> = (a, fn) => {
+  fn(a)
+  a
+}
+
+let tapMap: (t<'a>, 'a => unit) => t<'a> = (a, fn) => {
+  forEach(a, fn)
+  a
+}
+
+
 let get: (t<'a>, int) => option<'a> = %raw(`(x, i) => x[i]`)
 let getUnsafe: (t<'a>, int) => 'a = %raw(`(x, i) => x[i]`)
 let getExn = (x, i) => x->get(i)->Option.getExn(~desc="Array.getExn")
@@ -81,22 +92,26 @@ module Mut = {
   let push_ = (arr, x) => push(arr, x)->ignore
   @send @variadic external pushMany: (t<'a>, array<'a>) => int = "push"
   let pushMany_ = (arr, items) => pushMany(arr, items)->ignore
+  let set: (t<'a>, int, 'a) => unit = %raw(`(arr, i, x) => { arr[i] = x }`)
 }
 
 ///doc/ ## Transformation
 // TODO: set needs to consider default values for new elements between current length and index - AxM
+// Immutable version. prefer immutable in this file. use raw for mutable tricks for now. -AxM
+let setUnsafe = (arr, index, x) => clone(arr)->tap(Mut.set(_, index, x))
+let set = (arr, index, x) => {
+  if index < 0 || index > arr->length {
+    arr
+  } else {
+    arr->setUnsafe(index, x)
+  }
+}
 // let set = (arr: t<'a>, el: 'a, index: int): t<'a> => {
 //   let begin = arr->slice(~start=0, ~end_=index)
 //   let end = arr->sliceFrom(index + 1)
 //   Array.join([begin, [el], end])
 // }
 
-// Immutable version. prefer immutable in this file. use raw for mutable tricks for now. -AxM
-let setUnsafe = (arr, index, x) => {
-  let arr = clone(arr)
-  Js.Array2.unsafe_set(arr, index, x)
-  arr
-}
 
 @send external map: (t<'a>, 'a => 'b) => t<'b> = "map"
 @send external mapi: (t<'a>, ('a, int) => 'b) => t<'b> = "map"
@@ -111,6 +126,7 @@ let join = (arr: t<t<'a>>): t<'a> => bind(arr, identity)
 let flatten = join
 
 @send external filter: (t<'a>, 'a => bool) => t<'a> = "filter"
+@send external filteri: (t<'a>, ('a, int) => bool) => t<'a> = "filter"
 
 let keepMap = (arr, fn) => {
   let v = []
@@ -169,17 +185,17 @@ let toIndices = mapi(_, (_, i) => i)
 @send external sort: t<'a> => t<'a> = "toSorted"
 @send external sortCmp: (t<'a>, ('a, 'a) => int) => t<'a> = "toSorted"
 
-let slice = Js.Array2.slice
-let sliceFrom = Js.Array2.sliceFrom
+@send external slice: (t<'a>, int, int) => t<'a> = "slice"
+@send external sliceFrom: (t<'a>, int) => t<'a> = "slice"
 
 let head = get(_, 0)
-let tail = (arr: t<'a>): t<'a> => arr->Js.Array2.sliceFrom(1)
-let stem = (arr: t<'a>): t<'a> => arr->Js.Array2.slice(~start=0, ~end_=-1)
+let tail = sliceFrom(_, 1)
+let stem = slice(_, 0, -1)
 let last = (arr: t<'a>): option<'a> => arr->get(arr->length - 1)
-let take = (arr: t<'a>, int): t<'a> => arr->Js.Array2.slice(~start=0, ~end_=int)
+let take = (arr: t<'a>, int): t<'a> => arr->slice(0, int)
 
 let zipAdjacent = (arr: t<'a>): t<('a, 'a)> => {
-  arr->tail->Js.Array2.mapi((a, i) => (arr->getUnsafe(i), a))
+  arr->tail->mapi((a, i) => (arr->getUnsafe(i), a))
 }
 
 let partition: (t<'a>, ('a, int) => bool) => (t<'a>, t<'a>) = (arr, pred) => {
@@ -197,8 +213,8 @@ type evenOdd<'a> = {
 @deprecated("Use partition with your own predicate instead")
 let partitionIndexEvenOdd = (arr: t<'a>): evenOdd<'a> => {
   // TODO: reduce instead? who cares Alex.
-  let odd = arr->Js.Array2.filteri((_, i) => (@doesNotRaise mod(i, 2)) == 0)
-  let even = arr->Js.Array2.filteri((_, i) => (@doesNotRaise mod(i, 2)) != 0)
+  let odd = arr->filteri((_, i) => (@doesNotRaise mod(i, 2)) == 0)
+  let even = arr->filteri((_, i) => (@doesNotRaise mod(i, 2)) != 0)
   {even, odd}
 }
 
@@ -208,8 +224,8 @@ let cross = (a, b) => {
 }
 
 let splitAt = (arr: t<'a>, i: int) => {
-  let a = arr->slice(~start=0, ~end_=i)
-  let b = arr->slice(~start=i, ~end_={arr->length})
+  let a = arr->slice(0, i)
+  let b = arr->slice(i, arr->length)
   (a, b)
 }
 
@@ -217,7 +233,7 @@ let intercalate: (t<'a>, 'a) => t<'a> = (arr, i) => {
   let length: int = arr->length
   switch length {
   | l if l <= 1 => arr
-  | _ => arr->bind(a => [a, i])->slice(~start=0, ~end_=length + (length - 1))
+  | _ => arr->bind(a => [a, i])->slice(0, length + (length - 1))
   }
 }
 
@@ -226,18 +242,8 @@ let intercalateWithGenerator: (t<'a>, int => 'a) => t<'a> = (arr, gen) => {
   switch length {
   | l if l <= 1 => arr
   | _ =>
-    arr->bindi((a, idx) => [a, gen(idx)])->Js.Array2.slice(~start=0, ~end_=length + (length - 1))
+    arr->bindi((a, idx) => [a, gen(idx)])->slice(0, length + (length - 1))
   }
-}
-
-let tap: (t<'a>, t<'a> => unit) => t<'a> = (a, fn) => {
-  fn(a)
-  a
-}
-
-let tapMap: (t<'a>, 'a => unit) => t<'a> = (a, fn) => {
-  Js.Array2.forEach(a, fn)
-  a
 }
 
 let concat: (t<'a>, t<'a>) => t<'a> = %raw(`(a, b) => [...a, ...b]`)
@@ -284,7 +290,7 @@ let rec combinations = (arr: t<'a>, ~begin=[], ~size: int) => {
     arr->bindi((v, i) => {
       let begin = begin->append(v)
       let length = arr->length
-      let arr = arr->slice(~start=i + 1, ~end_=length + (length - 1))
+      let arr = arr->slice(i + 1, length + (length - 1))
       arr->combinations(~size=size - 1, ~begin)
     })
   }

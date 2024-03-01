@@ -32,7 +32,7 @@ let prettyOptions = (arr: array<string>): string => {
   | many => {
       let length = many->Array.length
       let last = many[length - 1]->Option.getExn(~desc="prettyOptions last")
-      let rest = many->Array.slice(~start=0, ~end_=length - 1)
+      let rest = many->Array.slice(0, length - 1)
       `${rest->Array.joinWith(", ")} or ${last}`
     }
   }

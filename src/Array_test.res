@@ -175,7 +175,6 @@ describe("Array", () => {
 		describe("one element", () => {
 			let arr = ["haha"]
 
-
 			describe("outside index", () => {
 				test("returns empty array in left", () => {
 					expect(arr->Array.splitAt(666))->toEqual((["haha"], []))
@@ -317,8 +316,18 @@ describe("Array", () => {
 								expect(arr)->toEqual(result)
 							})
 					})
-					describe("> length", () => {
+					describe("at length", () => {
 						let index = arr->Array.length
+						let result = arr->Array.insert(element, index)
+						test("does not mutate source", () => {
+							expect(arr)->not->toEqual(result)
+						})
+						test("inserts element", () => {
+							expect(result[index])->toEqual(Some(element))
+						})
+					})
+					describe("> length", () => {
+						let index = arr->Array.length + 3
 						let result = arr->Array.insert(element, index)
 						test("returns source", () => {
 							expect(arr)->toEqual(result)
@@ -346,24 +355,23 @@ describe("Array", () => {
 			})
 		})
 	})
+
 	describe("#remove", () => {
-		describe("non-empty", () => {
-			let arrays = [("two element", ["a", "b"]), ("many element", ["a","b","c","d","e"])]
-			arrays->Array.forEach(((desc, arr)) => {
-				describe(desc, () => {
-					describe("negative index", () => {
-						let index = -1
-							let result = arr->Array.remove(index)
-							test("returns source", () => {
-								expect(arr)->toEqual(result)
-							})
-					})
-					describe("> length", () => {
-						let index = arr->Array.length+5
+		let arrays = [("empty", []), ("two element", ["a", "b"]), ("many element", ["a","b","c","d","e"])]
+		arrays->Array.forEach(((desc, arr)) => {
+			describe(desc, () => {
+				describe("negative index", () => {
+					let index = -1
 						let result = arr->Array.remove(index)
 						test("returns source", () => {
 							expect(arr)->toEqual(result)
 						})
+				})
+				describe("> length", () => {
+					let index = arr->Array.length
+					let result = arr->Array.remove(index)
+					test("returns source", () => {
+						expect(arr)->toEqual(result)
 					})
 				})
 			})
