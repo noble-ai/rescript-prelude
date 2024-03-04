@@ -1,185 +1,227 @@
 # Option
 
 
-### keepU
 
-let keepU: (option<'a>, 'a => bool) => option<'a>
 
-### keep
+### Option.keepU
+  
+let keepU: (option<'a>, 'a => bool) => option<'a>  
 
-let keep: (option<'a>, 'a => bool) => option<'a>
 
-### forEachU
+### Option.keep
+  
+let keep: (option<'a>, 'a => bool) => option<'a>  
 
-let forEachU: (option<'a>, 'a => unit) => unit
 
-### forEach
+### Option.forEachU
+  
+let forEachU: (option<'a>, 'a => unit) => unit  
 
-let forEach: (option<'a>, 'a => unit) => unit
 
-### getExn
+### Option.forEach
+  
+let forEach: (option<'a>, 'a => unit) => unit  
 
-let getExn: option<'a> => 'a
 
-### getUnsafe
+### Option.getExn
+  
+let getExn: option<'a> => 'a  
 
-let getUnsafe: option<'a> => 'a
 
-### mapWithDefaultU
+### Option.getUnsafe
+  
+let getUnsafe: option<'a> => 'a  
 
-let mapWithDefaultU: (option<'a>, 'b, 'a => 'b) => 'b
 
-### mapWithDefault
+### Option.mapWithDefaultU
+  
+let mapWithDefaultU: (option<'a>, 'b, 'a => 'b) => 'b  
 
-let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b
 
-### mapU
+### Option.mapWithDefault
+  
+let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b  
 
-let mapU: (option<'a>, 'a => 'b) => option<'b>
 
-### map
+### Option.mapU
+  
+let mapU: (option<'a>, 'a => 'b) => option<'b>  
 
-let map: (option<'a>, 'a => 'b) => option<'b>
 
-### flatMapU
+### Option.map
+  
+let map: (option<'a>, 'a => 'b) => option<'b>  
 
-let flatMapU: (option<'a>, 'a => option<'b>) => option<'b>
 
-### flatMap
+### Option.flatMapU
+  
+let flatMapU: (option<'a>, 'a => option<'b>) => option<'b>  
 
-let flatMap: (option<'a>, 'a => option<'b>) => option<'b>
 
-### getWithDefault
+### Option.flatMap
+  
+let flatMap: (option<'a>, 'a => option<'b>) => option<'b>  
 
-let getWithDefault: (option<'a>, 'a) => 'a
 
-### orElse
+### Option.getWithDefault
+  
+let getWithDefault: (option<'a>, 'a) => 'a  
 
-let orElse: (option<'a>, option<'a>) => option<'a>
 
-### isSome
+### Option.orElse
+  
+let orElse: (option<'a>, option<'a>) => option<'a>  
 
-let isSome: option<'a> => bool
 
-### isNone
+### Option.isSome
+  
+let isSome: option<'a> => bool  
 
-let isNone: option<'a> => bool
 
-### eqU
+### Option.isNone
+  
+let isNone: option<'a> => bool  
 
-let eqU: (option<'a>, option<'b>, ('a, 'b) => bool) => bool
 
-### eq
+### Option.eqU
+  
+let eqU: (option<'a>, option<'b>, ('a, 'b) => bool) => bool  
 
-let eq: (option<'a>, option<'b>, ('a, 'b) => bool) => bool
 
-### cmpU
+### Option.eq
+  
+let eq: (option<'a>, option<'b>, ('a, 'b) => bool) => bool  
 
-let cmpU: (option<'a>, option<'b>, ('a, 'b) => int) => int
 
-### cmp
+### Option.cmpU
+  
+let cmpU: (option<'a>, option<'b>, ('a, 'b) => int) => int  
 
-let cmp: (option<'a>, option<'b>, ('a, 'b) => int) => int
 
-### mapWithDefault
+### Option.cmp
+  
+let cmp: (option<'a>, option<'b>, ('a, 'b) => int) => int  
 
-let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b
-please use map->getWithDefault for ease of refactoring
 
-### t
+### Option.mapWithDefault
+  
+let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b  
+please use map->getWithDefault for ease of refactoring  
 
-type t<'a> = option<'a>
 
-### void
+### Option.t
+  
+type t<'a> = option<'a>  
 
-let void: option<'a> => unit
 
-### getExn
+### Option.void
+  
+let void: option<'a> => unit  
 
-let getExn: (option<'a>, ~desc: string=?) => 'a
 
-### return
+### Option.getExn
+  
+let getExn: (option<'a>, ~desc: string=?) => 'a  
 
-let return: 'a => option<'a>
 
-### bind
+### Option.return
+  
+let return: 'a => option<'a>  
 
-let bind: (option<'a>, 'a => option<'b>) => option<'b>
 
-### join
+### Option.bind
+  
+let bind: (option<'a>, 'a => option<'b>) => option<'b>  
 
-let join: option<option<'a>> => option<'a>
 
-### const
+### Option.join
+  
+let join: option<option<'a>> => option<'a>  
 
-let const: (option<'a>, 'b) => option<'b>
 
-### some
+### Option.const
+  
+let const: (option<'a>, 'b) => option<'b>  
 
-let some: 'a => option<'a>
 
-### none
+### Option.some
+  
+let some: 'a => option<'a>  
 
-let none: option<'a> => option<'b>
 
-### apply
+### Option.none
+  
+let none: option<'a> => option<'b>  
 
-let apply: (option<'a => 'b>, option<'a>) => option<'b>
 
-### liftA1
+### Option.apply
+  
+let apply: (option<'a => 'b>, option<'a>) => option<'b>  
 
-let liftA1: ('a => 'r, option<'a>) => option<'r>
 
-### liftA2
+### Option.liftA1
+  
+let liftA1: ('a => 'r, option<'a>) => option<'r>  
 
-let liftA2: (('a, 'b) => 'r, option<'a>, option<'b>) => option<'r>
 
-### liftA3
+### Option.liftA2
+  
+let liftA2: (('a, 'b) => 'r, option<'a>, option<'b>) => option<'r>  
 
+
+### Option.liftA3
+  
 let liftA3: (
   ('a, 'b, 'c) => 'd,
   option<'a>,
   option<'b>,
   option<'c>,
-) => option<'d>
+) => option<'d>  
 
-### applyFirst
 
-let applyFirst: (option<'a>, option<'b>) => option<'a>
+### Option.applyFirst
+  
+let applyFirst: (option<'a>, option<'b>) => option<'a>  
 
-### applySecond
 
-let applySecond: (option<'a>, option<'b>) => option<'b>
+### Option.applySecond
+  
+let applySecond: (option<'a>, option<'b>) => option<'b>  
 
-### all2
 
-let all2: (option<'a>, option<'b>) => option<('a, 'b)>
+### Option.all2
+  
+let all2: (option<'a>, option<'b>) => option<('a, 'b)>  
 
-### all3
 
-let all3: (option<'a>, option<'b>, option<'c>) => option<('a, 'b, 'c)>
+### Option.all3
+  
+let all3: (option<'a>, option<'b>, option<'c>) => option<('a, 'b, 'c)>  
 
-### all4
 
+### Option.all4
+  
 let all4: (
   option<'a>,
   option<'b>,
   option<'c>,
   option<'d>,
-) => option<('a, 'b, 'c, 'd)>
+) => option<('a, 'b, 'c, 'd)>  
 
-### all5
 
+### Option.all5
+  
 let all5: (
   option<'a>,
   option<'b>,
   option<'c>,
   option<'d>,
   option<'e>,
-) => option<('a, 'b, 'c, 'd, 'e)>
+) => option<('a, 'b, 'c, 'd, 'e)>  
 
-### all6
 
+### Option.all6
+  
 let all6: (
   option<'a>,
   option<'b>,
@@ -187,81 +229,100 @@ let all6: (
   option<'d>,
   option<'e>,
   option<'f>,
-) => option<('a, 'b, 'c, 'd, 'e, 'f)>
+) => option<('a, 'b, 'c, 'd, 'e, 'f)>  
 
-### all
 
-let all: array<option<'a>> => option<array<'a>>
+### Option.all
+  
+let all: array<option<'a>> => option<array<'a>>  
 
-### distribute2
 
-let distribute2: option<('a, 'b)> => (option<'a>, option<'b>)
+### Option.distribute2
+  
+let distribute2: option<('a, 'b)> => (option<'a>, option<'b>)  
 
-### distribute3
 
-let distribute3: option<('a, 'b, 'c)> => (option<'a>, option<'b>, option<'c>)
+### Option.distribute3
+  
+let distribute3: option<('a, 'b, 'c)> => (option<'a>, option<'b>, option<'c>)  
 
-### tap
 
-let tap: (option<'a>, 'a => unit) => option<'a>
+### Option.tap
+  
+let tap: (option<'a>, 'a => unit) => option<'a>  
 
-### tapNone
 
-let tapNone: (option<'a>, unit => unit) => option<'a>
+### Option.tapNone
+  
+let tapNone: (option<'a>, unit => unit) => option<'a>  
 
-### invert
 
-let invert: (option<'a>, 'b) => option<'b>
+### Option.invert
+  
+let invert: (option<'a>, 'b) => option<'b>  
 
-### predicate
 
-let predicate: ('v, 'v => bool) => option<'v>
+### Option.predicate
+  
+let predicate: ('v, 'v => bool) => option<'v>  
 
-### guard
 
-let guard: (option<'a>, 'a => bool) => option<'a>
+### Option.guard
+  
+let guard: (option<'a>, 'a => bool) => option<'a>  
 
-### flap0
 
-let flap0: option<unit => 'b> => option<'b>
+### Option.flap0
+  
+let flap0: option<unit => 'b> => option<'b>  
 
-### flap0_
 
-let flap0_: option<unit => 'b> => unit
+### Option.flap0_
+  
+let flap0_: option<unit => 'b> => unit  
 
-### flap1
 
-let flap1: (option<'a => 'b>, 'a) => option<'b>
+### Option.flap1
+  
+let flap1: (option<'a => 'b>, 'a) => option<'b>  
 
-### flap1_
 
-let flap1_: (option<'a => 'b>, 'a) => unit
+### Option.flap1_
+  
+let flap1_: (option<'a => 'b>, 'a) => unit  
 
-### flap2
 
-let flap2: (option<('a, 'b) => 'c>, 'a, 'b) => option<'c>
+### Option.flap2
+  
+let flap2: (option<('a, 'b) => 'c>, 'a, 'b) => option<'c>  
 
-### flap2_
 
-let flap2_: (option<('a, 'b) => 'c>, 'a, 'b) => unit
+### Option.flap2_
+  
+let flap2_: (option<('a, 'b) => 'c>, 'a, 'b) => unit  
 
-### flap3
 
-let flap3: (option<('a, 'b, 'c) => 'd>, 'a, 'b, 'c) => option<'d>
+### Option.flap3
+  
+let flap3: (option<('a, 'b, 'c) => 'd>, 'a, 'b, 'c) => option<'d>  
 
-### flap3_
 
-let flap3_: (option<('a, 'b, 'c) => 'd>, 'a, 'b, 'c) => unit
+### Option.flap3_
+  
+let flap3_: (option<('a, 'b, 'c) => 'd>, 'a, 'b, 'c) => unit  
 
-### first
 
-let first: (option<'a>, option<'a>) => option<'a>
+### Option.first
+  
+let first: (option<'a>, option<'a>) => option<'a>  
 
-### returnArray
 
-let returnArray: array<'a> => array<option<'a>>
+### Option.returnArray
+  
+let returnArray: array<'a> => array<option<'a>>  
 
-### log
 
-let log: (option<'a>, 'b) => option<'a>
+### Option.log
+  
+let log: (option<'a>, 'b) => option<'a>  
 

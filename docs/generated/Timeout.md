@@ -1,11 +1,14 @@
 # Timeout
 
 
-### set
 
-let set: (unit => unit, int) => Js.Global.timeoutId
 
-### clear
+### Timeout.set
+  
+let set: (unit => unit, int) => Js.Global.timeoutId  
 
-let clear: Js.Global.timeoutId => unit
+
+### Timeout.clear
+  
+let clear: Js.Global.timeoutId => unit  
 

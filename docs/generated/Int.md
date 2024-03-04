@@ -1,63 +1,79 @@
 # Int
 
 
-### t
 
-type t = int
 
-### toString
+### Int.t
+  
+type t = int  
 
-let toString: int => string
 
-### fromString
+### Int.toString
+  
+let toString: int => string  
 
-let fromString: string => option<int>
 
-### toFloat
+### Int.fromString
+  
+let fromString: string => option<int>  
 
-let toFloat: t => float
 
-### fromFloatUnsafe
+### Int.toFloat
+  
+let toFloat: t => float  
 
-let fromFloatUnsafe: float => t
 
-### fromFloat
+### Int.fromFloatUnsafe
+  
+let fromFloatUnsafe: float => t  
 
-let fromFloat: float => option<t>
 
-### initZeroDigitHelper
+### Int.fromFloat
+  
+let fromFloat: float => option<t>  
 
-let initZeroDigitHelper: int => string
 
-### min
+### Int.initZeroDigitHelper
+  
+let initZeroDigitHelper: int => string  
 
-let min: (int, int) => int
 
-### minMany
+### Int.min
+  
+let min: (int, int) => int  
 
-let minMany: array<int> => int
 
-### max
+### Int.minMany
+  
+let minMany: array<int> => int  
 
-let max: (int, int) => int
 
-### maxMany
+### Int.max
+  
+let max: (int, int) => int  
 
-let maxMany: array<int> => int
 
-### abs
+### Int.maxMany
+  
+let maxMany: array<int> => int  
 
-let abs: int => int
 
-### sign
+### Int.abs
+  
+let abs: int => int  
 
-let sign: int => int
 
-### random
+### Int.sign
+  
+let sign: int => int  
 
-let random: (int, int) => int
 
-### toExponentialWithPrecision
+### Int.random
+  
+let random: (int, int) => int  
 
-let toExponentialWithPrecision: (t, ~digits: int) => string
+
+### Int.toExponentialWithPrecision
+  
+let toExponentialWithPrecision: (t, ~digits: int) => string  
 

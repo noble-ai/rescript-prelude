@@ -1,7 +1,9 @@
 # Void
 
 
-### void
 
-let void: 'a => unit
+
+### Void.void
+  
+let void: 'a => unit  
 

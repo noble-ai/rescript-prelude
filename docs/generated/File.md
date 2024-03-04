@@ -1,68 +1,88 @@
 # File
 
 
-### t
 
-type t
 
-### make
+### File.t
+  
+type t  
 
-let make: unit => t
 
-### lastModified
+### File.make
+  
+let make: unit => t  
 
-let lastModified: t => int
 
-### lastModifiedDate
+### File.lastModified
+  
+let lastModified: t => int  
 
-let lastModifiedDate: t => Js.Date.t
 
-### name
+### File.lastModifiedDate
+  
+let lastModifiedDate: t => Js.Date.t  
 
-let name: t => string
 
-### webkitRelativePath
+### File.name
+  
+let name: t => string  
 
-let webkitRelativePath: t => string
 
-### type_
+### File.webkitRelativePath
+  
+let webkitRelativePath: t => string  
 
-let type_: t => string
 
-### size
+### File.type_
+  
+let type_: t => string  
 
-let size: t => int
 
-### tToJsT
+### File.size
+  
+let size: t => int  
 
-let tToJsT: t => {..}
 
-### slice
+### File.tToJsT
+  
+let tToJsT: t => {..}  
 
+
+### File.slice
+  
 let slice: (
   t,
   ~start: int=?,
   ~end: int=?,
   ~contentType: string=?,
   unit,
-) => t
-
-### stream
-
-type stream
-
-### stream
-
-let stream: t => stream
-
-### text
-
-let text: t => string
-
-### Blob
+) => t  
 
 
-### makeBlob
+### File.stream
+  
+type stream  
 
-let makeBlob: (array<'a>, 'opts) => Blob.t
+
+### File.stream
+  
+let stream: t => stream  
+
+
+### File.text
+  
+let text: t => string  
+
+
+### File.Blob
+  
+  
+### File.Blob.t
+  
+type t  
+
+
+### File.makeBlob
+  
+let makeBlob: (array<'a>, 'opts) => Blob.t  
 

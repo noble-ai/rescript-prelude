@@ -1,47 +1,59 @@
 # FormData
 
 
-### t
 
-type t
 
-### make
+### FormData.t
+  
+type t  
 
-let make: unit => t
 
-### appendString
+### FormData.make
+  
+let make: unit => t  
 
-let appendString: (t, string, string) => unit
 
-### appendInt
+### FormData.appendString
+  
+let appendString: (t, string, string) => unit  
 
-let appendInt: (t, string, int) => unit
 
-### appendFile
+### FormData.appendInt
+  
+let appendInt: (t, string, int) => unit  
 
-let appendFile: (t, string, File.t) => unit
 
-### appendBlob
+### FormData.appendFile
+  
+let appendFile: (t, string, File.t) => unit  
 
-let appendBlob: (t, string, File.Blob.t, string) => unit
 
-### appendInt2
+### FormData.appendBlob
+  
+let appendBlob: (t, string, File.Blob.t, string) => unit  
 
-let appendInt2: (t, string, int) => t
 
-### appendString2
+### FormData.appendInt2
+  
+let appendInt2: (t, string, int) => t  
 
-let appendString2: (t, string, string) => t
 
-### appendFile2
+### FormData.appendString2
+  
+let appendString2: (t, string, string) => t  
 
-let appendFile2: (t, string, File.t) => t
 
-### appendBlob2
+### FormData.appendFile2
+  
+let appendFile2: (t, string, File.t) => t  
 
-let appendBlob2: (t, string, File.Blob.t, string) => t
 
-### toJs
+### FormData.appendBlob2
+  
+let appendBlob2: (t, string, File.Blob.t, string) => t  
 
-let toJs: t => {..}
+
+### FormData.toJs
+  
+let toJs: t => {..}  
 

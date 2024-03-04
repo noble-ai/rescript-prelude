@@ -1,7 +1,9 @@
 # Object
 
 
-### assign
 
-let assign: ({..}, {..}) => {..}
+
+### Object.assign
+  
+let assign: ({..}, {..}) => {..}  
 

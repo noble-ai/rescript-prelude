@@ -1,7 +1,9 @@
 # Uri
 
 
-### encodeComponent
 
-let encodeComponent: string => string
+
+### Uri.encodeComponent
+  
+let encodeComponent: string => string  
 

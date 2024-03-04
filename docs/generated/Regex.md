@@ -1,31 +1,39 @@
 # Regex
 
 
-### t
 
-type t = Js.Re.t
 
-### result
+### Regex.t
+  
+type t = Js.Re.t  
 
-type result = Js.Re.result
 
-### groups
+### Regex.result
+  
+type result = Js.Re.result  
 
-let groups: Js.Re.result => option<Dict.t<Null.t<string>>>
 
-### exec_
+### Regex.groups
+  
+let groups: Js.Re.result => option<Dict.t<Null.t<string>>>  
 
-let exec_: (Js.Re.t, string) => option<Js.Re.result>
 
-### fromString
+### Regex.exec_
+  
+let exec_: (Js.Re.t, string) => option<Js.Re.result>  
 
-let fromString: string => Js.Re.t
 
-### captures
+### Regex.fromString
+  
+let fromString: string => Js.Re.t  
 
-let captures: Js.Re.result => array<Js.nullable<string>>
 
-### test_
+### Regex.captures
+  
+let captures: Js.Re.result => array<Js.nullable<string>>  
 
-let test_: (Js.Re.t, string) => bool
+
+### Regex.test_
+  
+let test_: (Js.Re.t, string) => bool  
 

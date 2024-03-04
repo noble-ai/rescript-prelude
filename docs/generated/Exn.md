@@ -1,15 +1,19 @@
 # Exn
 
 
-### t
 
-type t = Js.Exn.t
 
-### raise
+### Exn.t
+  
+type t = Js.Exn.t  
 
-let raise: string => 'a
 
-### message
+### Exn.raise
+  
+let raise: string => 'a  
 
-let message: Js.Exn.t => option<string>
+
+### Exn.message
+  
+let message: Js.Exn.t => option<string>  
 

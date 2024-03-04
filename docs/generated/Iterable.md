@@ -1,7 +1,9 @@
 # Iterable
 
 
-### t
 
-type t<'a>
+
+### Iterable.t
+  
+type t<'a>  
 

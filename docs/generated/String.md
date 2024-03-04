@@ -1,118 +1,147 @@
 # String
 
 
-### splitAt
 
-let splitAt: (string, int) => (Js.String2.t, Js.String2.t)
 
-### capitalize
+### String.splitAt
+  
+let splitAt: (string, int) => (Js.String2.t, Js.String2.t)  
 
-let capitalize: string => string
 
-### compare
+### String.capitalize
+  
+let capitalize: string => string  
 
-let compare: (string, string) => int
 
-### shortenLargeString
+### String.compare
+  
+let compare: (string, string) => int  
 
-let shortenLargeString: (Js.String2.t, ~max: int=?, unit) => Js.String2.t
 
-### prettyOptions
+### String.shortenLargeString
+  
+let shortenLargeString: (Js.String2.t, ~max: int=?, unit) => Js.String2.t  
 
-let prettyOptions: array<string> => string
 
-### getRandomString
+### String.prettyOptions
+  
+let prettyOptions: array<string> => string  
 
-let getRandomString: unit => string
 
-### makeUniq
+### String.getRandomString
+  
+let getRandomString: unit => string  
 
-let makeUniq: (string, string) => string
 
-### splitByComma
+### String.makeUniq
+  
+let makeUniq: (string, string) => string  
 
-let splitByComma: string => array<Js.String2.t>
 
-### stringToId
+### String.splitByComma
+  
+let splitByComma: string => array<Js.String2.t>  
 
-let stringToId: string => string
 
-### includes
+### String.stringToId
+  
+let stringToId: string => string  
 
-let includes: (Js.String2.t, Js.String2.t) => bool
 
-### split
+### String.includes
+  
+let includes: (Js.String2.t, Js.String2.t) => bool  
 
-let split: (Js.String2.t, Js.String2.t) => array<Js.String2.t>
 
-### concat
+### String.split
+  
+let split: (Js.String2.t, Js.String2.t) => array<Js.String2.t>  
 
-let concat: (Js.String2.t, Js.String2.t) => Js.String2.t
 
-### replaceByRe
+### String.concat
+  
+let concat: (Js.String2.t, Js.String2.t) => Js.String2.t  
 
-let replaceByRe: (Js.String2.t, Js_re.t, Js.String2.t) => Js.String2.t
 
-### endsWith
+### String.replaceByRe
+  
+let replaceByRe: (Js.String2.t, Js_re.t, Js.String2.t) => Js.String2.t  
 
-let endsWith: (Js.String2.t, Js.String2.t) => bool
 
-### concatMany
+### String.endsWith
+  
+let endsWith: (Js.String2.t, Js.String2.t) => bool  
 
-let concatMany: (Js.String2.t, array<Js.String2.t>) => Js.String2.t
 
-### toLowerCase
+### String.concatMany
+  
+let concatMany: (Js.String2.t, array<Js.String2.t>) => Js.String2.t  
 
-let toLowerCase: Js.String2.t => Js.String2.t
 
-### toUpperCase
+### String.toLowerCase
+  
+let toLowerCase: Js.String2.t => Js.String2.t  
 
-let toUpperCase: Js.String2.t => Js.String2.t
 
-### length
+### String.toUpperCase
+  
+let toUpperCase: Js.String2.t => Js.String2.t  
 
-let length: Js.String2.t => int
 
-### make
+### String.length
+  
+let length: Js.String2.t => int  
 
-let make: 'a => Js.String2.t
 
-### replace
+### String.make
+  
+let make: 'a => Js.String2.t  
 
-let replace: (Js.String2.t, Js.String2.t, Js.String2.t) => Js.String2.t
 
-### match_
+### String.replace
+  
+let replace: (Js.String2.t, Js.String2.t, Js.String2.t) => Js.String2.t  
 
+
+### String.match_
+  
 let match_: (
   Js.String2.t,
   Js_re.t,
-) => option<array<option<Js.String2.t>>>
+) => option<array<option<Js.String2.t>>>  
 
-### charAt
 
-let charAt: (Js.String2.t, int) => Js.String2.t
+### String.charAt
+  
+let charAt: (Js.String2.t, int) => Js.String2.t  
 
-### slice
 
-let slice: (Js.String2.t, ~from: int, ~to_: int) => Js.String2.t
+### String.slice
+  
+let slice: (Js.String2.t, ~from: int, ~to_: int) => Js.String2.t  
 
-### trim
 
-let trim: Js.String2.t => Js.String2.t
+### String.trim
+  
+let trim: Js.String2.t => Js.String2.t  
 
-### get
 
-let get: (Js.String2.t, int) => Js.String2.t
+### String.get
+  
+let get: (Js.String2.t, int) => Js.String2.t  
 
-### startsWith
 
-let startsWith: (Js.String2.t, Js.String2.t) => bool
+### String.startsWith
+  
+let startsWith: (Js.String2.t, Js.String2.t) => bool  
 
-### sliceToEnd
 
-let sliceToEnd: (Js.String2.t, ~from: int) => Js.String2.t
+### String.sliceToEnd
+  
+let sliceToEnd: (Js.String2.t, ~from: int) => Js.String2.t  
 
-### indexOf
 
-let indexOf: (Js.String2.t, Js.String2.t) => int
+### String.indexOf
+  
+let indexOf: (Js.String2.t, Js.String2.t) => int  
 

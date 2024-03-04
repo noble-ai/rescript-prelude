@@ -1,46 +1,62 @@
 # Dict
 
 
-### t
 
-type t<'a> = Js.Dict.t<'a>
 
-### empty
+### Dict.t
+  
+type t<'a> = Js.Dict.t<'a>  
 
-let empty: unit => Js.Dict.t<'a>
 
-### set
+### Dict.empty
+  
+let empty: unit => Js.Dict.t<'a>  
 
-let set: (t<'a>, Js.Dict.key, 'a) => t<'a>
 
-### get
+### Dict.set
+  
+let set: (t<'a>, Js.Dict.key, 'a) => t<'a>  
 
-let get: (Js.Dict.t<'a>, Js.Dict.key) => option<'a>
 
-### getUnsafe
+### Dict.get
+  
+let get: (Js.Dict.t<'a>, Js.Dict.key) => option<'a>  
 
-let getUnsafe: (Js.Dict.t<'a>, Js.Dict.key) => 'a
 
-### fromArray
+### Dict.getUnsafe
+  
+let getUnsafe: (Js.Dict.t<'a>, Js.Dict.key) => 'a  
 
-let fromArray: array<(Js.Dict.key, 'a)> => Js.Dict.t<'a>
 
-### entries
+### Dict.fromArray
+  
+let fromArray: array<(Js.Dict.key, 'a)> => Js.Dict.t<'a>  
 
-let entries: Js.Dict.t<'a> => array<(Js.Dict.key, 'a)>
 
-### values
+### Dict.entries
+  
+let entries: Js.Dict.t<'a> => array<(Js.Dict.key, 'a)>  
 
-let values: Js.Dict.t<'a> => array<'a>
 
-### merge
+### Dict.values
+  
+let values: Js.Dict.t<'a> => array<'a>  
 
-let merge: (t<'a>, t<'a>) => t<'a>
 
-### map
+### Dict.merge
+  
+let merge: (t<'a>, t<'a>) => t<'a>  
 
-let map: (Js.Dict.t<'a>, 'a => 'b) => Js.Dict.t<'b>
 
-### Mut
+### Dict.map
+  
+let map: (Js.Dict.t<'a>, 'a => 'b) => Js.Dict.t<'b>  
 
+
+### Dict.Mut
+  
+  
+### Dict.Mut.set
+  
+let set: (Js.Dict.t<'a>, Js.Dict.key, 'a) => unit  
 

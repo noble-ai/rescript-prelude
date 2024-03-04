@@ -1,375 +1,510 @@
 # Array
 
 
-### t
+N+1 Array bindings.  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here.
 
-type t<'a> = array<'a>
+### Array.t
+  
+type t<'a> = array<'a>  
 
-### fromIterable
 
-let fromIterable: Iterable.t<'t> => t<'t>
+### Array.fromIterable
+  
+let fromIterable: Iterable.t<'t> => t<'t>  
 
-### return
 
-let return: 'a => t<'a>
+### Array.return
+  
+let return: 'a => t<'a>  
 
-### clone
 
-let clone: t<'a> => t<'a>
+### Array.clone
+  
+let clone: t<'a> => t<'a>  
+Use spread operator to make a shallow copy of an array
 
-### range
+### Array.range
+  
+let range: int => t<int>  
+[0..i) excludes i
 
-let range: int => t<int>
+### Array.rangeInclusive
+  
+let rangeInclusive: int => t<int>  
+Use range instead  
 
-### rangeInclusive
 
-let rangeInclusive: int => t<int>
-Use range instead
+### Array.rangeInclusive
+  
+let rangeInclusive: int => t<int>  
 
-### rangeInclusive
 
-let rangeInclusive: int => t<int>
+### Array.toIterable
+  
+let toIterable: t<'t> => Iterable.t<'t>  
 
-### toIterable
 
-let toIterable: t<'t> => Iterable.t<'t>
+### Array.length
+  
+let length: t<'a> => int  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length)
 
-### length
+### Array.includes
+  
+let includes: (t<'a>, 'a) => bool  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
 
-let length: t<'a> => int
+### Array.forEach
+  
+let forEach: (t<'a>, 'a => unit) => unit  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 
-### includes
+### Array.forEachi
+  
+let forEachi: (t<'a>, ('a, int) => unit) => unit  
 
-let includes: (t<'a>, 'a) => bool
 
-### forEach
+### Array.tap
+  
+let tap: (t<'a>, t<'a> => unit) => t<'a>  
+pass an array to an effect, returning the original array
 
-let forEach: (t<'a>, 'a => unit) => unit
+### Array.tapMap
+  
+let tapMap: (t<'a>, 'a => unit) => t<'a>  
+pass each element of an array to an effect, returning the original array
 
-### forEachi
+### Array.getUnsafe
+  
+let getUnsafe: (t<'a>, int) => 'a  
 
-let forEachi: (t<'a>, ('a, int) => unit) => unit
 
-### tap
+### Array.get
+  
+let get: (t<'a>, int) => option<'a>  
 
-let tap: (t<'a>, t<'a> => unit) => t<'a>
 
-### tapMap
+### Array.getExn
+  
+let getExn: (t<'a>, int) => 'a  
 
-let tapMap: (t<'a>, 'a => unit) => t<'a>
 
-### get
+### Array.indexOf
+  
+let indexOf: (t<'a>, 'a) => int  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
 
-let get: (t<'a>, int) => option<'a>
+### Array.indexOf
+  
+let indexOf: (t<'a>, 'a) => option<int>  
+Use findIndex instead: This has vague comparison semantics  
+indexOf uses strict equality for comparison which does not play well with rescripts more-but-not-clearly value based situations.[{a: 3}, {a: 4}].indexOf({a: 4}) == -1.
 
-### getUnsafe
+### Array.y
+  
+let y: unit => option<int>  
 
-let getUnsafe: (t<'a>, int) => 'a
 
-### getExn
+### Array.findIndex
+  
+let findIndex: (t<'a>, 'a => bool) => int  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
-let getExn: (t<'a>, int) => 'a
+### Array.findIndex
+  
+let findIndex: (t<'a>, 'a => bool) => option<int>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
-### indexOf
+### Array.getIndexBy
+  
+let getIndexBy: (t<'a>, 'a => bool) => option<int>  
+Use findIndex instead  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
-let indexOf: (t<'a>, 'a) => int
+### Array.all
+  
+let all: (t<'a>, 'a => bool) => bool  
+Renamed to match Promise, Result, Option
 
-### indexOf
+### Array.alli
+  
+let alli: (t<'a>, ('a, int) => bool) => bool  
+Renamed to match Promise, Result, Option
 
-let indexOf: (t<'a>, 'a) => option<int>
-Use findIndex instead
+### Array.every
+  
+let every: (t<'a>, 'a => bool) => bool  
+Use all instead: Renamed to match Promise, Result, etc  
 
-### y
 
-let y: unit => option<int>
+### Array.everyi
+  
+let everyi: (t<'a>, ('a, int) => bool) => bool  
+Use alli instead: : Renamed to match Promise, Result, etc  
 
-### findIndex
 
-let findIndex: (t<'a>, 'a => bool) => int
+### Array.some
+  
+let some: (t<'a>, 'a => bool) => bool  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
 
-### findIndex
+### Array.somei
+  
+let somei: (t<'a>, ('a, int) => bool) => bool  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
 
-let findIndex: (t<'a>, 'a => bool) => option<int>
+### Array.isEmpty
+  
+let isEmpty: t<'a> => bool  
 
-### getIndexBy
 
-let getIndexBy: (t<'a>, 'a => bool) => option<int>
-Use findIndex instead
+### Array.Mut
+  
+  
+### Array.Mut.sort
+  
+let sort: t<'a> => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 
-### all
+### Array.Mut.reverse
+  
+let reverse: t<'a> => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
 
-let all: (t<'a>, 'a => bool) => bool
+### Array.Mut.splice
+  
+let splice: (t<'a>, ~index: int, ~remove: int, array<'a>) => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
 
-### every
+### Array.Mut.splice_
+  
+let splice_: (t<'a>, ~index: int, ~remove: int, array<'a>) => unit  
 
-let every: (t<'a>, 'a => bool) => bool
-Use all instead
 
-### alli
+### Array.Mut.push
+  
+let push: (t<'a>, 'a) => int  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
 
-let alli: (t<'a>, ('a, int) => bool) => bool
+### Array.Mut.push_
+  
+let push_: (t<'a>, 'a) => unit  
 
-### everyi
 
-let everyi: (t<'a>, ('a, int) => bool) => bool
-Use alli instead
+### Array.Mut.pushMany
+  
+let pushMany: (t<'a>, array<'a>) => int  
 
-### some
 
-let some: (t<'a>, 'a => bool) => bool
+### Array.Mut.pushMany_
+  
+let pushMany_: (t<'a>, array<'a>) => unit  
 
-### somei
 
-let somei: (t<'a>, ('a, int) => bool) => bool
+### Array.Mut.set
+  
+let set: (t<'a>, int, 'a) => unit  
 
-### isEmpty
 
-let isEmpty: t<'a> => bool
+### Array.setUnsafe
+  
+let setUnsafe: (t<'a>, int, 'a) => t<'a>  
 
-### Mut
 
+### Array.set
+  
+let set: (t<'a>, int, 'a) => t<'a>  
 
-### setUnsafe
 
-let setUnsafe: (t<'a>, int, 'a) => t<'a>
+### Array.map
+  
+let map: (t<'a>, 'a => 'b) => t<'b>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
-### set
+### Array.mapi
+  
+let mapi: (t<'a>, ('a, int) => 'b) => t<'b>  
 
-let set: (t<'a>, int, 'a) => t<'a>
 
-### map
+### Array.const
+  
+let const: (t<'x>, 'b) => t<'b>  
+return a new array with each element replaced with `b`
 
-let map: (t<'a>, 'a => 'b) => t<'b>
+### Array.bind
+  
+let bind: (t<'a>, 'a => t<'b>) => t<'b>  
+Renamed to match Promise, Result, Option
 
-### mapi
+### Array.bindi
+  
+let bindi: (t<'a>, ('a, int) => t<'b>) => t<'b>  
 
-let mapi: (t<'a>, ('a, int) => 'b) => t<'b>
 
-### const
+### Array.identity
+  
+let identity: 'a => 'a  
 
-let const: (t<'x>, 'b) => t<'b>
 
-### bind
+### Array.join
+  
+let join: t<t<'a>> => t<'a>  
+Collapse an array of arrays by one degree
 
-let bind: (t<'a>, 'a => t<'b>) => t<'b>
+### Array.flatten
+  
+let flatten: t<t<'a>> => t<'a>  
+use join instead  
+Renamed to match Promise, Result, Option
 
-### bindi
+### Array.filter
+  
+let filter: (t<'a>, 'a => bool) => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 
-let bindi: (t<'a>, ('a, int) => t<'b>) => t<'b>
+### Array.filteri
+  
+let filteri: (t<'a>, ('a, int) => bool) => t<'a>  
 
-### identity
 
-let identity: 'a => 'a
+### Array.keepMap
+  
+let keepMap: (t<'a>, 'a => option<'b>) => array<'b>  
 
-### join
 
-let join: t<t<'a>> => t<'a>
+### Array.catOptions
+  
+let catOptions: t<option<'a>> => t<'a>  
 
-### flatten
 
-let flatten: t<t<'a>> => t<'a>
-use join instead
+### Array.keepBind
+  
+let keepBind: (t<option<'a>>, 'a => option<'b>) => t<'b>  
 
-### filter
 
-let filter: (t<'a>, 'a => bool) => t<'a>
+### Array.first
+  
+let first: (t<'a>, 'a => bool) => option<'a>  
 
-### filteri
 
-let filteri: (t<'a>, ('a, int) => bool) => t<'a>
+### Array.firsti
+  
+let firsti: (t<'a>, ('a, int) => bool) => option<'a>  
 
-### keepMap
 
-let keepMap: (t<'a>, 'a => option<'b>) => array<'b>
+### Array.find
+  
+let find: (t<'a>, 'a => bool) => option<'a>  
+Use first instead  
 
-### catOptions
 
-let catOptions: t<option<'a>> => t<'a>
+### Array.findi
+  
+let findi: (t<'a>, ('a, int) => bool) => option<'a>  
+Use firsti instead  
 
-### keepBind
 
-let keepBind: (t<option<'a>>, 'a => option<'b>) => t<'b>
+### Array.firstOption
+  
+let firstOption: (t<'a>, 'a => option<'b>) => option<'b>  
 
-### first
 
-let first: (t<'a>, 'a => bool) => option<'a>
+### Array.firstEq
+  
+let firstEq: (t<'a>, 'a) => option<'a>  
 
-### firsti
 
-let firsti: (t<'a>, ('a, int) => bool) => option<'a>
+### Array.findEq
+  
+let findEq: (t<'a>, 'a) => option<'a>  
 
-### find
 
-let find: (t<'a>, 'a => bool) => option<'a>
-Use first instead
+### Array.firstBy
+  
+let firstBy: (t<'a>, 'a => 'b, 'b) => option<'a>  
 
-### findi
 
-let findi: (t<'a>, ('a, int) => bool) => option<'a>
-Use firsti instead
+### Array.findBy
+  
+let findBy: (t<'a>, 'a => 'b, 'b) => option<'a>  
+Use firstBy instead  
 
-### firstOption
 
-let firstOption: (t<'a>, 'a => option<'b>) => option<'b>
+### Array.last
+  
+let last: (t<'a>, 'a => bool) => option<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast)
 
-### firstEq
+### Array.lasti
+  
+let lasti: (t<'a>, ('a, int) => bool) => option<'a>  
 
-let firstEq: (t<'a>, 'a) => option<'a>
 
-### findEq
+### Array.findLast
+  
+let findLast: (t<'a>, 'a => bool) => option<'a>  
+Use last instead  
 
-let findEq: (t<'a>, 'a) => option<'a>
 
-### firstBy
+### Array.findLasti
+  
+let findLasti: (t<'a>, ('a, int) => bool) => option<'a>  
+Use lasti instead  
 
-let firstBy: (t<'a>, 'a => 'b, 'b) => option<'a>
 
-### findBy
+### Array.joinWith
+  
+let joinWith: (t<string>, string) => string  
+Join is a common term for monads, and this function is fairly specific so give it the more specific name
 
-let findBy: (t<'a>, 'a => 'b, 'b) => option<'a>
-Use firstBy instead
+### Array.reduce
+  
+let reduce: (t<'a>, ('b, 'a) => 'b, 'b) => 'b  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
 
-### last
+### Array.reducei
+  
+let reducei: (t<'a>, ('b, 'a, int) => 'b, 'b) => 'b  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
 
-let last: (t<'a>, 'a => bool) => option<'a>
+### Array.reverse
+  
+let reverse: t<'a> => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toReversed)
 
-### lasti
+### Array.toIndices
+  
+let toIndices: t<'a> => t<int>  
 
-let lasti: (t<'a>, ('a, int) => bool) => option<'a>
 
-### findLast
+### Array.sort
+  
+let sort: t<'a> => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted)
 
-let findLast: (t<'a>, 'a => bool) => option<'a>
-Use last instead
+### Array.sortCmp
+  
+let sortCmp: (t<'a>, ('a, 'a) => int) => t<'a>  
 
-### findLasti
 
-let findLasti: (t<'a>, ('a, int) => bool) => option<'a>
-Use lasti instead
+### Array.slice
+  
+let slice: (t<'a>, int, int) => t<'a>  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
 
-### joinWith
+### Array.sliceFrom
+  
+let sliceFrom: (t<'a>, int) => t<'a>  
 
-let joinWith: (t<string>, string) => string
 
-### reduce
+### Array.head
+  
+let head: t<'a> => option<'a>  
+return first element
 
-let reduce: (t<'a>, ('b, 'a) => 'b, 'b) => 'b
+### Array.tail
+  
+let tail: t<'a> => t<'a>  
 
-### reducei
 
-let reducei: (t<'a>, ('b, 'a, int) => 'b, 'b) => 'b
+### Array.stem
+  
+let stem: t<'a> => t<'a>  
+all but last element
 
-### reverse
+### Array.last
+  
+let last: t<'a> => option<'a>  
 
-let reverse: t<'a> => t<'a>
 
-### toIndices
+### Array.take
+  
+let take: (t<'a>, int) => t<'a>  
 
-let toIndices: t<'a> => t<int>
 
-### sort
+### Array.zipAdjacent
+  
+let zipAdjacent: t<'a> => t<('a, 'a)>  
 
-let sort: t<'a> => t<'a>
 
-### sortCmp
+### Array.partition
+  
+let partition: (t<'a>, ('a, int) => bool) => (t<'a>, t<'a>)  
 
-let sortCmp: (t<'a>, ('a, 'a) => int) => t<'a>
 
-### slice
+### Array.evenOdd
+  
+type evenOdd<'a> = {even: t<'a>, odd: t<'a>}  
 
-let slice: (t<'a>, int, int) => t<'a>
 
-### sliceFrom
+### Array.partitionIndexEvenOdd
+  
+let partitionIndexEvenOdd: t<'a> => evenOdd<'a>  
+Use partition with your own predicate instead  
 
-let sliceFrom: (t<'a>, int) => t<'a>
 
-### head
+### Array.cross
+  
+let cross: (t<'a>, t<'b>) => t<('a, 'b)>  
 
-let head: t<'a> => option<'a>
 
-### tail
+### Array.splitAt
+  
+let splitAt: (t<'a>, int) => (t<'a>, t<'a>)  
 
-let tail: t<'a> => t<'a>
 
-### stem
+### Array.intercalate
+  
+let intercalate: (t<'a>, 'a) => t<'a>  
 
-let stem: t<'a> => t<'a>
 
-### last
+### Array.intercalateWithGenerator
+  
+let intercalateWithGenerator: (t<'a>, int => 'a) => t<'a>  
 
-let last: t<'a> => option<'a>
 
-### take
+### Array.concat
+  
+let concat: (t<'a>, t<'a>) => t<'a>  
+Use spread operator to combine two arrays
 
-let take: (t<'a>, int) => t<'a>
+### Array.append
+  
+let append: (t<'a>, 'a) => t<'a>  
+Use spread operator to append an element to an array
 
-### zipAdjacent
+### Array.prepend
+  
+let prepend: ('a, t<'a>) => t<'a>  
+Use spread operator to prepend an element to an array
 
-let zipAdjacent: t<'a> => t<('a, 'a)>
+### Array.splice
+  
+let splice: (t<'a>, ~index: int, ~remove: int, t<'a>) => t<'a>  
 
-### partition
 
-let partition: (t<'a>, ('a, int) => bool) => (t<'a>, t<'a>)
+### Array.replace
+  
+let replace: (t<'a>, 'a, int) => t<'a>  
 
-### evenOdd
 
-type evenOdd<'a> = {even: t<'a>, odd: t<'a>}
+### Array.insert
+  
+let insert: (t<'a>, 'a, int) => t<'a>  
 
-### partitionIndexEvenOdd
 
-let partitionIndexEvenOdd: t<'a> => evenOdd<'a>
-Use partition with your own predicate instead
+### Array.remove
+  
+let remove: (t<'a>, int) => t<'a>  
 
-### cross
 
-let cross: (t<'a>, t<'b>) => t<('a, 'b)>
+### Array.combinations
+  
+let combinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>  
 
-### splitAt
 
-let splitAt: (t<'a>, int) => (t<'a>, t<'a>)
+### Array.generateCombinations
+  
+let generateCombinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>  
+Use combinations instead  
 
-### intercalate
-
-let intercalate: (t<'a>, 'a) => t<'a>
-
-### intercalateWithGenerator
-
-let intercalateWithGenerator: (t<'a>, int => 'a) => t<'a>
-
-### concat
-
-let concat: (t<'a>, t<'a>) => t<'a>
-
-### append
-
-let append: (t<'a>, 'a) => t<'a>
-
-### prepend
-
-let prepend: ('a, t<'a>) => t<'a>
-
-### splice
-
-let splice: (t<'a>, ~index: int, ~remove: int, t<'a>) => t<'a>
-
-### replace
-
-let replace: (t<'a>, 'a, int) => t<'a>
-
-### insert
-
-let insert: (t<'a>, 'a, int) => t<'a>
-
-### remove
-
-let remove: (t<'a>, int) => t<'a>
-
-### combinations
-
-let combinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>
-
-### generateCombinations
-
-let generateCombinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>
-Use combinations instead
-\n  * Sign a message with a key.\n  *\n  * @param message - A message to be signed\n  * @param key - The key with which to sign the message\n  * @returns A signed message\n
