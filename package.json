@@ -1,12 +1,13 @@
 {
   "name": "@nobleai/rescript-prelude",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "NobleAI optinionated frame for unifying external core libraries",
   "main": "index.js",
   "repository": "https://github.com/noble-ai/rescript-prelude",
   "author": "Alex Mouton (alex.mouton@noble.ai)",
   "license": "MIT",
   "private": false,
+  "type": "module",
   "scripts": {
     "build": "rescript build",
     "start": "rescript build -w",
@@ -23,9 +24,11 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
+    "@nobleai/rescript-documentation": "^0.3.0",
     "@nobleai/rescript-vitest": "^0.30.3",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rescript/react": "^0.11.0",
+    "@rescript/tools": "^0.5.0",
     "jsdom": "^24.0.0",
     "vitest": "^0.30.1"
   }
