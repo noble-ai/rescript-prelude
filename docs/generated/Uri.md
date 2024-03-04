@@ -5,5 +5,5 @@
 
 ### Uri.encodeComponent
   
-let encodeComponent: string => string  
+`let encodeComponent: string => string`  
 

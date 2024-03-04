@@ -5,73 +5,73 @@
 
 ### File.t
   
-type t  
+`type t`  
 
 
 ### File.make
   
-let make: unit => t  
+`let make: unit => t`  
 
 
 ### File.lastModified
   
-let lastModified: t => int  
+`let lastModified: t => int`  
 
 
 ### File.lastModifiedDate
   
-let lastModifiedDate: t => Js.Date.t  
+`let lastModifiedDate: t => Js.Date.t`  
 
 
 ### File.name
   
-let name: t => string  
+`let name: t => string`  
 
 
 ### File.webkitRelativePath
   
-let webkitRelativePath: t => string  
+`let webkitRelativePath: t => string`  
 
 
 ### File.type_
   
-let type_: t => string  
+`let type_: t => string`  
 
 
 ### File.size
   
-let size: t => int  
+`let size: t => int`  
 
 
 ### File.tToJsT
   
-let tToJsT: t => {..}  
+`let tToJsT: t => {..}`  
 
 
 ### File.slice
   
-let slice: (
+`let slice: (
   t,
   ~start: int=?,
   ~end: int=?,
   ~contentType: string=?,
   unit,
-) => t  
+) => t`  
 
 
 ### File.stream
   
-type stream  
+`type stream`  
 
 
 ### File.stream
   
-let stream: t => stream  
+`let stream: t => stream`  
 
 
 ### File.text
   
-let text: t => string  
+`let text: t => string`  
 
 
 ### File.Blob
@@ -79,10 +79,10 @@ let text: t => string
   
 ### File.Blob.t
   
-type t  
+`type t`  
 
 
 ### File.makeBlob
   
-let makeBlob: (array<'a>, 'opts) => Blob.t  
+`let makeBlob: (array<'a>, 'opts) => Blob.t`  
 

@@ -5,5 +5,5 @@
 
 ### Tap.tap
   
-let tap: ('a, 'a => unit) => 'a  
+`let tap: ('a, 'a => unit) => 'a`  
 

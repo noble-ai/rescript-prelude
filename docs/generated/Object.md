@@ -5,5 +5,5 @@
 
 ### Object.assign
   
-let assign: ({..}, {..}) => {..}  
+`let assign: ({..}, {..}) => {..}`  
 

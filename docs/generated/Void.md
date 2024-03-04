@@ -5,5 +5,5 @@
 
 ### Void.void
   
-let void: 'a => unit  
+`let void: 'a => unit`  
 
