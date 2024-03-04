@@ -24,7 +24,7 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "@nobleai/rescript-documentation": "^0.4.0",
+    "@nobleai/rescript-documentation": "^0.5.0",
     "@nobleai/rescript-vitest": "^0.30.3",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rescript/react": "^0.11.0",

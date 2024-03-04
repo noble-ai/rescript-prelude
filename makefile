@@ -9,7 +9,7 @@ outdir:
 all: outdir $(MD_FILES)
 
 docs/generated/%.md: src/%.res
-	yarn -s run rescript-tools doc $< > temp.json; yarn -s run noble-doc temp.json > $@; rm temp.json
+	yarn -s run rescript-tools doc $< > temp.json; yarn -s run rescript-doc temp.json > $@; rm temp.json
 
 clean: 
 	rm -rf ./docs/generated
