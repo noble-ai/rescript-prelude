@@ -1,6 +1,6 @@
 {
   "name": "@nobleai/rescript-prelude",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "NobleAI optinionated frame for unifying external core libraries",
   "main": "index.js",
   "repository": "https://github.com/noble-ai/rescript-prelude",
@@ -24,7 +24,7 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "@nobleai/rescript-documentation": "^0.3.0",
+    "@nobleai/rescript-documentation": "^0.4.0",
     "@nobleai/rescript-vitest": "^0.30.3",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rescript/react": "^0.11.0",

@@ -1,3 +1,31 @@
-yarn run v1.22.19
-$ /Users/alexmouton/Documents/code/rescript-prelude/node_modules/.bin/noble-doc
-Done in 0.20s.
+# PromiseResult
+
+
+### result
+
+type result<'ok, 'err> = Result.t<'ok, 'err>
+
+### t
+
+type t<'ok, 'err> = Promise.t<result<'ok, 'err>>
+
+### map
+
+let map: (t<'o, 'e>, 'o => 'or) => Promise.t<result<'or, 'e>>
+
+### bind
+
+let bind: (t<'o, 'e>, 'o => t<'or, 'e>) => Promise.t<result<'or, 'e>>
+
+### tap
+
+let tap: (t<'o, 'e>, 'o => unit) => Promise.t<result<'o, 'e>>
+
+### tapBind
+
+let tapBind: (t<'o, 'e>, 'o => t<'a, 'b>) => Promise.t<result<'o, 'e>>
+
+### lift
+
+let lift: Promise.t<'a> => t<'a, 'err>
+

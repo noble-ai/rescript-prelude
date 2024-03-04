@@ -1,3 +1,15 @@
-yarn run v1.22.19
-$ /Users/alexmouton/Documents/code/rescript-prelude/node_modules/.bin/noble-doc
-Done in 0.26s.
+# Exn
+
+
+### t
+
+type t = Js.Exn.t
+
+### raise
+
+let raise: string => 'a
+
+### message
+
+let message: Js.Exn.t => option<string>
+

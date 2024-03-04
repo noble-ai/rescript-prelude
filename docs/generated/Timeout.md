@@ -1,3 +1,11 @@
-yarn run v1.22.19
-$ /Users/alexmouton/Documents/code/rescript-prelude/node_modules/.bin/noble-doc
-Done in 0.20s.
+# Timeout
+
+
+### set
+
+let set: (unit => unit, int) => Js.Global.timeoutId
+
+### clear
+
+let clear: Js.Global.timeoutId => unit
+
