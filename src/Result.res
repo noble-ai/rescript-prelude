@@ -332,4 +332,4 @@ let all = (arr: array<t<'a, 'err>>): t<array<'a>, 'err> => {
   )
 }
 
-let log = (res: t<'ok, 'err>, str: string) => Js.log2(str, res)
+let log = (res, str) => res->Tap.tap(Js.log2(str))
