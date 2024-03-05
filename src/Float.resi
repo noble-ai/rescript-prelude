@@ -16,7 +16,7 @@ let negativeInfinity: float
 let formatNumber: (float, string) => string
 let formatNumberDefault: float => string
 let shortenLargeFloat: float => string
-external unsafeFloatToInt: float => int = "%identity"
+let unsafeFloatToInt: float => int
 let round: float => int
 let ceil: float => int
 let floor: float => int
@@ -29,3 +29,8 @@ let abs: float => float
 let trunc: float => float
 let sign: float => float
 let pow: (~base: float, ~exp: float) => float
+
+let log: float => float
+let log2: float => float
+let log10: float => float
+let log1p: float => float

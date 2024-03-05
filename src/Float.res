@@ -45,3 +45,8 @@ let abs = Js.Math.abs_float
 let trunc = Js.Math.trunc
 let sign = Js.Math.sign_float
 let pow = Js.Math.pow_float
+
+@scope("Math") external log: float => float = "log"
+@scope("Math") external log2: float => float = "log2"
+@scope("Math") external log10: float => float = "log10"
+@scope("Math") external log1p: float => float = "log1p"
