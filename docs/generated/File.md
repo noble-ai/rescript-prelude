@@ -71,7 +71,7 @@
 
 ### File.text
   
-`let text: t => string`  
+`let text: t => Promise.t<string>`  
 
 
 ### File.Blob

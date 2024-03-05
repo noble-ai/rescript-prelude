@@ -3,6 +3,68 @@
 
 
 
+### Option.t
+  
+`type t<'a> = option<'a>`  
+
+
+### Option.return
+  
+`let return: 'a => option<'a>`  
+
+
+### Option.returnArray
+  
+`let returnArray: array<'a> => array<option<'a>>`  
+
+
+### Option.some
+  
+`let some: 'a => option<'a>`  
+
+
+### Option.none
+  
+`let none: option<'a> => option<'b>`  
+
+
+### Option.void
+  
+`let void: option<'a> => unit`  
+
+
+### Option.getExn
+  
+`let getExn: (option<'a>, ~desc: string=?) => 'a`  
+
+
+### Option.getUnsafe
+  
+`let getUnsafe: option<'a> => 'a`  
+
+
+### Option.or
+  
+`let or: (option<'a>, 'a) => 'a`  
+
+
+### Option.getWithDefault
+  
+`let getWithDefault: (option<'a>, 'a) => 'a`  
+[!WARNING] please use or [!WARNING]  
+
+
+### Option.mapWithDefault
+  
+`let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
+[!WARNING] please use map->or for ease of refactoring [!WARNING]  
+
+
+### Option.mapWithDefaultU
+  
+`let mapWithDefaultU: (option<'a>, 'b, 'a => 'b) => 'b`  
+
+
 ### Option.keepU
   
 `let keepU: (option<'a>, 'a => bool) => option<'a>`  
@@ -23,26 +85,6 @@
 `let forEach: (option<'a>, 'a => unit) => unit`  
 
 
-### Option.getExn
-  
-`let getExn: option<'a> => 'a`  
-
-
-### Option.getUnsafe
-  
-`let getUnsafe: option<'a> => 'a`  
-
-
-### Option.mapWithDefaultU
-  
-`let mapWithDefaultU: (option<'a>, 'b, 'a => 'b) => 'b`  
-
-
-### Option.mapWithDefault
-  
-`let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-
-
 ### Option.mapU
   
 `let mapU: (option<'a>, 'a => 'b) => option<'b>`  
@@ -61,11 +103,6 @@
 ### Option.flatMap
   
 `let flatMap: (option<'a>, 'a => option<'b>) => option<'b>`  
-
-
-### Option.getWithDefault
-  
-`let getWithDefault: (option<'a>, 'a) => 'a`  
 
 
 ### Option.orElse
@@ -103,32 +140,6 @@
 `let cmp: (option<'a>, option<'b>, ('a, 'b) => int) => int`  
 
 
-### Option.mapWithDefault
-  
-`let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-[!WARNING] please use map->getWithDefault for ease of refactoring [!WARNING]  
-
-
-### Option.t
-  
-`type t<'a> = option<'a>`  
-
-
-### Option.void
-  
-`let void: option<'a> => unit`  
-
-
-### Option.getExn
-  
-`let getExn: (option<'a>, ~desc: string=?) => 'a`  
-
-
-### Option.return
-  
-`let return: 'a => option<'a>`  
-
-
 ### Option.bind
   
 `let bind: (option<'a>, 'a => option<'b>) => option<'b>`  
@@ -144,16 +155,6 @@
 `let const: (option<'a>, 'b) => option<'b>`  
 
 
-### Option.some
-  
-`let some: 'a => option<'a>`  
-
-
-### Option.none
-  
-`let none: option<'a> => option<'b>`  
-
-
 ### Option.apply
   
 `let apply: (option<'a => 'b>, option<'a>) => option<'b>`  
@@ -162,7 +163,7 @@
 ### Option.liftA1
   
 `let liftA1: ('a => 'r, option<'a>) => option<'r>`  
-
+Turn a function on concrete values into an optional function. \"A\" for Applicative
 
 ### Option.liftA2
   
@@ -182,11 +183,13 @@
 ### Option.applyFirst
   
 `let applyFirst: (option<'a>, option<'b>) => option<'a>`  
+[!WARNING] use first [!WARNING]  
 
 
 ### Option.applySecond
   
 `let applySecond: (option<'a>, option<'b>) => option<'b>`  
+[!WARNING] use second [!WARNING]  
 
 
 ### Option.all2
@@ -265,17 +268,17 @@
 ### Option.predicate
   
 `let predicate: ('v, 'v => bool) => option<'v>`  
-
+Keep the value v if true, otherwise return None
 
 ### Option.guard
   
 `let guard: (option<'a>, 'a => bool) => option<'a>`  
-
+force the option to None when the predicate returns false
 
 ### Option.flap0
   
 `let flap0: option<unit => 'b> => option<'b>`  
-
+invoke an optional function, returning optional result
 
 ### Option.flap0_
   
@@ -317,9 +320,9 @@
 `let first: (option<'a>, option<'a>) => option<'a>`  
 
 
-### Option.returnArray
+### Option.second
   
-`let returnArray: array<'a> => array<option<'a>>`  
+`let second: (option<'a>, option<'a>) => option<'a>`  
 
 
 ### Option.log

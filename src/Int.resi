@@ -4,7 +4,6 @@ let fromString: string => option<int>
 external toFloat: t => float = "%identity"
 external fromFloatUnsafe: float => t = "%identity"
 let fromFloat: float => option<t>
-let initZeroDigitHelper: int => string
 let min: (int, int) => int
 let minMany: array<int> => int
 let max: (int, int) => int

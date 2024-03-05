@@ -1,5 +1,3 @@
-///doc/ # Int
-
 type t = int
 let toString = Belt.Int.toString
 
@@ -12,10 +10,6 @@ let fromFloat: float => option<t> = f => {
 	->fromFloatUnsafe
 	->Option.predicate(x => f->Float.round->toFloat == x->toFloat)
 }
-
-let initZeroDigitHelper = (num: int): string =>
-  // TODO: negative ints - AxM
-  num < 10 ? `0${num->toString}` : num->toString
 
 let min = Js.Math.min_int
 let minMany = Js.Math.minMany_int

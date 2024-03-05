@@ -107,7 +107,7 @@
 
 ### Map.Complex
   
-  
+\nSince the key comaprisons in Js map are vaguely by reference,\nthey play poorly with rescripts ease of creating new values.\nSo for situations where you have a key that is not a primitive\nwhere the value and reference comparison collapse\nUse Complex Map, providing a string representation of your type\nSo we can track those key values separate from the value values\nand pretend everything is the same\n  
 ### Map.Complex.Make
   
   

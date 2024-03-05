@@ -1,6 +1,3 @@
-///doc/ # Either         
-
-// A la: https://pursuit.purescript.org/packages/purescript-either/6.1.0/docs/Data.Either
 @deriving(accessors)
 type t<'a, 'b> = Left('a) | Right('b)
 

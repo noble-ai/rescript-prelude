@@ -426,7 +426,7 @@ all but last element
 ### Array.cross
   
 `let cross: (t<'a>, t<'b>) => t<('a, 'b)>`  
-
+make each pair in a cross product of two arrays
 
 ### Array.splitAt
   
@@ -471,7 +471,7 @@ Use spread operator to prepend an element to an array
 ### Array.insert
   
 `let insert: (t<'a>, 'a, int) => t<'a>`  
-
+Allows insert at end of array, but avoids sparse array
 
 ### Array.remove
   

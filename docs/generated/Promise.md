@@ -43,7 +43,7 @@
 ### Promise.const
   
 `let const: (t<'x>, 'b) => t<'b>`  
-
+Take a promise and replace its yielded value with a constant\nWe use this for casting to unit mostly, but it's useful for other things too\n
 
 ### Promise.bind
   
@@ -58,12 +58,12 @@
 ### Promise.tap
   
 `let tap: (t<'a>, 'a => unit) => t<'a>`  
-
+Call fn with the value from the promise, ignoring its return
 
 ### Promise.tapBind
   
 `let tapBind: (t<'a>, 'a => t<'b>) => t<'a>`  
-
+Call fn with the value from the promise, ignoring its return. but only continue when fn resolves
 
 ### Promise.all2
   
@@ -100,12 +100,18 @@
 ### Promise.finallyVoid
   
 `let finallyVoid: (t<'a>, 'a => unit) => unit`  
+[!WARNING] use finally_ [!WARNING]  
+
+
+### Promise.finally_
+  
+`let finally_: (t<'a>, 'a => unit) => unit`  
 
 
 ### Promise.sequence
   
 `let sequence: (array<'a>, 'a => t<'b>) => t<array<'b>>`  
-
+Take an array of input, and a function that makes a promise producing b from one a.\nStart with a Promise that produces an empty array.\nWalk along the array of inputs, with the accumulator being a promise that produces the array of earlier inputs.\nbind off of that promise with a function that produces your Promise<b>, then map that Promise to append it on the existing array of bs - AxM\n
 
 ### Promise.errorToExn
   

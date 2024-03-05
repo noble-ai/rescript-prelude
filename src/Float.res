@@ -1,6 +1,3 @@
-///doc/ # Float
-
-let toLocaleString: float => string = %raw(`(x) => x.toLocaleString()`)
 
 let fromString = Belt.Float.fromString
 let fromStringUnsafe = x => x->fromString->Option.getExn(~desc="Float.fromStringUnsafe")
@@ -13,6 +10,7 @@ type optsLocale = {
   minimumFractionDigits: int,
 }
 
+let toLocaleString: float => string = %raw(`(x) => x.toLocaleString()`)
 let toLocaleStringOptions: (float, Js.Undefined.t<string>, optsLocale) => string = %raw(`(x, fmt, opts) => x.toLocaleString(fmt, opts)`)
 
 let toExponential = Js.Float.toExponential

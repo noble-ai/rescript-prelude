@@ -10,3 +10,4 @@ NobleAI Opinionated Prelude for unification of Belt/Js and other antique core li
 * Prefer Promise over async
 * Trailing _ in function name variation of other function returning unit
 * Clearly identify reference/strict equality since we dont often have reference equality.
+* All objects should have `let log: ('a, string) => 'a`

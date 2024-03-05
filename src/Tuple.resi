@@ -1,3 +1,7 @@
+@@ocaml.doc(
+"Both flattened and recursive definitions of Tuple, with equivalent operators for both."
+)
+
 let fst2: (('a, 'b)) => 'a
 let snd2: (('a, 'b)) => 'b
 let mapl2: (~f: 'a => 'b, ('a, 'c)) => ('b, 'c)
@@ -90,9 +94,13 @@ let reverse4: (('a, 'b, 'c, 'd)) => ('d, 'c, 'b, 'a)
 let reverse5: (('a, 'b, 'c, 'd, 'e)) => ('e, 'd, 'c, 'b, 'a)
 let reverse6: (('a, 'b, 'c, 'd, 'e, 'f)) => ('f, 'e, 'd, 'c, 'b, 'a)
 let reverse7: (('a, 'b, 'c, 'd, 'e, 'f, 'g)) => ('g, 'f, 'e, 'd, 'c, 'b, 'a)
+
+@ocaml.doc("render a polymorphic tuple to an array")
 let mono: (('a, 'b) => 'c, 'c => 'd, 'a, 'b) => 'd
+
 let all: (('a, 'b) => 'c, 'c => Array.t<bool>, 'a, 'b) => bool
 let some: (('a, 'b) => 'c, 'c => Array.t<bool>, 'a, 'b) => bool
+
 module Tuple2: {
   type t<'a, 'b> = ('a, 'b)
   let make: ('a, 'b) => ('a, 'b)
@@ -109,6 +117,7 @@ module Tuple2: {
   let get1: (('a, 'b)) => 'a
   let get2: (('a, 'b)) => 'b
 }
+
 module Tuple3: {
   type t<'a, 'b, 'c> = ('a, 'b, 'c)
   let make: ('a, 'b, 'c) => ('a, 'b, 'c)
@@ -130,6 +139,7 @@ module Tuple3: {
   let get2: (('a, 'b, 'c)) => 'b
   let get3: (('a, 'b, 'c)) => 'c
 }
+
 module Tuple4: {
   type t<'a, 'b, 'c, 'd> = ('a, 'b, 'c, 'd)
   let make: ('a, 'b, 'c, 'd) => ('a, 'b, 'c, 'd)
@@ -152,6 +162,7 @@ module Tuple4: {
   let get3: (('a, 'b, 'c, 'd)) => 'c
   let get4: (('a, 'b, 'c, 'd)) => 'd
 }
+
 module Tuple5: {
   type t<'a, 'b, 'c, 'd, 'e> = ('a, 'b, 'c, 'd, 'e)
   let make: ('a, 'b, 'c, 'd, 'e) => ('a, 'b, 'c, 'd, 'e)
@@ -187,6 +198,7 @@ module Tuple5: {
   let get4: (('a, 'b, 'c, 'd, 'e)) => 'd
   let get5: (('a, 'b, 'c, 'd, 'e)) => 'e
 }
+
 module Tuple6: {
   type t<'a, 'b, 'c, 'd, 'e, 'f> = ('a, 'b, 'c, 'd, 'e, 'f)
   let make: ('a, 'b, 'c, 'd, 'e, 'f) => ('a, 'b, 'c, 'd, 'e, 'f)
@@ -223,6 +235,7 @@ module Tuple6: {
   let get5: (('a, 'b, 'c, 'd, 'e, 'f)) => 'e
   let get6: (('a, 'b, 'c, 'd, 'e, 'f)) => 'f
 }
+
 module Tuple7: {
   type t<'a, 'b, 'c, 'd, 'e, 'f, 'g> = ('a, 'b, 'c, 'd, 'e, 'f, 'g)
   let make: ('a, 'b, 'c, 'd, 'e, 'f, 'g) => ('a, 'b, 'c, 'd, 'e, 'f, 'g)
@@ -260,6 +273,7 @@ module Tuple7: {
   let get6: (('a, 'b, 'c, 'd, 'e, 'f, 'g)) => 'f
   let get7: (('a, 'b, 'c, 'd, 'e, 'f, 'g)) => 'g
 }
+
 module Nested: {
   type t<'a, 'z> = ('a, 'z)
   type t2<'a, 'z> = t<'a, 'z>
@@ -301,6 +315,7 @@ module Nested: {
   let set5: (t6<'a, 'b, 'c, 'd, 'e, 'z>, 'e) => t6<'a, 'b, 'c, 'd, 'e, 'z>
   let set6: (t7<'a, 'b, 'c, 'd, 'e, 'f, 'z>, 'f) => t7<'a, 'b, 'c, 'd, 'e, 'f, 'z>
   let set7: (t8<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'z>, 'g) => t8<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'z>
+
   module Tuple1: {
     type t<'a> = tuple1<'a>
     type units = t<unit>
@@ -323,6 +338,7 @@ module Nested: {
     let set1: (t2<'a, 'b>, 'c) => t2<'c, 'b>
     let get1: t<'a> => 'a
   }
+
   module Tuple2: {
     type t<'a, 'b> = t3<'a, 'b, unit>
     let make: ('a, 'b) => t<'a, 'b>
@@ -350,6 +366,7 @@ module Nested: {
     let get1: t<'a, 'b> => 'a
     let get2: t<'a, 'b> => 'b
   }
+
   module Tuple3: {
     type t<'a, 'b, 'c> = t4<'a, 'b, 'c, unit>
     let make: ('a, 'b, 'c) => t<'a, 'b, 'c>
@@ -379,6 +396,7 @@ module Nested: {
     let get2: t3<'a, 'b, 'c> => 'b
     let get3: t4<'a, 'b, 'c, 'd> => 'c
   }
+
   module Tuple4: {
     type t<'a, 'b, 'c, 'd> = t5<'a, 'b, 'c, 'd, unit>
     let make: ('a, 'b, 'c, 'd) => t<'a, 'b, 'c, 'd>
@@ -415,6 +433,7 @@ module Nested: {
     let get3: t4<'a, 'b, 'c, 'd> => 'c
     let get4: t5<'a, 'b, 'c, 'd, 'e> => 'd
   }
+
   module Tuple5: {
     type t<'a, 'b, 'c, 'd, 'e> = t6<'a, 'b, 'c, 'd, 'e, unit>
     type units = (unit, Tuple4.units)
@@ -460,6 +479,7 @@ module Nested: {
     let get4: t5<'a, 'b, 'c, 'd, 'e> => 'd
     let get5: t6<'a, 'b, 'c, 'd, 'e, 'f> => 'e
   }
+
   module Tuple6: {
     type t<'a, 'b, 'c, 'd, 'e, 'f> = ('a, Tuple5.t<'b, 'c, 'd, 'e, 'f>)
     type units = (unit, Tuple5.units)
@@ -509,6 +529,7 @@ module Nested: {
     let get5: t6<'a, 'b, 'c, 'd, 'e, 'f> => 'e
     let get6: t7<'a, 'b, 'c, 'd, 'e, 'f, 'g> => 'f
   }
+
   module Tuple7: {
     type t<'a, 'b, 'c, 'd, 'e, 'f, 'g> = ('a, Tuple6.t<'b, 'c, 'd, 'e, 'f, 'g>)
     type units = (unit, Tuple5.units)

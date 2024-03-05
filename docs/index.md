@@ -426,7 +426,7 @@ all but last element
 ### Array.cross
   
 `let cross: (t<'a>, t<'b>) => t<('a, 'b)>`  
-
+make each pair in a cross product of two arrays
 
 ### Array.splitAt
   
@@ -471,7 +471,7 @@ Use spread operator to prepend an element to an array
 ### Array.insert
   
 `let insert: (t<'a>, 'a, int) => t<'a>`  
-
+Allows insert at end of array, but avoids sparse array
 
 ### Array.remove
   
@@ -657,7 +657,7 @@ Use spread operator to prepend an element to an array
 # Either
 
 
-
+With regards to [Purescript Either](https://pursuit.purescript.org/packages/purescript-either/6.1.0/docs/Data.Either)
 
 ### Either.t
   
@@ -676,7 +676,7 @@ Use spread operator to prepend an element to an array
 
 ### Either.map
   
-`let map: 'r. ('l => 'lo, t<'l, 'r>) => t<'lo, 'r>`  
+`let map: ('l => 'lo, t<'l, 'r>) => t<'lo, 'r>`  
 
 
 ### Either.bimap
@@ -696,7 +696,7 @@ Use spread operator to prepend an element to an array
 
 ### Either.Nested
   
-  
+Recursive construction of multi value either, terminated with unit  
 ### Either.Nested.t1
   
 `type t1<'a> = t<'a, unit>`  
@@ -821,7 +821,7 @@ Use spread operator to prepend an element to an array
 
 ### File.text
   
-`let text: t => string`  
+`let text: t => Promise.t<string>`  
 
 
 ### File.Blob
@@ -1090,11 +1090,6 @@ Use spread operator to prepend an element to an array
 ### Int.fromFloat
   
 `let fromFloat: float => option<t>`  
-
-
-### Int.initZeroDigitHelper
-  
-`let initZeroDigitHelper: int => string`  
 
 
 ### Int.min
@@ -1386,7 +1381,7 @@ Use spread operator to prepend an element to an array
 
 ### Map.Complex
   
-  
+\nSince the key comaprisons in Js map are vaguely by reference,\nthey play poorly with rescripts ease of creating new values.\nSo for situations where you have a key that is not a primitive\nwhere the value and reference comparison collapse\nUse Complex Map, providing a string representation of your type\nSo we can track those key values separate from the value values\nand pretend everything is the same\n  
 ### Map.Complex.Make
   
   
@@ -1540,6 +1535,68 @@ Use spread operator to prepend an element to an array
 
 
 
+### Option.t
+  
+`type t<'a> = option<'a>`  
+
+
+### Option.return
+  
+`let return: 'a => option<'a>`  
+
+
+### Option.returnArray
+  
+`let returnArray: array<'a> => array<option<'a>>`  
+
+
+### Option.some
+  
+`let some: 'a => option<'a>`  
+
+
+### Option.none
+  
+`let none: option<'a> => option<'b>`  
+
+
+### Option.void
+  
+`let void: option<'a> => unit`  
+
+
+### Option.getExn
+  
+`let getExn: (option<'a>, ~desc: string=?) => 'a`  
+
+
+### Option.getUnsafe
+  
+`let getUnsafe: option<'a> => 'a`  
+
+
+### Option.or
+  
+`let or: (option<'a>, 'a) => 'a`  
+
+
+### Option.getWithDefault
+  
+`let getWithDefault: (option<'a>, 'a) => 'a`  
+[!WARNING] please use or [!WARNING]  
+
+
+### Option.mapWithDefault
+  
+`let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
+[!WARNING] please use map->or for ease of refactoring [!WARNING]  
+
+
+### Option.mapWithDefaultU
+  
+`let mapWithDefaultU: (option<'a>, 'b, 'a => 'b) => 'b`  
+
+
 ### Option.keepU
   
 `let keepU: (option<'a>, 'a => bool) => option<'a>`  
@@ -1560,26 +1617,6 @@ Use spread operator to prepend an element to an array
 `let forEach: (option<'a>, 'a => unit) => unit`  
 
 
-### Option.getExn
-  
-`let getExn: option<'a> => 'a`  
-
-
-### Option.getUnsafe
-  
-`let getUnsafe: option<'a> => 'a`  
-
-
-### Option.mapWithDefaultU
-  
-`let mapWithDefaultU: (option<'a>, 'b, 'a => 'b) => 'b`  
-
-
-### Option.mapWithDefault
-  
-`let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-
-
 ### Option.mapU
   
 `let mapU: (option<'a>, 'a => 'b) => option<'b>`  
@@ -1598,11 +1635,6 @@ Use spread operator to prepend an element to an array
 ### Option.flatMap
   
 `let flatMap: (option<'a>, 'a => option<'b>) => option<'b>`  
-
-
-### Option.getWithDefault
-  
-`let getWithDefault: (option<'a>, 'a) => 'a`  
 
 
 ### Option.orElse
@@ -1640,32 +1672,6 @@ Use spread operator to prepend an element to an array
 `let cmp: (option<'a>, option<'b>, ('a, 'b) => int) => int`  
 
 
-### Option.mapWithDefault
-  
-`let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-[!WARNING] please use map->getWithDefault for ease of refactoring [!WARNING]  
-
-
-### Option.t
-  
-`type t<'a> = option<'a>`  
-
-
-### Option.void
-  
-`let void: option<'a> => unit`  
-
-
-### Option.getExn
-  
-`let getExn: (option<'a>, ~desc: string=?) => 'a`  
-
-
-### Option.return
-  
-`let return: 'a => option<'a>`  
-
-
 ### Option.bind
   
 `let bind: (option<'a>, 'a => option<'b>) => option<'b>`  
@@ -1681,16 +1687,6 @@ Use spread operator to prepend an element to an array
 `let const: (option<'a>, 'b) => option<'b>`  
 
 
-### Option.some
-  
-`let some: 'a => option<'a>`  
-
-
-### Option.none
-  
-`let none: option<'a> => option<'b>`  
-
-
 ### Option.apply
   
 `let apply: (option<'a => 'b>, option<'a>) => option<'b>`  
@@ -1699,7 +1695,7 @@ Use spread operator to prepend an element to an array
 ### Option.liftA1
   
 `let liftA1: ('a => 'r, option<'a>) => option<'r>`  
-
+Turn a function on concrete values into an optional function. \"A\" for Applicative
 
 ### Option.liftA2
   
@@ -1719,11 +1715,13 @@ Use spread operator to prepend an element to an array
 ### Option.applyFirst
   
 `let applyFirst: (option<'a>, option<'b>) => option<'a>`  
+[!WARNING] use first [!WARNING]  
 
 
 ### Option.applySecond
   
 `let applySecond: (option<'a>, option<'b>) => option<'b>`  
+[!WARNING] use second [!WARNING]  
 
 
 ### Option.all2
@@ -1802,17 +1800,17 @@ Use spread operator to prepend an element to an array
 ### Option.predicate
   
 `let predicate: ('v, 'v => bool) => option<'v>`  
-
+Keep the value v if true, otherwise return None
 
 ### Option.guard
   
 `let guard: (option<'a>, 'a => bool) => option<'a>`  
-
+force the option to None when the predicate returns false
 
 ### Option.flap0
   
 `let flap0: option<unit => 'b> => option<'b>`  
-
+invoke an optional function, returning optional result
 
 ### Option.flap0_
   
@@ -1854,9 +1852,9 @@ Use spread operator to prepend an element to an array
 `let first: (option<'a>, option<'a>) => option<'a>`  
 
 
-### Option.returnArray
+### Option.second
   
-`let returnArray: array<'a> => array<option<'a>>`  
+`let second: (option<'a>, option<'a>) => option<'a>`  
 
 
 ### Option.log
@@ -1909,7 +1907,7 @@ invalid kind
 ### Promise.const
   
 `let const: (t<'x>, 'b) => t<'b>`  
-
+Take a promise and replace its yielded value with a constant\nWe use this for casting to unit mostly, but it's useful for other things too\n
 
 ### Promise.bind
   
@@ -1924,12 +1922,12 @@ invalid kind
 ### Promise.tap
   
 `let tap: (t<'a>, 'a => unit) => t<'a>`  
-
+Call fn with the value from the promise, ignoring its return
 
 ### Promise.tapBind
   
 `let tapBind: (t<'a>, 'a => t<'b>) => t<'a>`  
-
+Call fn with the value from the promise, ignoring its return. but only continue when fn resolves
 
 ### Promise.all2
   
@@ -1966,12 +1964,18 @@ invalid kind
 ### Promise.finallyVoid
   
 `let finallyVoid: (t<'a>, 'a => unit) => unit`  
+[!WARNING] use finally_ [!WARNING]  
+
+
+### Promise.finally_
+  
+`let finally_: (t<'a>, 'a => unit) => unit`  
 
 
 ### Promise.sequence
   
 `let sequence: (array<'a>, 'a => t<'b>) => t<array<'b>>`  
-
+Take an array of input, and a function that makes a promise producing b from one a.\nStart with a Promise that produces an empty array.\nWalk along the array of inputs, with the accumulator being a promise that produces the array of earlier inputs.\nbind off of that promise with a function that produces your Promise<b>, then map that Promise to append it on the existing array of bs - AxM\n
 
 ### Promise.errorToExn
   
@@ -2014,22 +2018,22 @@ invalid kind
 
 ### PromiseResult.map
   
-`let map: (t<'o, 'e>, 'o => 'or) => Promise.t<result<'or, 'e>>`  
+`let map: (t<'o, 'e>, 'o => 'or) => t<'or, 'e>`  
 
 
 ### PromiseResult.bind
   
-`let bind: (t<'o, 'e>, 'o => t<'or, 'e>) => Promise.t<result<'or, 'e>>`  
+`let bind: (t<'o, 'e>, 'o => t<'or, 'e>) => t<'or, 'e>`  
 
 
 ### PromiseResult.tap
   
-`let tap: (t<'o, 'e>, 'o => unit) => Promise.t<result<'o, 'e>>`  
+`let tap: (t<'o, 'e>, 'o => unit) => t<'o, 'e>`  
 
 
 ### PromiseResult.tapBind
   
-`let tapBind: (t<'o, 'e>, 'o => t<'a, 'b>) => Promise.t<result<'o, 'e>>`  
+`let tapBind: (t<'o, 'e>, 'o => t<'a, 'b>) => t<'o, 'e>`  
 
 
 ### PromiseResult.lift
@@ -2180,9 +2184,15 @@ invalid kind
 `let toOption: result<'ok, 'err> => option<'ok>`  
 
 
+### Result.or
+  
+`let or: (result<'ok, 'err>, 'ok) => 'ok`  
+
+
 ### Result.getWithDefault
   
 `let getWithDefault: (result<'ok, 'err>, 'ok) => 'ok`  
+[!WARNING] use or [!WARNING]  
 
 
 ### Result.resolve
@@ -2203,7 +2213,7 @@ invalid kind
 ### Result.predicate
   
 `let predicate: (bool, 'v, 'err) => t<'v, 'err>`  
-
+Keep the value v if true, otherwise return None
 
 ### Result.toOptionError
   
@@ -2329,7 +2339,7 @@ invalid kind
 ### Result.all2
   
 `let all2: (t<'a, 'err>, t<'b, 'err>) => t<('a, 'b), 'err>`  
-
+\nGiven results with different OK types but the same error type,\nReturn an Ok result with the tuple of all three if they are all Ok\nor return the first error\n
 
 ### Result.all3
   
@@ -2555,7 +2565,7 @@ invalid kind
 # Tuple
 
 
-
+Both flattened and recursive definitions of Tuple, with equivalent operators for both.
 
 ### Tuple.fst2
   
@@ -3018,7 +3028,7 @@ invalid kind
 ### Tuple.mono
   
 `let mono: (('a, 'b) => 'c, 'c => 'd, 'a, 'b) => 'd`  
-
+render a polymorphic tuple to an array
 
 ### Tuple.all
   

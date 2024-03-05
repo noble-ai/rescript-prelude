@@ -15,22 +15,22 @@
 
 ### PromiseResult.map
   
-`let map: (t<'o, 'e>, 'o => 'or) => Promise.t<result<'or, 'e>>`  
+`let map: (t<'o, 'e>, 'o => 'or) => t<'or, 'e>`  
 
 
 ### PromiseResult.bind
   
-`let bind: (t<'o, 'e>, 'o => t<'or, 'e>) => Promise.t<result<'or, 'e>>`  
+`let bind: (t<'o, 'e>, 'o => t<'or, 'e>) => t<'or, 'e>`  
 
 
 ### PromiseResult.tap
   
-`let tap: (t<'o, 'e>, 'o => unit) => Promise.t<result<'o, 'e>>`  
+`let tap: (t<'o, 'e>, 'o => unit) => t<'o, 'e>`  
 
 
 ### PromiseResult.tapBind
   
-`let tapBind: (t<'o, 'e>, 'o => t<'a, 'b>) => Promise.t<result<'o, 'e>>`  
+`let tapBind: (t<'o, 'e>, 'o => t<'a, 'b>) => t<'o, 'e>`  
 
 
 ### PromiseResult.lift

@@ -223,7 +223,6 @@ let partitionIndexEvenOdd = (arr: t<'a>): evenOdd<'a> => {
   {even, odd}
 }
 
-// make each pair in a cross product of two arrays
 let cross = (a, b) => a->bind(a => b->map(b => (a, b)))
 
 let splitAt = (arr: t<'a>, i: int) => {
@@ -253,7 +252,6 @@ let concat: (t<'a>, t<'a>) => t<'a> = %raw(`(a, b) => [...a, ...b]`)
 let append: (t<'a>, 'a) => t<'a> = %raw(`(arr, a) => [...arr, a]`)
 let prepend: ('a, t<'a>) => t<'a> = %raw(`(a, arr) => [a, ...arr]`)
 
-// @send external splice: (t<'a>, int, int, t<'a>) => t<'a> = "toSpliced"
 let splice: (t<'a>, ~index: int, ~remove: int, t<'a>) => t<'a> = (arr, ~index, ~remove, items) => {
   arr
   ->clone
@@ -269,7 +267,6 @@ let replace = (arr: t<'a>, el: 'a, index: int): t<'a> => {
 }
 
 let insert = (arr: t<'a>, el: 'a, index: int): t<'a> => {
-  // Allows insert at end of array, but avoids sparse array
   if index < 0 || index > (arr->length + 1) {
     arr
   } else {
@@ -285,7 +282,6 @@ let remove = (arr: t<'a>, index: int): t<'a> => {
   }
 }
 
-// generate combinations of a fixed size
 let rec combinations = (arr: t<'a>, ~begin=[], ~size: int) => {
   switch size {
   | 0 => [begin]
@@ -299,5 +295,4 @@ let rec combinations = (arr: t<'a>, ~begin=[], ~size: int) => {
   }
 }
 
-// FIXME: this is just here to exercise the docs framework - AxM
 let generateCombinations = combinations

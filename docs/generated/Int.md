@@ -33,11 +33,6 @@
 `let fromFloat: float => option<t>`  
 
 
-### Int.initZeroDigitHelper
-  
-`let initZeroDigitHelper: int => string`  
-
-
 ### Int.min
   
 `let min: (int, int) => int`  

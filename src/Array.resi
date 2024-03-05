@@ -214,7 +214,7 @@ type evenOdd<'a> = {
 @deprecated("Use partition with your own predicate instead")
 let partitionIndexEvenOdd : (t<'a>) => evenOdd<'a>
 
-// make each pair in a cross product of two arrays
+@ocaml.doc("make each pair in a cross product of two arrays")
 let cross: (t<'a>, t<'b>) => t<('a, 'b)>
 
 let splitAt: (t<'a>, int) => (t<'a>, t<'a>)
@@ -237,11 +237,12 @@ let splice: (t<'a>, ~index: int, ~remove: int, t<'a>) => t<'a>
 
 let replace: (t<'a>, 'a, int) => t<'a>
 
+@ocaml.doc("Allows insert at end of array, but avoids sparse array")
 let insert : (t<'a>, 'a, int) => t<'a>
 
 let remove : (t<'a>, int) => t<'a>
 
-// generate combinations of a fixed size
+@ocalm.doc("generate combinations of a fixed size")
 let combinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>
 
 @deprecated("Use combinations instead")

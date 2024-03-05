@@ -1,5 +1,3 @@
-///doc/ # Regex
-
 type t = Js.Re.t
 type result = Js.Re.result
 @get external groups: Js.Re.result => option<Dict.t<Null.t<string>>> = "groups"

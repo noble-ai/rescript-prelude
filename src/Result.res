@@ -1,4 +1,3 @@
-///doc/ # Result
 include Belt.Result
 
 let ok = x => Ok(x)
@@ -44,12 +43,14 @@ let toOption = (a: result<'ok, 'err>): option<'ok> => {
   }
 }
 
-let getWithDefault = (a: result<'ok, 'err>, b: 'ok): 'ok => {
+let or = (a: result<'ok, 'err>, b: 'ok): 'ok => {
   switch a {
     | Ok(a) => a
     | _ => b
   }
 }
+
+let getWithDefault = or
 
 let resolve = (a: result<'ok, 'err>, ~ok: 'ok => 'b, ~err: 'err => 'b): 'b => {
   switch a {
@@ -73,7 +74,6 @@ let invert = (res: t<'a, 'b>): t<'b, 'a> => {
   }
 }
 
-// Keep the value v if true, otherwise return None
 let predicate = (b: bool, v: 'v, e: 'err): t<'v, 'err> => {
   if b {
     Ok(v)
@@ -245,9 +245,6 @@ let all2 : (
     }
   }
 
-// Given three results with different OK types but the same error type,
-// Return an Ok result with the tuple of all three if they are all Ok
-// or return the first error
 let all3 : (
   t<'a, 'err>,
   t<'b, 'err>,

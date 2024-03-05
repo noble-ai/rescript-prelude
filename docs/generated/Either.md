@@ -1,7 +1,7 @@
 # Either
 
 
-
+With regards to [Purescript Either](https://pursuit.purescript.org/packages/purescript-either/6.1.0/docs/Data.Either)
 
 ### Either.t
   
@@ -20,7 +20,7 @@
 
 ### Either.map
   
-`let map: 'r. ('l => 'lo, t<'l, 'r>) => t<'lo, 'r>`  
+`let map: ('l => 'lo, t<'l, 'r>) => t<'lo, 'r>`  
 
 
 ### Either.bimap
@@ -40,7 +40,7 @@
 
 ### Either.Nested
   
-  
+Recursive construction of multi value either, terminated with unit  
 ### Either.Nested.t1
   
 `type t1<'a> = t<'a, unit>`  

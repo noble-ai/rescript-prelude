@@ -1,6 +1,3 @@
-///doc/ # Tuple
-
-// This module contains both flattened and recursive definitions of Tuple, with equivalent operators for both.
 
 let fst2 = ((a,_)) => a
 let snd2 = ((_,b)) => b
@@ -75,10 +72,8 @@ let reverse5 = ((a, b, c, d, e)) => (e, d, c, b, a)
 let reverse6 = ((a, b, c, d, e, f)) => (f, e, d, c, b, a)
 let reverse7 = ((a, b, c, d, e, f, g)) => (g, f, e, d, c, b, a)
 
-// render a polymorphic tuple to an array
 let mono = (napply, toList) => (f, t) => napply(f, t)->toList
 
-// Some conveinences for tests
 let all = (napply, toList) => (f, t) => napply(f, t)->toList->Array.all(x => x)
 let some = (napply, toList) => (f, t) => napply(f, t)->toList->Array.some(x => x)
 

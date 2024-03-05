@@ -103,9 +103,15 @@
 `let toOption: result<'ok, 'err> => option<'ok>`  
 
 
+### Result.or
+  
+`let or: (result<'ok, 'err>, 'ok) => 'ok`  
+
+
 ### Result.getWithDefault
   
 `let getWithDefault: (result<'ok, 'err>, 'ok) => 'ok`  
+[!WARNING] use or [!WARNING]  
 
 
 ### Result.resolve
@@ -126,7 +132,7 @@
 ### Result.predicate
   
 `let predicate: (bool, 'v, 'err) => t<'v, 'err>`  
-
+Keep the value v if true, otherwise return None
 
 ### Result.toOptionError
   
@@ -252,7 +258,7 @@
 ### Result.all2
   
 `let all2: (t<'a, 'err>, t<'b, 'err>) => t<('a, 'b), 'err>`  
-
+\nGiven results with different OK types but the same error type,\nReturn an Ok result with the tuple of all three if they are all Ok\nor return the first error\n
 
 ### Result.all3
   

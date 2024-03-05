@@ -42,15 +42,6 @@ let reduce = (map, f, acc) => {
 	->Array.reduce( (acc, (key, value)) => f(acc, key, value), acc)
 }
 
-///doc/ ## Complex Map
-///doc/ Since the key comaprisons in Js map are vaguely by reference,
-///doc/ they play poorly with rescripts ease of creating new values.
-///doc/ So for situations where you have a key that is not a primitive
-///doc/ where the value and reference comparison collapse
-///doc/ Use Complex Map, providing a string representation of your type
-///doc/ So we can track those key values separate from the value values
-///doc/ and pretend everything is the same
-
 module Complex = {
   module type Key = {
     type t

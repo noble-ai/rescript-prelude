@@ -28,6 +28,16 @@ let delete: (t<'a, 'b>, 'a) => t<'a, 'b>
 let clear: 'a => t<'b, 'c>
 let reduce: (t<'key, 'value>, ('acc, 'key, 'value) => 'acc, 'acc) =>'acc 
 
+@ocaml.doc("
+Since the key comaprisons in Js map are vaguely by reference,
+they play poorly with rescripts ease of creating new values.
+So for situations where you have a key that is not a primitive
+where the value and reference comparison collapse
+Use Complex Map, providing a string representation of your type
+So we can track those key values separate from the value values
+and pretend everything is the same
+")
+
 module Complex: {
   module type Key = {
     type t

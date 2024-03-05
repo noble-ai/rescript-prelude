@@ -1,20 +1,11 @@
-///doc/ # Option
-
 include Belt.Option
-
-
-@deprecated("please use map->or for ease of refactoring")
-let mapWithDefault = mapWithDefault
-
-let or = (a, b) => switch a {
-  | Some(a) => a
-  | None => b
-  }
-
-@deprecated("please use or")
-let getWithDefault = or 
-
 type t<'a> = option<'a>
+
+let return = a => Some(a)
+external returnArray: array<'a> => array<option<'a>> = "%identity"
+
+let some = (a: 'a): option<'a> => Some(a)
+let none = (_o: option<'a>) => None
 
 external void: option<'a> => unit = "%identity"
 
@@ -24,15 +15,25 @@ let getExn = (a, ~desc="undefined getExn") =>
   | None => Exn.raise(desc)
   }
 
-let return = a => Some(a)
 
-let bind = (a: option<'a>, fn: 'a => option<'b>): option<'b> => a->flatMap(fn)
-let join = (a: option<option<'a>>): option<'a> => a->bind(x => x)
+let or = (a, b) => switch a {
+  | Some(a) => a
+  | None => b
+  }
+
+let getWithDefault = or 
+
+let mapWithDefault = mapWithDefault
+
+let bind = flatMap
+
+let join = (a) => switch a {
+  | Some(Some(a)) => Some(a)
+  | _ => None
+}
 
 let const = (o, a) => o->map(_ => a)
 
-let some = (a: 'a): option<'a> => Some(a)
-let none = (_o: option<'a>) => None
 
 let apply = (f: option<'a => 'b>, x: option<'a>): option<'b> => {
   switch (f, x) {
@@ -41,7 +42,6 @@ let apply = (f: option<'a => 'b>, x: option<'a>): option<'b> => {
   }
 }
 
-// Turn a function on concrete values into an optional function. "A" for Applicative
 let liftA1 = (f: 'a => 'r): (option<'a> => option<'r>) => {
   a => {
     switch a {
@@ -162,7 +162,6 @@ let invert = (a: option<'a>, b: 'b): option<'b> => {
   }
 }
 
-// Keep the value v if true, otherwise return None
 let predicate = (v: 'v, b: 'v => bool): option<'v> => {
   if b(v) {
     Some(v)
@@ -171,13 +170,25 @@ let predicate = (v: 'v, b: 'v => bool): option<'v> => {
   }
 }
 
-// force the option to None when the predicate returns false
 let guard = (a: option<'a>, p: 'a => bool): option<'a> => {
   switch a->map(p) {
   | Some(true) => a
   | _ => None
   }
 }
+
+let first = (acc: option<'a>, a: option<'a>) =>
+  switch (acc, a) {
+  | (acc, _) if acc->isSome => acc
+  | (_, b) => b
+  }
+
+let second = (acc: option<'a>, a: option<'a>) =>
+  switch (acc, a) {
+  | (Some(_), acc) => acc
+  | (_, b) => b
+  }
+
 
 let flap0 = (f: option<() => 'b>): option<'b> => f->map(f => f())
 let flap0_ = (f: option<() => 'b>): () => f->flap0->void
@@ -190,13 +201,5 @@ let flap2_ = (f: option<('a, 'b) => 'c>, a: 'a, b: 'b): () => flap2(f,a,b)->void
 let flap3 = (f: option<('a, 'b, 'c) => 'd>, a: 'a, b: 'b, c: 'c): option<'d> => f->map(f => f(a, b, c))
 let flap3_ = (f: option<('a, 'b, 'c) => 'd>, a: 'a, b: 'b, c: 'c): () => flap3(f,a,b,c)->void
 
-// For use in Array2.reduce, take the first Some option.
-let first = (acc: option<'a>, a: option<'a>) =>
-  switch (acc, a) {
-  | (acc, _) if acc->isSome => acc
-  | (_, b) => b
-  }
-
-external returnArray: array<'a> => array<option<'a>> = "%identity"
 
 let log = (d, s) => d->tap(Js.Console.log2(s))

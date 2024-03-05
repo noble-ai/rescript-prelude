@@ -18,10 +18,16 @@ let isError: t<'ok, 'err> => bool
 let fromOption: (option<'a>, 'b) => t<'a, 'b>
 let fromOptionError: option<'a> => t<unit, 'a>
 let toOption: result<'ok, 'err> => option<'ok>
+
+let or: (result<'ok, 'err>, 'ok) => 'ok
+@deprecated("use or")
 let getWithDefault: (result<'ok, 'err>, 'ok) => 'ok
+
 let resolve: (result<'ok, 'err>, ~ok: 'ok => 'b, ~err: 'err => 'b) => 'b
 let first: (result<'ok, 'err>, result<'ok, 'err>) => result<'ok, 'err>
 let invert: t<'a, 'b> => t<'b, 'a>
+
+@ocaml.doc( "Keep the value v if true, otherwise return None")
 let predicate: (bool, 'v, 'err) => t<'v, 'err>
 let toOptionError: result<'ok, 'err> => option<'err>
 let bind: (t<'a, 'b>, 'a => t<'c, 'b>) => t<'c, 'b>
@@ -61,6 +67,12 @@ let traverse: (
   'b => t<'a, 'e>,
 ) => t<'acc, 'ecc>
 let allArray: array<t<'a, 'e>> => t<array<'a>, 'e>
+
+@ocaml.doc("
+Given results with different OK types but the same error type,
+Return an Ok result with the tuple of all three if they are all Ok
+or return the first error
+")
 let all2: (t<'a, 'err>, t<'b, 'err>) => t<('a, 'b), 'err>
 let all3: (t<'a, 'err>, t<'b, 'err>, t<'c, 'err>) => t<('a, 'b, 'c), 'err>
 let all4: (t<'a, 'err>, t<'b, 'err>, t<'c, 'err>, t<'d, 'err>) => t<('a, 'b, 'c, 'd), 'err>
