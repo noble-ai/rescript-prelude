@@ -24,5 +24,7 @@ let maxMany = Js.Math.maxMany_int
 let abs = Js.Math.abs_int
 let sign = Js.Math.sign_int
 
+let mod: (int, int) => int = (a, b) => mod(a, b)
+
 let random = Js.Math.random_int
 let toExponentialWithPrecision = x => x->toFloat->Js.Float.toExponentialWithPrecision

@@ -43,7 +43,7 @@ describe("Array", () => {
 		}
 		let result = arr->Array.keepBind(keepEven)
 		test("returns evens", () => {
-			expect(result->Array.every(x => x->String.includes(even)))->toBe(true)
+			expect(result->Array.all(x => x->String.includes(even)))->toBe(true)
 		})
 	})
 
@@ -121,13 +121,13 @@ describe("Array", () => {
 		let odd = "odd"
 		// Encode even and odds to be able to check they each get returned, not just filling with one value
 		let arr = makeArrayEvenOdd(~even, ~odd, ~length)
-		let result = arr->Array.partitionIndexEvenOdd
+		let (resultodd, resulteven) = arr->Array.partition((_, i) => Int.mod(i, 2) == 0)
 		describe("all evens are even", () => {
 			test("returns evens", () => {
-				expect(result.even->Array.every(x => x->String.includes(even)))->toBe(true)
+				expect(resulteven->Array.all(x => x->String.includes(even)))->toBe(true)
 			})
 			test("returns odds", () => {
-				expect(result.odd->Array.every(x => x->String.includes(odd)))->toBe(true)
+				expect(resultodd->Array.all(x => x->String.includes(odd)))->toBe(true)
 			})
 		})
 	})
@@ -225,13 +225,13 @@ describe("Array", () => {
 			arrays->Array.forEach(((desc, arr)) => {
 				describe( desc, () => {
 					let result = arr->Array.intercalate(inserted)
-					let {even, odd} = Array.partitionIndexEvenOdd(result)
+					let (odd, even) = result->Array.partition((_, i) => Int.mod(i, 2) == 0)
 
 					test("odd indexes equals source", () => {
 						expect(odd)->toEqual(arr)
 					})
 					test("even indexes all equal inserted", () => {
-						expect(even->Array.every(x => x == inserted))->toBeTruthy
+						expect(even->Array.all(x => x == inserted))->toBeTruthy
 					})
 				})
 			})
@@ -378,12 +378,12 @@ describe("Array", () => {
 		})
 	})
 
-	describe("#generateCombinations", () => {
+	describe("#combinations", () => {
 		describe("empty", () => {
 			let arr = []
 			let begin = []
 			let size = 3
-			let result = arr->Array.generateCombinations(~size, ~begin)
+			let result = arr->Array.combinations(~size, ~begin)
 			test("returns empty", () => {
 				expect(result)->toEqual([])
 			})
@@ -392,7 +392,7 @@ describe("Array", () => {
 			let arr = [0, 1, 2, 3, 4]
 			let begin = []
 			let size = 0
-			let result = arr->Array.generateCombinations(~size, ~begin)
+			let result = arr->Array.combinations(~size, ~begin)
 			test("returns nested empty", () => {
 				expect(result)->toEqual([[]])
 			})
@@ -413,7 +413,7 @@ describe("Array", () => {
 				[1, 3, 4],
 				[2, 3, 4],
 			]
-			let result = arr->Array.generateCombinations(~size, ~begin)
+			let result = arr->Array.combinations(~size, ~begin)
 			test("returns combinations of fixed size = 3", () => {
 				expect(result)->toEqual(expectedCombinations)
 			})

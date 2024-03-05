@@ -68,6 +68,11 @@
 `let sign: int => int`  
 
 
+### Int.mod
+  
+`let mod: (int, int) => int`  
+
+
 ### Int.random
   
 `let random: (int, int) => int`  

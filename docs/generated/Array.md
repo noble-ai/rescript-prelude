@@ -1,7 +1,7 @@
 # Array
 
 
-N+1 Array bindings.  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here.
+\n  ## N+1 Array bindings.  \n  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here. \n  Works to avoid sparse arrays for type safety. \n
 
 ### Array.t
   
@@ -32,11 +32,6 @@ Use spread operator to make a shallow copy of an array
   
 `let rangeInclusive: int => t<int>`  
 Use range instead  
-
-
-### Array.rangeInclusive
-  
-`let rangeInclusive: int => t<int>`  
 
 
 ### Array.toIterable
@@ -91,24 +86,9 @@ pass each element of an array to an effect, returning the original array
 
 ### Array.indexOf
   
-`let indexOf: (t<'a>, 'a) => int`  
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
-
-### Array.indexOf
-  
 `let indexOf: (t<'a>, 'a) => option<int>`  
 Use findIndex instead: This has vague comparison semantics  
 indexOf uses strict equality for comparison which does not play well with rescripts more-but-not-clearly value based situations.[{a: 3}, {a: 4}].indexOf({a: 4}) == -1.
-
-### Array.y
-  
-`let y: unit => option<int>`  
-
-
-### Array.findIndex
-  
-`let findIndex: (t<'a>, 'a => bool) => int`  
-[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
 ### Array.findIndex
   
@@ -124,12 +104,12 @@ Use findIndex instead
 ### Array.all
   
 `let all: (t<'a>, 'a => bool) => bool`  
-Renamed to match Promise, Result, Option
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
 
 ### Array.alli
   
 `let alli: (t<'a>, ('a, int) => bool) => bool`  
-Renamed to match Promise, Result, Option
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
 
 ### Array.every
   
@@ -160,7 +140,7 @@ Use alli instead: : Renamed to match Promise, Result, etc
 
 ### Array.Mut
   
-  
+Mutating functions on Array.t  
 ### Array.Mut.sort
   
 `let sort: t<'a> => t<'a>`  
@@ -216,6 +196,11 @@ Use alli instead: : Renamed to match Promise, Result, etc
 `let set: (t<'a>, int, 'a) => t<'a>`  
 
 
+### Array.setExn
+  
+`let setExn: (t<'a>, int, 'a) => t<'a>`  
+
+
 ### Array.map
   
 `let map: (t<'a>, 'a => 'b) => t<'b>`  
@@ -234,16 +219,11 @@ return a new array with each element replaced with `b`
 ### Array.bind
   
 `let bind: (t<'a>, 'a => t<'b>) => t<'b>`  
-Renamed to match Promise, Result, Option
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap)
 
 ### Array.bindi
   
 `let bindi: (t<'a>, ('a, int) => t<'b>) => t<'b>`  
-
-
-### Array.identity
-  
-`let identity: 'a => 'a`  
 
 
 ### Array.join
@@ -269,7 +249,7 @@ Renamed to match Promise, Result, Option
 
 ### Array.keepMap
   
-`let keepMap: (t<'a>, 'a => option<'b>) => array<'b>`  
+`let keepMap: (t<'a>, 'a => option<'b>) => t<'b>`  
 
 
 ### Array.catOptions
@@ -292,6 +272,11 @@ Renamed to match Promise, Result, Option
 `let firsti: (t<'a>, ('a, int) => bool) => option<'a>`  
 
 
+### Array.firstOption
+  
+`let firstOption: (t<'a>, 'a => option<'b>) => option<'b>`  
+
+
 ### Array.find
   
 `let find: (t<'a>, 'a => bool) => option<'a>`  
@@ -302,11 +287,6 @@ Use first instead
   
 `let findi: (t<'a>, ('a, int) => bool) => option<'a>`  
 Use firsti instead  
-
-
-### Array.firstOption
-  
-`let firstOption: (t<'a>, 'a => option<'b>) => option<'b>`  
 
 
 ### Array.firstEq
@@ -327,7 +307,7 @@ Use firsti instead
 ### Array.findBy
   
 `let findBy: (t<'a>, 'a => 'b, 'b) => option<'a>`  
-Use firstBy instead  
+Use first instead  
 
 
 ### Array.last
@@ -355,7 +335,7 @@ Use lasti instead
 ### Array.joinWith
   
 `let joinWith: (t<string>, string) => string`  
-Join is a common term for monads, and this function is fairly specific so give it the more specific name
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
 
 ### Array.reduce
   
@@ -412,9 +392,9 @@ return first element
 `let stem: t<'a> => t<'a>`  
 all but last element
 
-### Array.last
+### Array.leaf
   
-`let last: t<'a> => option<'a>`  
+`let leaf: t<'a> => option<'a>`  
 
 
 ### Array.take
