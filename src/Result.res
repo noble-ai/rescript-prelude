@@ -331,3 +331,5 @@ let all = (arr: array<t<'a, 'err>>): t<array<'a>, 'err> => {
     Ok([])
   )
 }
+
+let log = (res: t<'ok, 'err>, str: string) => Js.log2(str, res)
