@@ -1,13 +1,14 @@
 open! Vitest
 
-module ToStringTuple = {
+module KeyTuple = {
 	type t = (int ,int)
 	let toString = (t: t) => {
 			let (a, b) = t
 			`(${a->Int.toString},${b->Int.toString})`
 	}
 }
-module MapTuple = Map.Complex(ToStringTuple)
+
+module MapTuple = Map.Complex.Make(KeyTuple)
 
 describe("Map", () => {
 	describe("#make", () => {

@@ -1,9 +1,3 @@
-///doc/ # Map
-///doc/ ## Javascript Map
-///doc/ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
-///doc/ Keys are compared by a specific method almost by-reference.
-///doc/ Maps modifications are implemented mutably, so get/set/delete/clear include a clone.
-
 type t<'key, 'value>
 
 @new external make: unit => t<'k, 'v> = "Map"
@@ -57,85 +51,85 @@ let reduce = (map, f, acc) => {
 ///doc/ So we can track those key values separate from the value values
 ///doc/ and pretend everything is the same
 
-module type ToString = {
-  type t
-  let toString: t => string
-}
-
-module Complex = (ToString: ToString) => {
-  type keys = t<string, ToString.t>
-  type values<'value> = t<string, 'value>
-  type t<'value> = (keys, values<'value>)
-  let fromArray = iterable => {
-    let keys: keys = make()
-    let values: values<'value> = make()
-    iterable->Array.forEach(((key, value)) => {
-      Mut.set(keys, ToString.toString(key), key)
-      Mut.set(values, ToString.toString(key), value)
-    })
-    (keys, values)
-  }
-  let make = () => (make(), make())
-  let size = ((keys, _)) => keys->size
-  let entries = ((keys, values)) => {
-    let result = []
-    keys->forEach((value, key, _) => {
-      let _ = result->Array.Mut.push((value, values->getUnsafe(key)))
-    })
-    result->Array.toIterable
+module Complex = {
+  module type Key = {
+    type t
+    let toString: t => string
   }
 
-  let keys = ((keys, _)) => keys->values
-  let values = ((_, vs)) => vs->values
-  let forEach = ((keys, values) as map, f) => {
-    keys->forEach((key, value) => {
-      f(value, values->getUnsafe(key), map)
-    })
-  }
-
-  let has = ((keys, _), key) => keys->has(ToString.toString(key))
-  let get = ((_, values), key) => values->get(ToString.toString(key))
-  let getUnsafe = ((_, values), key) => values->getUnsafe(ToString.toString(key))
-
-  module Mut = {
-    let set = ((keys, values), key, value) => {
-      Mut.set(keys, ToString.toString(key), key)
-      Mut.set(values, ToString.toString(key), value)
+  module Make = (Key: Key) => {
+    type keys = t<string, Key.t>
+    type values<'value> = t<string, 'value>
+    type t<'value> = (keys, values<'value>)
+    let fromArray = iterable => {
+      let keys: keys = make()
+      let values: values<'value> = make()
+      iterable->Array.forEach(((key, value)) => {
+        Mut.set(keys, Key.toString(key), key)
+        Mut.set(values, Key.toString(key), value)
+      })
+      (keys, values)
     }
-    let delete = ((keys, values), key) => {
-      Mut.delete(keys, ToString.toString(key))
-      Mut.delete(values, ToString.toString(key))
+    let make = () => (make(), make())
+    let size = ((keys, _)) => keys->size
+    let entries = ((keys, values)) => {
+      let result = []
+      keys->forEach((value, key, _) => {
+        let _ = result->Array.Mut.push((value, values->getUnsafe(key)))
+      })
+      result->Array.toIterable
     }
-    let clear = ((keys, values)) => {
-      Mut.clear(keys)
-      Mut.clear(values)
+
+    let keys = ((keys, _)) => keys->values
+    let values = ((_, vs)) => vs->values
+    let forEach: (t<'value>, (Key.t, 'value, t<'value>) => unit) => unit = ((keys, values) as map, f) => {
+      keys->forEach((value, key, _) => f(value, values->getUnsafe(key), map))
+    }
+
+    let has = ((keys, _), key) => keys->has(Key.toString(key))
+    let get = ((_, values), key) => values->get(Key.toString(key))
+    let getUnsafe = ((_, values), key) => values->getUnsafe(Key.toString(key))
+
+    module Mut = {
+      let set = ((keys, values), key, value) => {
+        Mut.set(keys, Key.toString(key), key)
+        Mut.set(values, Key.toString(key), value)
+      }
+      let delete = ((keys, values), key) => {
+        Mut.delete(keys, Key.toString(key))
+        Mut.delete(values, Key.toString(key))
+      }
+      let clear: t<'value> => unit = ((keys, values)) => {
+        Mut.clear(keys)
+        Mut.clear(values)
+      }
+    }
+
+    let clone = ((keys, values)) => {
+      let keys = keys->clone
+      let values = values->clone
+      (keys, values)
+    }
+
+    let set = (map, key, value): t<'a> => {
+      let new = map->clone
+      new->Mut.set(key, value)
+      new
+    }
+
+    let delete = (map, key): t<'a> => {
+      let new = map->clone
+      new->Mut.delete(key)
+      new
+    }
+
+    let clear: t<'value> => t<'value> = _ => make()
+
+    let reduce = (map, f, acc) => {
+      map
+      ->entries
+      ->Array.fromIterable
+      ->Array.reduce( (acc, (key, value)) => f(acc, key, value), acc)
     }
   }
-
-  let clone = ((keys, values)) => {
-    let keys = keys->clone
-    let values = values->clone
-    (keys, values)
-  }
-
-  let set = (map, key, value): t<'a> => {
-    let new = map->clone
-    new->Mut.set(key, value)
-    new
-  }
-
-  let delete = (map, key): t<'a> => {
-    let new = map->clone
-    new->Mut.delete(key)
-    new
-  }
-
-  let clear = make
-
-	let reduce = (map, f, acc) => {
-		map
-		->entries
-		->Array.fromIterable
-		->Array.reduce( (acc, (key, value)) => f(acc, key, value), acc)
-	}
 }

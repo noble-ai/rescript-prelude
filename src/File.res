@@ -1,4 +1,3 @@
-///doc/ # File
 type t
 
 @new external make: unit => t = "File"
@@ -14,8 +13,6 @@ external tToJsT: t => Js.t<'a> = "%identity"
 @send external slice: (t, ~start: int=?, ~end: int=?, ~contentType: string=?, ()) => t = "slice"
 
 type stream
-// Transforms the File into a ReadableStream that can be used to read the File contents.
-// Transforms the File into a stream and reads it to completion. It returns a promise that resolves with a USVString (text).
 @send external stream: (t) => stream = "stream"
 
 @send external text: (t) => string = "text"

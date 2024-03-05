@@ -28,11 +28,6 @@
 `let mapU: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>`  
 
 
-### Result.map
-  
-`let map: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>`  
-
-
 ### Result.flatMapU
   
 `let flatMapU: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>`  
@@ -41,21 +36,6 @@
 ### Result.flatMap
   
 `let flatMap: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>`  
-
-
-### Result.getWithDefault
-  
-`let getWithDefault: (t<'a, 'b>, 'a) => 'a`  
-
-
-### Result.isOk
-  
-`let isOk: t<'a, 'b> => bool`  
-
-
-### Result.isError
-  
-`let isError: t<'a, 'b> => bool`  
 
 
 ### Result.eqU
@@ -158,6 +138,14 @@
 `let bind: (t<'a, 'b>, 'a => t<'c, 'b>) => t<'c, 'b>`  
 
 
+### Result.bindError
+  
+`let bindError: (
+  t<'ok, 'error>,
+  'error => t<'ok, 'errorx>,
+) => t<'ok, 'errorx>`  
+
+
 ### Result.guard
   
 `let guard: (t<'ok, 'error>, 'ok => bool, 'error) => t<'ok, 'error>`  
@@ -166,11 +154,6 @@
 ### Result.guardOpt
   
 `let guardOpt: (t<'ok, 'error>, 'ok => option<'error>) => t<'ok, 'error>`  
-
-
-### Result.map
-  
-`let map: (t<'ok, 'error>, 'ok => 'ox) => t<'ox, 'error>`  
 
 
 ### Result.const
@@ -316,4 +299,9 @@
 ### Result.all
   
 `let all: array<t<'a, 'err>> => t<array<'a>, 'err>`  
+
+
+### Result.log
+  
+`let log: ('a, 'b) => 'a`  
 

@@ -817,7 +817,7 @@ Use spread operator to prepend an element to an array
 ### File.stream
   
 `let stream: t => stream`  
-
+\n Transforms the File into a ReadableStream that can be used to read the File contents.\n Transforms the File into a stream and reads it to completion. It returns a promise that resolves with a USVString (text).\n
 
 ### File.text
   
@@ -1280,7 +1280,7 @@ Use spread operator to prepend an element to an array
 # Map
 
 
-
+\n## Javascript Map\n[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)\nKeys are compared by a specific method almost by-reference.\nMaps modifications are implemented mutably, so get/set/delete/clear include a clone.\n
 
 ### Map.t
   
@@ -1377,145 +1377,125 @@ Use spread operator to prepend an element to an array
 
 ### Map.reduce
   
-`let reduce: (t<'a, 'b>, ('c, 'a, 'b) => 'c, 'c) => 'c`  
-
-
-### Map.ToString
-  
-  
-### Map.ToString.t
-  
-`type t`  
-
-
-### Map.ToString.toString
-  
-`let toString: t => string`  
+`let reduce: (
+  t<'key, 'value>,
+  ('acc, 'key, 'value) => 'acc,
+  'acc,
+) => 'acc`  
 
 
 ### Map.Complex
   
   
-### Map.Complex.keys
+### Map.Complex.Make
   
-`type keys = t<string, ToString.t>`  
+  
+### Map.Complex.Make.keys
+  
+`type keys = t<string, Key.t>`  
 
 
-### Map.Complex.values
+### Map.Complex.Make.values
   
 `type values<'value> = t<string, 'value>`  
 
 
-### Map.Complex.t
+### Map.Complex.Make.t
   
 `type t<'value> = (keys, values<'value>)`  
 
 
-### Map.Complex.fromArray
+### Map.Complex.Make.fromArray
   
-`let fromArray: Array.t<(ToString.t, 'value)> => (keys, values<'value>)`  
+`let fromArray: Array.t<(Key.t, 'value)> => t<'value>`  
 
 
-### Map.Complex.make
+### Map.Complex.Make.make
   
-`let make: unit => (t<'a, 'b>, t<'c, 'd>)`  
+`let make: unit => t<'value>`  
 
 
-### Map.Complex.size
+### Map.Complex.Make.size
   
-`let size: ((t<'a, 'b>, 'c)) => int`  
+`let size: t<'value> => int`  
 
 
-### Map.Complex.entries
+### Map.Complex.Make.entries
   
-`let entries: ((t<'a, 'b>, t<'a, 'c>)) => Iterable.t<('b, 'c)>`  
+`let entries: t<'value> => Iterable.t<(Key.t, 'value)>`  
 
 
-### Map.Complex.keys
+### Map.Complex.Make.keys
   
-`let keys: ((t<'a, 'b>, 'c)) => Iterable.t<'b>`  
+`let keys: t<'value> => Iterable.t<Key.t>`  
 
 
-### Map.Complex.values
+### Map.Complex.Make.values
   
-`let values: (('a, t<'b, 'c>)) => Iterable.t<'c>`  
+`let values: t<'value> => Iterable.t<'value>`  
 
 
-### Map.Complex.forEach
+### Map.Complex.Make.forEach
   
-`let forEach: (
-  (t<'a, 'b>, t<'b, 'c>),
-  ('a, 'c, (t<'a, 'b>, t<'b, 'c>), t<'a, 'b>) => unit,
-) => unit`  
+`let forEach: (t<'value>, (Key.t, 'value, t<'value>) => unit) => unit`  
 
 
-### Map.Complex.has
+### Map.Complex.Make.has
   
-`let has: ((t<string, 'a>, 'b), ToString.t) => bool`  
+`let has: (t<'value>, Key.t) => bool`  
 
 
-### Map.Complex.get
+### Map.Complex.Make.get
   
-`let get: (('a, t<string, 'b>), ToString.t) => option<'b>`  
+`let get: (t<'value>, Key.t) => option<'value>`  
 
 
-### Map.Complex.getUnsafe
+### Map.Complex.Make.getUnsafe
   
-`let getUnsafe: (('a, t<string, 'b>), ToString.t) => 'b`  
+`let getUnsafe: (t<'value>, Key.t) => 'value`  
 
 
-### Map.Complex.Mut
+### Map.Complex.Make.Mut
   
   
-### Map.Complex.Mut.set
+### Map.Complex.Make.Mut.set
   
-`let set: (
-  (t<string, ToString.t>, t<string, 'a>),
-  ToString.t,
-  'a,
-) => unit`  
+`let set: (t<'value>, Key.t, 'value) => unit`  
 
 
-### Map.Complex.Mut.delete
+### Map.Complex.Make.Mut.delete
   
-`let delete: ((t<string, 'a>, t<string, 'b>), ToString.t) => unit`  
+`let delete: (t<'value>, Key.t) => unit`  
 
 
-### Map.Complex.Mut.clear
+### Map.Complex.Make.Mut.clear
   
-`let clear: ((t<'a, 'b>, t<'c, 'd>)) => unit`  
+`let clear: t<'value> => unit`  
 
 
-### Map.Complex.clone
+### Map.Complex.Make.clone
   
-`let clone: ((t<'a, 'b>, t<'c, 'd>)) => (t<'a, 'b>, t<'c, 'd>)`  
+`let clone: t<'value> => t<'value>`  
 
 
-### Map.Complex.set
+### Map.Complex.Make.set
   
-`let set: (
-  (t<string, ToString.t>, t<string, 'a>),
-  ToString.t,
-  'a,
-) => t<'a>`  
+`let set: (t<'value>, Key.t, 'value) => t<'value>`  
 
 
-### Map.Complex.delete
+### Map.Complex.Make.delete
   
-`let delete: (
-  (t<string, ToString.t>, t<string, 'a>),
-  ToString.t,
-) => t<'a>`  
+`let delete: (t<'value>, Key.t) => t<'value>`  
 
 
-### Map.Complex.clear
+### Map.Complex.Make.clear
   
-`let clear: unit => (t<'a, 'b>, t<'c, 'd>)`  
+`let clear: t<'value> => t<'value>`  
 
 
-### Map.Complex.reduce
+### Map.Complex.Make.reduce
   
-`let reduce: ((t<'a, 'b>, t<'a, 'c>), ('d, 'b, 'c) => 'd, 'd) => 'd`  
+`let reduce: (t<'value>, ('acc, Key.t, 'value) => 'acc, 'acc) => 'acc`  
 
 # Null
 
@@ -2125,11 +2105,6 @@ invalid kind
 `let mapU: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>`  
 
 
-### Result.map
-  
-`let map: (t<'a, 'c>, 'a => 'b) => t<'b, 'c>`  
-
-
 ### Result.flatMapU
   
 `let flatMapU: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>`  
@@ -2138,21 +2113,6 @@ invalid kind
 ### Result.flatMap
   
 `let flatMap: (t<'a, 'c>, 'a => t<'b, 'c>) => t<'b, 'c>`  
-
-
-### Result.getWithDefault
-  
-`let getWithDefault: (t<'a, 'b>, 'a) => 'a`  
-
-
-### Result.isOk
-  
-`let isOk: t<'a, 'b> => bool`  
-
-
-### Result.isError
-  
-`let isError: t<'a, 'b> => bool`  
 
 
 ### Result.eqU
@@ -2255,6 +2215,14 @@ invalid kind
 `let bind: (t<'a, 'b>, 'a => t<'c, 'b>) => t<'c, 'b>`  
 
 
+### Result.bindError
+  
+`let bindError: (
+  t<'ok, 'error>,
+  'error => t<'ok, 'errorx>,
+) => t<'ok, 'errorx>`  
+
+
 ### Result.guard
   
 `let guard: (t<'ok, 'error>, 'ok => bool, 'error) => t<'ok, 'error>`  
@@ -2263,11 +2231,6 @@ invalid kind
 ### Result.guardOpt
   
 `let guardOpt: (t<'ok, 'error>, 'ok => option<'error>) => t<'ok, 'error>`  
-
-
-### Result.map
-  
-`let map: (t<'ok, 'error>, 'ok => 'ox) => t<'ox, 'error>`  
 
 
 ### Result.const
@@ -2413,6 +2376,11 @@ invalid kind
 ### Result.all
   
 `let all: array<t<'a, 'err>> => t<array<'a>, 'err>`  
+
+
+### Result.log
+  
+`let log: ('a, 'b) => 'a`  
 
 # String
 
