@@ -33,6 +33,12 @@ let tapBind = (p: t<'a>, fn: 'a => t<'b>): t<'a> => {
 @scope("Promise") @val external all5: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>)) => t<('a, 'b, 'c, 'd, 'e)> = "all"
 
 @send external catch: (t<'a>, 'error => t<'b>) => t<'b> = "catch"
+let tapCatch = (p: t<'a>, fn: 'error => unit): t<'a> => {
+  p->catch(err => {
+    fn(err)
+    reject(err)
+  })
+}
 
 @send external finally: (t<'a>, () => unit) => t<'a> = "finally"
 

@@ -27,6 +27,8 @@ let all4: ((t<'a>, t<'b>, t<'c>, t<'d>)) => t<('a, 'b, 'c, 'd)>
 let all5: ((t<'a>, t<'b>, t<'c>, t<'d>, t<'e>)) => t<('a, 'b, 'c, 'd, 'e)>
 
 let catch: (t<'a>, 'error => t<'b>) => t<'b> 
+let tapCatch: (t<'a>, 'error => unit) => t<'a>
+
 let finally: (t<'a>, () => unit) => t<'a> 
 @deprecated("use finally_")
 let finallyVoid: (t<'a>, 'a => unit) => unit
