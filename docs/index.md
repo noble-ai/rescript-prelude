@@ -31,7 +31,7 @@ Use spread operator to make a shallow copy of an array
 ### Array.rangeInclusive
   
 `let rangeInclusive: int => t<int>`  
-Use range instead  
+[!WARNING] Use range instead [!WARNING]  
 
 
 ### Array.toIterable
@@ -87,7 +87,7 @@ pass each element of an array to an effect, returning the original array
 ### Array.indexOf
   
 `let indexOf: (t<'a>, 'a) => option<int>`  
-Use findIndex instead: This has vague comparison semantics  
+[!WARNING] Use findIndex instead: This has vague comparison semantics [!WARNING]  
 indexOf uses strict equality for comparison which does not play well with rescripts more-but-not-clearly value based situations.[{a: 3}, {a: 4}].indexOf({a: 4}) == -1.
 
 ### Array.findIndex
@@ -98,7 +98,7 @@ indexOf uses strict equality for comparison which does not play well with rescri
 ### Array.getIndexBy
   
 `let getIndexBy: (t<'a>, 'a => bool) => option<int>`  
-Use findIndex instead  
+[!WARNING] Use findIndex instead [!WARNING]  
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
 ### Array.all
@@ -114,13 +114,13 @@ Use findIndex instead
 ### Array.every
   
 `let every: (t<'a>, 'a => bool) => bool`  
-Use all instead: Renamed to match Promise, Result, etc  
+[!WARNING] Use all instead: Renamed to match Promise, Result, etc [!WARNING]  
 
 
 ### Array.everyi
   
 `let everyi: (t<'a>, ('a, int) => bool) => bool`  
-Use alli instead: : Renamed to match Promise, Result, etc  
+[!WARNING] Use alli instead: : Renamed to match Promise, Result, etc [!WARNING]  
 
 
 ### Array.some
@@ -234,7 +234,7 @@ Collapse an array of arrays by one degree
 ### Array.flatten
   
 `let flatten: t<t<'a>> => t<'a>`  
-use join instead  
+[!WARNING] use join instead [!WARNING]  
 Renamed to match Promise, Result, Option
 
 ### Array.filter
@@ -280,13 +280,13 @@ Renamed to match Promise, Result, Option
 ### Array.find
   
 `let find: (t<'a>, 'a => bool) => option<'a>`  
-Use first instead  
+[!WARNING] Use first instead [!WARNING]  
 
 
 ### Array.findi
   
 `let findi: (t<'a>, ('a, int) => bool) => option<'a>`  
-Use firsti instead  
+[!WARNING] Use firsti instead [!WARNING]  
 
 
 ### Array.firstEq
@@ -307,7 +307,7 @@ Use firsti instead
 ### Array.findBy
   
 `let findBy: (t<'a>, 'a => 'b, 'b) => option<'a>`  
-Use first instead  
+[!WARNING] Use first instead [!WARNING]  
 
 
 ### Array.last
@@ -323,13 +323,13 @@ Use first instead
 ### Array.findLast
   
 `let findLast: (t<'a>, 'a => bool) => option<'a>`  
-Use last instead  
+[!WARNING] Use last instead [!WARNING]  
 
 
 ### Array.findLasti
   
 `let findLasti: (t<'a>, ('a, int) => bool) => option<'a>`  
-Use lasti instead  
+[!WARNING] Use lasti instead [!WARNING]  
 
 
 ### Array.joinWith
@@ -420,7 +420,7 @@ all but last element
 ### Array.partitionIndexEvenOdd
   
 `let partitionIndexEvenOdd: t<'a> => evenOdd<'a>`  
-Use partition with your own predicate instead  
+[!WARNING] Use partition with your own predicate instead [!WARNING]  
 
 
 ### Array.cross
@@ -486,7 +486,7 @@ Use spread operator to prepend an element to an array
 ### Array.generateCombinations
   
 `let generateCombinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>`  
-Use combinations instead  
+[!WARNING] Use combinations instead [!WARNING]  
 
 # Date
 
@@ -1663,7 +1663,7 @@ Use combinations instead
 ### Option.mapWithDefault
   
 `let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-please use map->getWithDefault for ease of refactoring  
+[!WARNING] please use map->getWithDefault for ease of refactoring [!WARNING]  
 
 
 ### Option.t

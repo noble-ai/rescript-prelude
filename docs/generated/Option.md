@@ -106,7 +106,7 @@
 ### Option.mapWithDefault
   
 `let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-please use map->getWithDefault for ease of refactoring  
+[!WARNING] please use map->getWithDefault for ease of refactoring [!WARNING]  
 
 
 ### Option.t
