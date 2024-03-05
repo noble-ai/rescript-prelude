@@ -2,8 +2,17 @@
 
 include Belt.Option
 
-@deprecated("please use map->getWithDefault for ease of refactoring")
+
+@deprecated("please use map->or for ease of refactoring")
 let mapWithDefault = mapWithDefault
+
+let or = (a, b) => switch a {
+  | Some(a) => a
+  | None => b
+  }
+
+@deprecated("please use or")
+let getWithDefault = or 
 
 type t<'a> = option<'a>
 

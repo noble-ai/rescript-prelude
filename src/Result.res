@@ -86,6 +86,13 @@ let toOptionError = (a: result<'ok, 'err>): option<'err> => a->invert->toOption
 
 let bind = flatMap
 
+let bindError = (r: t<'ok, 'error>, fn: 'error => t<'ok, 'errorx>): t<'ok, 'errorx> => {
+  switch r {
+  | Ok(r) => Ok(r)
+  | Error(e) => fn(e)
+  }
+}
+
 let guard = (r: t<'ok, 'error>, fn: 'ok => bool, err: 'err) => {
   r->bind( (r) => {
     if fn(r) {
