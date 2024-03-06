@@ -27,3 +27,4 @@ let boolean = Js.Json.boolean
 let classify = Js.Json.classify
 let null = Js.Json.null
 let array = Js.Json.array
+let number = Js.Json.number

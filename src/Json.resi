@@ -24,3 +24,4 @@ let boolean: bool => Js.Json.t
 let classify: Js.Json.t => Js.Json.tagged_t
 let null: Js.Json.t
 let array: array<Js.Json.t> => Js.Json.t
+let number: float => Js.Json.t
