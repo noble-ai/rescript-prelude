@@ -51,13 +51,15 @@
 ### Option.getWithDefault
   
 `let getWithDefault: (option<'a>, 'a) => 'a`  
-[!WARNING] please use or [!WARNING]  
+> please use or
+{: .block-warning }  
 
 
 ### Option.mapWithDefault
   
 `let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-[!WARNING] please use map->or for ease of refactoring [!WARNING]  
+> please use map->or for ease of refactoring
+{: .block-warning }  
 
 
 ### Option.mapWithDefaultU
@@ -183,13 +185,15 @@ Turn a function on concrete values into an optional function. \"A\" for Applicat
 ### Option.applyFirst
   
 `let applyFirst: (option<'a>, option<'b>) => option<'a>`  
-[!WARNING] use first [!WARNING]  
+> use first
+{: .block-warning }  
 
 
 ### Option.applySecond
   
 `let applySecond: (option<'a>, option<'b>) => option<'b>`  
-[!WARNING] use second [!WARNING]  
+> use second
+{: .block-warning }  
 
 
 ### Option.all2

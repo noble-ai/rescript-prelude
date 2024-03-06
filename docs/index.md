@@ -31,7 +31,8 @@ Use spread operator to make a shallow copy of an array
 ### Array.rangeInclusive
   
 `let rangeInclusive: int => t<int>`  
-[!WARNING] Use range instead [!WARNING]  
+> Use range instead
+{: .block-warning }  
 
 
 ### Array.toIterable
@@ -87,7 +88,8 @@ pass each element of an array to an effect, returning the original array
 ### Array.indexOf
   
 `let indexOf: (t<'a>, 'a) => option<int>`  
-[!WARNING] Use findIndex instead: This has vague comparison semantics [!WARNING]  
+> Use findIndex instead: This has vague comparison semantics
+{: .block-warning }  
 indexOf uses strict equality for comparison which does not play well with rescripts more-but-not-clearly value based situations.[{a: 3}, {a: 4}].indexOf({a: 4}) == -1.
 
 ### Array.findIndex
@@ -98,7 +100,8 @@ indexOf uses strict equality for comparison which does not play well with rescri
 ### Array.getIndexBy
   
 `let getIndexBy: (t<'a>, 'a => bool) => option<int>`  
-[!WARNING] Use findIndex instead [!WARNING]  
+> Use findIndex instead
+{: .block-warning }  
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
 ### Array.all
@@ -114,13 +117,15 @@ indexOf uses strict equality for comparison which does not play well with rescri
 ### Array.every
   
 `let every: (t<'a>, 'a => bool) => bool`  
-[!WARNING] Use all instead: Renamed to match Promise, Result, etc [!WARNING]  
+> Use all instead: Renamed to match Promise, Result, etc
+{: .block-warning }  
 
 
 ### Array.everyi
   
 `let everyi: (t<'a>, ('a, int) => bool) => bool`  
-[!WARNING] Use alli instead: : Renamed to match Promise, Result, etc [!WARNING]  
+> Use alli instead: : Renamed to match Promise, Result, etc
+{: .block-warning }  
 
 
 ### Array.some
@@ -234,7 +239,8 @@ Collapse an array of arrays by one degree
 ### Array.flatten
   
 `let flatten: t<t<'a>> => t<'a>`  
-[!WARNING] use join instead [!WARNING]  
+> use join instead
+{: .block-warning }  
 Renamed to match Promise, Result, Option
 
 ### Array.filter
@@ -280,13 +286,15 @@ Renamed to match Promise, Result, Option
 ### Array.find
   
 `let find: (t<'a>, 'a => bool) => option<'a>`  
-[!WARNING] Use first instead [!WARNING]  
+> Use first instead
+{: .block-warning }  
 
 
 ### Array.findi
   
 `let findi: (t<'a>, ('a, int) => bool) => option<'a>`  
-[!WARNING] Use firsti instead [!WARNING]  
+> Use firsti instead
+{: .block-warning }  
 
 
 ### Array.firstEq
@@ -307,7 +315,8 @@ Renamed to match Promise, Result, Option
 ### Array.findBy
   
 `let findBy: (t<'a>, 'a => 'b, 'b) => option<'a>`  
-[!WARNING] Use first instead [!WARNING]  
+> Use first instead
+{: .block-warning }  
 
 
 ### Array.last
@@ -323,13 +332,15 @@ Renamed to match Promise, Result, Option
 ### Array.findLast
   
 `let findLast: (t<'a>, 'a => bool) => option<'a>`  
-[!WARNING] Use last instead [!WARNING]  
+> Use last instead
+{: .block-warning }  
 
 
 ### Array.findLasti
   
 `let findLasti: (t<'a>, ('a, int) => bool) => option<'a>`  
-[!WARNING] Use lasti instead [!WARNING]  
+> Use lasti instead
+{: .block-warning }  
 
 
 ### Array.joinWith
@@ -420,7 +431,8 @@ all but last element
 ### Array.partitionIndexEvenOdd
   
 `let partitionIndexEvenOdd: t<'a> => evenOdd<'a>`  
-[!WARNING] Use partition with your own predicate instead [!WARNING]  
+> Use partition with your own predicate instead
+{: .block-warning }  
 
 
 ### Array.cross
@@ -486,7 +498,8 @@ Allows insert at end of array, but avoids sparse array
 ### Array.generateCombinations
   
 `let generateCombinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>`  
-[!WARNING] Use combinations instead [!WARNING]  
+> Use combinations instead
+{: .block-warning }  
 
 # Date
 
@@ -998,6 +1011,26 @@ Recursive construction of multi value either, terminated with unit
   
 `let pow: (~base: float, ~exp: float) => float`  
 
+
+### Float.log
+  
+`let log: float => float`  
+
+
+### Float.log2
+  
+`let log2: float => float`  
+
+
+### Float.log10
+  
+`let log10: float => float`  
+
+
+### Float.log1p
+  
+`let log1p: float => float`  
+
 # FormData
 
 
@@ -1271,6 +1304,11 @@ Recursive construction of multi value either, terminated with unit
 ### Json.array
   
 `let array: array<Js.Json.t> => Js.Json.t`  
+
+
+### Json.number
+  
+`let number: float => Js.Json.t`  
 
 # Map
 
@@ -1583,13 +1621,15 @@ Recursive construction of multi value either, terminated with unit
 ### Option.getWithDefault
   
 `let getWithDefault: (option<'a>, 'a) => 'a`  
-[!WARNING] please use or [!WARNING]  
+> please use or
+{: .block-warning }  
 
 
 ### Option.mapWithDefault
   
 `let mapWithDefault: (option<'a>, 'b, 'a => 'b) => 'b`  
-[!WARNING] please use map->or for ease of refactoring [!WARNING]  
+> please use map->or for ease of refactoring
+{: .block-warning }  
 
 
 ### Option.mapWithDefaultU
@@ -1715,13 +1755,15 @@ Turn a function on concrete values into an optional function. \"A\" for Applicat
 ### Option.applyFirst
   
 `let applyFirst: (option<'a>, option<'b>) => option<'a>`  
-[!WARNING] use first [!WARNING]  
+> use first
+{: .block-warning }  
 
 
 ### Option.applySecond
   
 `let applySecond: (option<'a>, option<'b>) => option<'b>`  
-[!WARNING] use second [!WARNING]  
+> use second
+{: .block-warning }  
 
 
 ### Option.all2
@@ -1956,6 +1998,11 @@ Call fn with the value from the promise, ignoring its return. but only continue 
 `let catch: (t<'a>, 'error => t<'b>) => t<'b>`  
 
 
+### Promise.tapCatch
+  
+`let tapCatch: (t<'a>, 'error => unit) => t<'a>`  
+
+
 ### Promise.finally
   
 `let finally: (t<'a>, unit => unit) => t<'a>`  
@@ -1964,7 +2011,8 @@ Call fn with the value from the promise, ignoring its return. but only continue 
 ### Promise.finallyVoid
   
 `let finallyVoid: (t<'a>, 'a => unit) => unit`  
-[!WARNING] use finally_ [!WARNING]  
+> use finally_
+{: .block-warning }  
 
 
 ### Promise.finally_
@@ -2192,7 +2240,8 @@ Take an array of input, and a function that makes a promise producing b from one
 ### Result.getWithDefault
   
 `let getWithDefault: (result<'ok, 'err>, 'ok) => 'ok`  
-[!WARNING] use or [!WARNING]  
+> use or
+{: .block-warning }  
 
 
 ### Result.resolve
@@ -2565,7 +2614,7 @@ Keep the value v if true, otherwise return None
 # Tuple
 
 
-Both flattened and recursive definitions of Tuple, with equivalent operators for both.
+
 
 ### Tuple.fst2
   
@@ -3028,7 +3077,7 @@ Both flattened and recursive definitions of Tuple, with equivalent operators for
 ### Tuple.mono
   
 `let mono: (('a, 'b) => 'c, 'c => 'd, 'a, 'b) => 'd`  
-render a polymorphic tuple to an array
+
 
 ### Tuple.all
   

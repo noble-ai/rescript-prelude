@@ -111,7 +111,8 @@
 ### Result.getWithDefault
   
 `let getWithDefault: (result<'ok, 'err>, 'ok) => 'ok`  
-[!WARNING] use or [!WARNING]  
+> use or
+{: .block-warning }  
 
 
 ### Result.resolve

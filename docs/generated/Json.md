@@ -125,3 +125,8 @@
   
 `let array: array<Js.Json.t> => Js.Json.t`  
 
+
+### Json.number
+  
+`let number: float => Js.Json.t`  
+

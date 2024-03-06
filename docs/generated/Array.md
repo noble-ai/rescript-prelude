@@ -31,7 +31,8 @@ Use spread operator to make a shallow copy of an array
 ### Array.rangeInclusive
   
 `let rangeInclusive: int => t<int>`  
-[!WARNING] Use range instead [!WARNING]  
+> Use range instead
+{: .block-warning }  
 
 
 ### Array.toIterable
@@ -87,7 +88,8 @@ pass each element of an array to an effect, returning the original array
 ### Array.indexOf
   
 `let indexOf: (t<'a>, 'a) => option<int>`  
-[!WARNING] Use findIndex instead: This has vague comparison semantics [!WARNING]  
+> Use findIndex instead: This has vague comparison semantics
+{: .block-warning }  
 indexOf uses strict equality for comparison which does not play well with rescripts more-but-not-clearly value based situations.[{a: 3}, {a: 4}].indexOf({a: 4}) == -1.
 
 ### Array.findIndex
@@ -98,7 +100,8 @@ indexOf uses strict equality for comparison which does not play well with rescri
 ### Array.getIndexBy
   
 `let getIndexBy: (t<'a>, 'a => bool) => option<int>`  
-[!WARNING] Use findIndex instead [!WARNING]  
+> Use findIndex instead
+{: .block-warning }  
 [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
 ### Array.all
@@ -114,13 +117,15 @@ indexOf uses strict equality for comparison which does not play well with rescri
 ### Array.every
   
 `let every: (t<'a>, 'a => bool) => bool`  
-[!WARNING] Use all instead: Renamed to match Promise, Result, etc [!WARNING]  
+> Use all instead: Renamed to match Promise, Result, etc
+{: .block-warning }  
 
 
 ### Array.everyi
   
 `let everyi: (t<'a>, ('a, int) => bool) => bool`  
-[!WARNING] Use alli instead: : Renamed to match Promise, Result, etc [!WARNING]  
+> Use alli instead: : Renamed to match Promise, Result, etc
+{: .block-warning }  
 
 
 ### Array.some
@@ -234,7 +239,8 @@ Collapse an array of arrays by one degree
 ### Array.flatten
   
 `let flatten: t<t<'a>> => t<'a>`  
-[!WARNING] use join instead [!WARNING]  
+> use join instead
+{: .block-warning }  
 Renamed to match Promise, Result, Option
 
 ### Array.filter
@@ -280,13 +286,15 @@ Renamed to match Promise, Result, Option
 ### Array.find
   
 `let find: (t<'a>, 'a => bool) => option<'a>`  
-[!WARNING] Use first instead [!WARNING]  
+> Use first instead
+{: .block-warning }  
 
 
 ### Array.findi
   
 `let findi: (t<'a>, ('a, int) => bool) => option<'a>`  
-[!WARNING] Use firsti instead [!WARNING]  
+> Use firsti instead
+{: .block-warning }  
 
 
 ### Array.firstEq
@@ -307,7 +315,8 @@ Renamed to match Promise, Result, Option
 ### Array.findBy
   
 `let findBy: (t<'a>, 'a => 'b, 'b) => option<'a>`  
-[!WARNING] Use first instead [!WARNING]  
+> Use first instead
+{: .block-warning }  
 
 
 ### Array.last
@@ -323,13 +332,15 @@ Renamed to match Promise, Result, Option
 ### Array.findLast
   
 `let findLast: (t<'a>, 'a => bool) => option<'a>`  
-[!WARNING] Use last instead [!WARNING]  
+> Use last instead
+{: .block-warning }  
 
 
 ### Array.findLasti
   
 `let findLasti: (t<'a>, ('a, int) => bool) => option<'a>`  
-[!WARNING] Use lasti instead [!WARNING]  
+> Use lasti instead
+{: .block-warning }  
 
 
 ### Array.joinWith
@@ -420,7 +431,8 @@ all but last element
 ### Array.partitionIndexEvenOdd
   
 `let partitionIndexEvenOdd: t<'a> => evenOdd<'a>`  
-[!WARNING] Use partition with your own predicate instead [!WARNING]  
+> Use partition with your own predicate instead
+{: .block-warning }  
 
 
 ### Array.cross
@@ -486,5 +498,6 @@ Allows insert at end of array, but avoids sparse array
 ### Array.generateCombinations
   
 `let generateCombinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>`  
-[!WARNING] Use combinations instead [!WARNING]  
+> Use combinations instead
+{: .block-warning }  
 

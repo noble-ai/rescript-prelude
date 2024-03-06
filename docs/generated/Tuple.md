@@ -1,7 +1,7 @@
 # Tuple
 
 
-Both flattened and recursive definitions of Tuple, with equivalent operators for both.
+
 
 ### Tuple.fst2
   
@@ -464,7 +464,7 @@ Both flattened and recursive definitions of Tuple, with equivalent operators for
 ### Tuple.mono
   
 `let mono: (('a, 'b) => 'c, 'c => 'd, 'a, 'b) => 'd`  
-render a polymorphic tuple to an array
+
 
 ### Tuple.all
   

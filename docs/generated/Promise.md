@@ -92,6 +92,11 @@ Call fn with the value from the promise, ignoring its return. but only continue 
 `let catch: (t<'a>, 'error => t<'b>) => t<'b>`  
 
 
+### Promise.tapCatch
+  
+`let tapCatch: (t<'a>, 'error => unit) => t<'a>`  
+
+
 ### Promise.finally
   
 `let finally: (t<'a>, unit => unit) => t<'a>`  
@@ -100,7 +105,8 @@ Call fn with the value from the promise, ignoring its return. but only continue 
 ### Promise.finallyVoid
   
 `let finallyVoid: (t<'a>, 'a => unit) => unit`  
-[!WARNING] use finally_ [!WARNING]  
+> use finally_
+{: .block-warning }  
 
 
 ### Promise.finally_

@@ -160,3 +160,23 @@
   
 `let pow: (~base: float, ~exp: float) => float`  
 
+
+### Float.log
+  
+`let log: float => float`  
+
+
+### Float.log2
+  
+`let log2: float => float`  
+
+
+### Float.log10
+  
+`let log10: float => float`  
+
+
+### Float.log1p
+  
+`let log1p: float => float`  
+
