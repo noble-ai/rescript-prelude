@@ -1,4 +1,4 @@
-# rescript-prelude
+# Rescript Prelude
 NobleAI Opinionated Prelude for unification of Belt/Js and other antique core libraries.
 
 # Style 
