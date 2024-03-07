@@ -1,7 +1,11 @@
 # Array
 
 
-\n  ## N+1 Array bindings.  \n  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here. \n  Works to avoid sparse arrays for type safety. \n
+  
+  ## N+1 Array bindings.    
+  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here.   
+  Works to avoid sparse arrays for type safety.   
+
 
 ### Array.t
   
@@ -830,7 +834,10 @@ Recursive construction of multi value either, terminated with unit
 ### File.stream
   
 `let stream: t => stream`  
-\n Transforms the File into a ReadableStream that can be used to read the File contents.\n Transforms the File into a stream and reads it to completion. It returns a promise that resolves with a USVString (text).\n
+  
+ Transforms the File into a ReadableStream that can be used to read the File contents.  
+ Transforms the File into a stream and reads it to completion. It returns a promise that resolves with a USVString (text).  
+
 
 ### File.text
   
@@ -1313,7 +1320,12 @@ Recursive construction of multi value either, terminated with unit
 # Map
 
 
-\n## Javascript Map\n[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)\nKeys are compared by a specific method almost by-reference.\nMaps modifications are implemented mutably, so get/set/delete/clear include a clone.\n
+  
+## Javascript Map  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)  
+Keys are compared by a specific method almost by-reference.  
+Maps modifications are implemented mutably, so get/set/delete/clear include a clone.  
+
 
 ### Map.t
   
@@ -1419,7 +1431,15 @@ Recursive construction of multi value either, terminated with unit
 
 ### Map.Complex
   
-\nSince the key comaprisons in Js map are vaguely by reference,\nthey play poorly with rescripts ease of creating new values.\nSo for situations where you have a key that is not a primitive\nwhere the value and reference comparison collapse\nUse Complex Map, providing a string representation of your type\nSo we can track those key values separate from the value values\nand pretend everything is the same\n  
+  
+Since the key comaprisons in Js map are vaguely by reference,  
+they play poorly with rescripts ease of creating new values.  
+So for situations where you have a key that is not a primitive  
+where the value and reference comparison collapse  
+Use Complex Map, providing a string representation of your type  
+So we can track those key values separate from the value values  
+and pretend everything is the same  
+  
 ### Map.Complex.Make
   
   
@@ -1949,7 +1969,9 @@ invalid kind
 ### Promise.const
   
 `let const: (t<'x>, 'b) => t<'b>`  
-Take a promise and replace its yielded value with a constant\nWe use this for casting to unit mostly, but it's useful for other things too\n
+Take a promise and replace its yielded value with a constant  
+We use this for casting to unit mostly, but it's useful for other things too  
+
 
 ### Promise.bind
   
@@ -2023,7 +2045,11 @@ Call fn with the value from the promise, ignoring its return. but only continue 
 ### Promise.sequence
   
 `let sequence: (array<'a>, 'a => t<'b>) => t<array<'b>>`  
-Take an array of input, and a function that makes a promise producing b from one a.\nStart with a Promise that produces an empty array.\nWalk along the array of inputs, with the accumulator being a promise that produces the array of earlier inputs.\nbind off of that promise with a function that produces your Promise<b>, then map that Promise to append it on the existing array of bs - AxM\n
+Take an array of input, and a function that makes a promise producing b from one a.  
+Start with a Promise that produces an empty array.  
+Walk along the array of inputs, with the accumulator being a promise that produces the array of earlier inputs.  
+bind off of that promise with a function that produces your Promise<b>, then map that Promise to append it on the existing array of bs - AxM  
+
 
 ### Promise.errorToExn
   
@@ -2388,7 +2414,11 @@ Keep the value v if true, otherwise return None
 ### Result.all2
   
 `let all2: (t<'a, 'err>, t<'b, 'err>) => t<('a, 'b), 'err>`  
-\nGiven results with different OK types but the same error type,\nReturn an Ok result with the tuple of all three if they are all Ok\nor return the first error\n
+  
+Given results with different OK types but the same error type,  
+Return an Ok result with the tuple of all three if they are all Ok  
+or return the first error  
+
 
 ### Result.all3
   

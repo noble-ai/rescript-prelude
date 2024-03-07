@@ -1,7 +1,12 @@
 # Map
 
 
-\n## Javascript Map\n[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)\nKeys are compared by a specific method almost by-reference.\nMaps modifications are implemented mutably, so get/set/delete/clear include a clone.\n
+  
+## Javascript Map  
+[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)  
+Keys are compared by a specific method almost by-reference.  
+Maps modifications are implemented mutably, so get/set/delete/clear include a clone.  
+
 
 ### Map.t
   
@@ -107,7 +112,15 @@
 
 ### Map.Complex
   
-\nSince the key comaprisons in Js map are vaguely by reference,\nthey play poorly with rescripts ease of creating new values.\nSo for situations where you have a key that is not a primitive\nwhere the value and reference comparison collapse\nUse Complex Map, providing a string representation of your type\nSo we can track those key values separate from the value values\nand pretend everything is the same\n  
+  
+Since the key comaprisons in Js map are vaguely by reference,  
+they play poorly with rescripts ease of creating new values.  
+So for situations where you have a key that is not a primitive  
+where the value and reference comparison collapse  
+Use Complex Map, providing a string representation of your type  
+So we can track those key values separate from the value values  
+and pretend everything is the same  
+  
 ### Map.Complex.Make
   
   

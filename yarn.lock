@@ -122,10 +122,10 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz#d7c6e6755c78567a951e04ab52ef0fd26de59f32"
   integrity sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
 
-"@nobleai/rescript-documentation@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@nobleai/rescript-documentation/-/rescript-documentation-0.7.0.tgz#a954287cc173d45d081250809f7445b86502422c"
-  integrity sha512-Tp3bxuN4nGF9eVIl5Bp9H0VKq9ajjs/9mT6U0Q+oVJvG7AyGb10EmUzRFDfjrId7wFDczmD+iBMH4KY3h/xGug==
+"@nobleai/rescript-documentation@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@nobleai/rescript-documentation/-/rescript-documentation-0.7.1.tgz#497f5caa00dd7fc39a1dc37ff6128bbca5d2ee1c"
+  integrity sha512-KnBp26SIlVaSuJuCYOCQbkcgIkUhjkUWQdkbYsbx9XShc+ZhI3/R/68FKrx45Filaeeo5C+wXoFsFac+HJmcyg==
   dependencies:
     "@nobleai/rescript-prelude" "^0.7.0"
     lodash "4.17.21"

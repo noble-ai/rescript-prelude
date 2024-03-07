@@ -1,7 +1,11 @@
 # Array
 
 
-\n  ## N+1 Array bindings.  \n  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here. \n  Works to avoid sparse arrays for type safety. \n
+  
+  ## N+1 Array bindings.    
+  Moderately opinionated to avoid some of the inspecific nature of primitive js functions, and make naming more explicit or consistent with other modules here.   
+  Works to avoid sparse arrays for type safety.   
+
 
 ### Array.t
   

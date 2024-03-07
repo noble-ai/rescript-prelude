@@ -43,7 +43,9 @@
 ### Promise.const
   
 `let const: (t<'x>, 'b) => t<'b>`  
-Take a promise and replace its yielded value with a constant\nWe use this for casting to unit mostly, but it's useful for other things too\n
+Take a promise and replace its yielded value with a constant  
+We use this for casting to unit mostly, but it's useful for other things too  
+
 
 ### Promise.bind
   
@@ -117,7 +119,11 @@ Call fn with the value from the promise, ignoring its return. but only continue 
 ### Promise.sequence
   
 `let sequence: (array<'a>, 'a => t<'b>) => t<array<'b>>`  
-Take an array of input, and a function that makes a promise producing b from one a.\nStart with a Promise that produces an empty array.\nWalk along the array of inputs, with the accumulator being a promise that produces the array of earlier inputs.\nbind off of that promise with a function that produces your Promise<b>, then map that Promise to append it on the existing array of bs - AxM\n
+Take an array of input, and a function that makes a promise producing b from one a.  
+Start with a Promise that produces an empty array.  
+Walk along the array of inputs, with the accumulator being a promise that produces the array of earlier inputs.  
+bind off of that promise with a function that produces your Promise<b>, then map that Promise to append it on the existing array of bs - AxM  
+
 
 ### Promise.errorToExn
   

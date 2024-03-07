@@ -259,7 +259,11 @@ Keep the value v if true, otherwise return None
 ### Result.all2
   
 `let all2: (t<'a, 'err>, t<'b, 'err>) => t<('a, 'b), 'err>`  
-\nGiven results with different OK types but the same error type,\nReturn an Ok result with the tuple of all three if they are all Ok\nor return the first error\n
+  
+Given results with different OK types but the same error type,  
+Return an Ok result with the tuple of all three if they are all Ok  
+or return the first error  
+
 
 ### Result.all3
   

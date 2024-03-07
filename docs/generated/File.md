@@ -67,7 +67,10 @@
 ### File.stream
   
 `let stream: t => stream`  
-\n Transforms the File into a ReadableStream that can be used to read the File contents.\n Transforms the File into a stream and reads it to completion. It returns a promise that resolves with a USVString (text).\n
+  
+ Transforms the File into a ReadableStream that can be used to read the File contents.  
+ Transforms the File into a stream and reads it to completion. It returns a promise that resolves with a USVString (text).  
+
 
 ### File.text
   
