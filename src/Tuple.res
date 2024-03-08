@@ -297,8 +297,8 @@ module Nested = {
 		external reverse: t<'a> => t<'a> = "%identity"
 		let show: (t<'a>) => string = ((a, ())) => `(${a})`
 
-		let zip = (a: t<'aa>,  b: t<'ba>)
-			: t<('aa, 'ba)> => {
+		let zip = (a: t<'aa>,  b: t<'ba>) : t<('aa, 'ba)> => {
+
 			return(x => y => (x, y))
 			->napply(a)
 			->napply(b)
@@ -335,11 +335,10 @@ module Nested = {
 		let reverse: (t<'a, 'b>) => t<'b, 'a> = ((a, (b, ()))) => make(b, a)
 		let show: (t<'a, 'b>) => string = ((a, (b, ()))) => `(${a}, ${b})`
 		
-		let zip = (a: t<'aa, 'ab>,  b: t<'ba, 'bb>)
-			: t<('aa, 'ba), ('ab, 'bb)> => {
-			return(x => y => (x, y))
-			->napply(a)
-			->napply(b)
+		let zip = (a: t<'aa, 'ab>,  b: t<'ba, 'bb>): t<('aa, 'ba), ('ab, 'bb)> => {
+			let (ha, ta) = a
+			let (hb, tb) = b
+			((ha, hb), Tuple1.zip(ta, tb))
 		}
 
 	
@@ -374,11 +373,10 @@ module Nested = {
 		let reverse: (t<'a, 'b, 'c>) => t<'c, 'b, 'a> = ((a, (b, (c, ())))) => make(c, b, a)
 		let show: (t<'a, 'b, 'c>) => string = ((a, rest)) => `(${a}, ${Tuple2.show(rest)})`
 
-		let zip = (a: t<'aa, 'ab, 'ac>,  b: t<'ba, 'bb, 'bc>)
-			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc)> => {
-			return(x => y => (x, y))
-			->napply(a)
-			->napply(b)
+		let zip = (a: t<'aa, 'ab, 'ac>,  b: t<'ba, 'bb, 'bc>) : t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc)> => {
+			let (ha, ta) = a
+			let (hb, tb) = b
+			((ha, hb), Tuple2.zip(ta, tb))
 		}
 
 		
@@ -414,11 +412,10 @@ module Nested = {
 		let reverse: (t<'a, 'b, 'c, 'd>) => t<'d, 'c, 'b, 'a> = ((a, (b, (c, (d, ()))))) => make(d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd>) => string = ((a, rest)) => `(${a}, ${Tuple3.show(rest)})`
 		
-		let zip = (a: t<'aa, 'ab, 'ac, 'ad>,  b: t<'ba, 'bb, 'bc, 'bd>)
-			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd)> => {
-			return(x => y => (x, y))
-			->napply(a)
-			->napply(b)
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad>,  b: t<'ba, 'bb, 'bc, 'bd>) : t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd)> => {
+			let (ha, ta) = a
+			let (hb, tb) = b
+			((ha, hb), Tuple3.zip(ta, tb))
 		}
 
 		
@@ -456,11 +453,10 @@ module Nested = {
 		let reverse: (t<'a, 'b, 'c, 'd, 'e>) => t<'e, 'd, 'c, 'b, 'a> = ((a, (b, (c, (d, (e, ())))))) => make(e, d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd, 'e>) => string = ((a, rest)) => `(${a}, ${Tuple4.show(rest)})`
 		
-		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae>,  b: t<'ba, 'bb, 'bc, 'bd, 'be>)
-			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be)> => {
-			return(x => y => (x, y))
-			->napply(a)
-			->napply(b)
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae>,  b: t<'ba, 'bb, 'bc, 'bd, 'be>) : t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be)> => {
+			let (ha, ta) = a
+			let (hb, tb) = b
+			((ha, hb), Tuple4.zip(ta, tb))
 		}
 
 		
@@ -503,11 +499,10 @@ module Nested = {
 		let reverse: (t<'a, 'b, 'c, 'd, 'e, 'f>) => t<'f, 'e, 'd, 'c, 'b, 'a> = ((a, (b, (c, (d, (e, (f, ()))))))) => make(f, e, d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd, 'e, 'f>) => string = ((a, rest)) => `(${a}, ${Tuple5.show(rest)})`
 
-		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae, 'af>,  b: t<'ba, 'bb, 'bc, 'bd, 'be, 'bf>)
-			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be), ('af, 'bf)> => {
-			return(x => y => (x, y))
-			->napply(a)
-			->napply(b)
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae, 'af>,  b: t<'ba, 'bb, 'bc, 'bd, 'be, 'bf>) : t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be), ('af, 'bf)> => {
+			let (ha, ta) = a
+			let (hb, tb) = b
+			((ha, hb), Tuple5.zip(ta, tb))
 		}
 
 		
@@ -553,11 +548,10 @@ module Nested = {
 		let reverse: (t<'a, 'b, 'c, 'd, 'e, 'f, 'g>) => t<'g, 'f, 'e, 'd, 'c, 'b, 'a> = ((a, (b, (c, (d, (e, (f, (g, ())))))))) => make(g, f, e, d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd, 'e, 'f, 'g>) => string = ((a, rest)) => `(${a}, ${Tuple6.show(rest)})`
 
-		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae, 'af, 'ag>,  b: t<'ba, 'bb, 'bc, 'bd, 'be, 'bf, 'bg>)
-			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be), ('af, 'bf), ('ag, 'bg)> => {
-			return(x => y => (x, y))
-			->napply(a)
-			->napply(b)
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae, 'af, 'ag>,  b: t<'ba, 'bb, 'bc, 'bd, 'be, 'bf, 'bg>) : t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be), ('af, 'bf), ('ag, 'bg)> => {
+			let (ha, ta) = a
+			let (hb, tb) = b
+			((ha, hb), Tuple6.zip(ta, tb))
 		}
 
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
