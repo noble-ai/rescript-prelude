@@ -297,6 +297,13 @@ module Nested = {
 		external reverse: t<'a> => t<'a> = "%identity"
 		let show: (t<'a>) => string = ((a, ())) => `(${a})`
 
+		let zip = (a: t<'aa>,  b: t<'ba>)
+			: t<('aa, 'ba)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
+
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let encode = a => (a, ())
 		let decode = ((a, _)) => a
@@ -327,7 +334,15 @@ module Nested = {
 		let ncompose: (t<'fa => 'fao, 'fb => 'fbo>, t<'ga => 'fa, 'gb => 'fb>) => t<'ga => 'fao, 'gb=> 'fbo> = ((fa, (fb, ())), (ga, (gb, ()))) => make(a => a->ga->fa, b => b->gb->fb)
 		let reverse: (t<'a, 'b>) => t<'b, 'a> = ((a, (b, ()))) => make(b, a)
 		let show: (t<'a, 'b>) => string = ((a, (b, ()))) => `(${a}, ${b})`
+		
+		let zip = (a: t<'aa, 'ab>,  b: t<'ba, 'bb>)
+			: t<('aa, 'ba), ('ab, 'bb)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
 
+	
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let mono = (f, t) => napply(f, t)->toList
 		let all = (f, t) => napply(f, t)->toList->Array.all(x => x)
@@ -358,6 +373,14 @@ module Nested = {
 		let ncompose: (t<'fa => 'fao, 'fb => 'fbo, 'fc => 'fco>, t<'ga => 'fa, 'gb => 'fb, 'gc => 'fc>) => t<'ga => 'fao, 'gb=> 'fbo, 'gc => 'fco> = ((fa, (fb, (fc, ()))), (ga, (gb, (gc, ())))) => make(a => a->ga->fa, b => b->gb->fb, c => c->gc->fc)
 		let reverse: (t<'a, 'b, 'c>) => t<'c, 'b, 'a> = ((a, (b, (c, ())))) => make(c, b, a)
 		let show: (t<'a, 'b, 'c>) => string = ((a, rest)) => `(${a}, ${Tuple2.show(rest)})`
+
+		let zip = (a: t<'aa, 'ab, 'ac>,  b: t<'ba, 'bb, 'bc>)
+			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
+
 		
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let mono = (f, t) => napply(f, t)->toList
@@ -390,6 +413,14 @@ module Nested = {
 		let ncompose: (t<'fa => 'fao, 'fb => 'fbo, 'fc => 'fco, 'fd => 'fdo>, t<'ga => 'fa, 'gb => 'fb, 'gc => 'fc, 'gd => 'fd>) => t<'ga => 'fao, 'gb=> 'fbo, 'gc => 'fco, 'gd => 'fdo> = ((fa, (fb, (fc, (fd, ())))), (ga, (gb, (gc, (gd, ()))))) => make(a => a->ga->fa, b => b->gb->fb, c => c->gc->fc, d => d->gd->fd)
 		let reverse: (t<'a, 'b, 'c, 'd>) => t<'d, 'c, 'b, 'a> = ((a, (b, (c, (d, ()))))) => make(d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd>) => string = ((a, rest)) => `(${a}, ${Tuple3.show(rest)})`
+		
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad>,  b: t<'ba, 'bb, 'bc, 'bd>)
+			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
+
 		
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let mono = (f, t) => napply(f, t)->toList
@@ -424,6 +455,14 @@ module Nested = {
 		let ncompose: (t<'fa => 'fao, 'fb => 'fbo, 'fc => 'fco, 'fd => 'fdo, 'fe => 'feo>, t<'ga => 'fa, 'gb => 'fb, 'gc => 'fc, 'gd => 'fd, 'ge => 'fe>) => t<'ga => 'fao, 'gb=> 'fbo, 'gc => 'fco, 'gd => 'fdo, 'ge => 'feo> = ((fa, (fb, (fc, (fd, (fe, ()))))), (ga, (gb, (gc, (gd, (ge, ())))))) => make(a => a->ga->fa, b => b->gb->fb, c => c->gc->fc, d => d->gd->fd, e => e->ge->fe)
 		let reverse: (t<'a, 'b, 'c, 'd, 'e>) => t<'e, 'd, 'c, 'b, 'a> = ((a, (b, (c, (d, (e, ())))))) => make(e, d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd, 'e>) => string = ((a, rest)) => `(${a}, ${Tuple4.show(rest)})`
+		
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae>,  b: t<'ba, 'bb, 'bc, 'bd, 'be>)
+			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
+
 		
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let mono = (f, t) => napply(f, t)->toList
@@ -463,6 +502,14 @@ module Nested = {
 		let ncompose: (t<'fa => 'fao, 'fb => 'fbo, 'fc => 'fco, 'fd => 'fdo, 'fe => 'feo, 'ff => 'ffo>, t<'ga => 'fa, 'gb => 'fb, 'gc => 'fc, 'gd => 'fd, 'ge => 'fe, 'gf => 'ff>) => t<'ga => 'fao, 'gb=> 'fbo, 'gc => 'fco, 'gd => 'fdo, 'ge => 'feo, 'gf => 'ffo> = ((fa, (fb, (fc, (fd, (fe, (ff, ())))))), (ga, (gb, (gc, (gd, (ge, (gf, ()))))))) => make(a => a->ga->fa, b => b->gb->fb, c => c->gc->fc, d => d->gd->fd, e => e->ge->fe, f => f->gf->ff)
 		let reverse: (t<'a, 'b, 'c, 'd, 'e, 'f>) => t<'f, 'e, 'd, 'c, 'b, 'a> = ((a, (b, (c, (d, (e, (f, ()))))))) => make(f, e, d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd, 'e, 'f>) => string = ((a, rest)) => `(${a}, ${Tuple5.show(rest)})`
+
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae, 'af>,  b: t<'ba, 'bb, 'bc, 'bd, 'be, 'bf>)
+			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be), ('af, 'bf)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
+
 		
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let mono = (f, t) => napply(f, t)->toList
@@ -505,7 +552,14 @@ module Nested = {
 		let ncompose: (t<'fa => 'fao, 'fb => 'fbo, 'fc => 'fco, 'fd => 'fdo, 'fe => 'feo, 'ff => 'ffo, 'fg => 'fgo>, t<'ga => 'fa, 'gb => 'fb, 'gc => 'fc, 'gd => 'fd, 'ge => 'fe, 'gf => 'ff, 'gg => 'fg>) => t<'ga => 'fao, 'gb=> 'fbo, 'gc => 'fco, 'gd => 'fdo, 'ge => 'feo, 'gf => 'ffo, 'gg => 'fgo> = ((fa, (fb, (fc, (fd, (fe, (ff, (fg, ()))))))), (ga, (gb, (gc, (gd, (ge, (gf, (gg, ())))))))) => make(a => a->ga->fa, b => b->gb->fb, c => c->gc->fc, d => d->gd->fd, e => e->ge->fe, f => f->gf->ff, g => g->gg->fg)
 		let reverse: (t<'a, 'b, 'c, 'd, 'e, 'f, 'g>) => t<'g, 'f, 'e, 'd, 'c, 'b, 'a> = ((a, (b, (c, (d, (e, (f, (g, ())))))))) => make(g, f, e, d, c, b, a)
 		let show: (t<'a, 'b, 'c, 'd, 'e, 'f, 'g>) => string = ((a, rest)) => `(${a}, ${Tuple6.show(rest)})`
-		
+
+		let zip = (a: t<'aa, 'ab, 'ac, 'ad, 'ae, 'af, 'ag>,  b: t<'ba, 'bb, 'bc, 'bd, 'be, 'bf, 'bg>)
+			: t<('aa, 'ba), ('ab, 'bb), ('ac, 'bc), ('ad, 'bd), ('ae, 'be), ('af, 'bf), ('ag, 'bg)> => {
+			return(x => y => (x, y))
+			->napply(a)
+			->napply(b)
+		}
+
 		// Conveniences. Need to be done literally here to avoid  mutation/side-effect error
 		let mono = (f, t) => napply(f, t)->toList
 		let all = (f, t) => napply(f, t)->toList->Array.all(x => x)
