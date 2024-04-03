@@ -6,6 +6,7 @@ let snd2 = ((_,b)) => b
 // Functions are taken as named arguments so the resulting function can be piped easily.
 let mapl2 = (~f, (a,b))  => (f(a), b)
 let mapr2 = (~f, (a,b))  => (a, f(b))
+let bimap = (fa, fb, (a,b)) => (fa(a), fb(b))
 
 type t2<'a, 'z> = ('a, 'z)
 type t3<'a, 'b, 'z> = ('a, 'b, 'z)
@@ -262,6 +263,7 @@ module Nested = {
 	type tuple7<'a, 'b, 'c, 'd, 'e, 'f, 'g> = t8<'a, 'b, 'c, 'd, 'e, 'f, 'g, ()>
 	type tuple8<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h> = t9<'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, ()>
 
+	let head: (t<'a, 'b>) => 'a = ((a, _)) => a
 	let rest: (t<'a, 'b>) => 'b = ((_, z)) => z
 
 	let get1: (t2<'a, 'z>) => 'a = ((a, _)) => a
