@@ -1,6 +1,18 @@
 @deriving(accessors)
 type t<'a, 'b> = Left('a) | Right('b)
 
+let toLeft = (t: t<'a, 'b>): option<'a> => 
+	switch t {
+		| Left(a) => Some(a)
+		| Right(_) => None
+	}
+
+let toRight = (t: t<'a, 'b>): option<'b> => 
+	switch t {
+		| Left(_) => None
+		| Right(b) => Some(b)
+	}
+
 let map: type r. ('l => 'lo) => t<'l, r> => t<'lo, r> = (fn, t) => 
 	switch t {
 		| Left(l) => Left(fn(l))

@@ -2,6 +2,9 @@
 type t<'a, 'b> = Left('a) | Right('b)
 let left: 'a => t<'a, 'b>
 let right: 'b => t<'a, 'b>
+let toLeft: t<'a, 'b> => option<'a>
+let toRight: t<'a, 'b> => option<'b>
+
 let map: ('l => 'lo, t<'l, 'r>) => t<'lo, 'r>
 let bimap: ('l => 'lo, 'r => 'ro, t<'l, 'r>) => t<'lo, 'ro>
 let sequence: t<option<'a>, option<'b>> => option<t<'a, 'b>>
