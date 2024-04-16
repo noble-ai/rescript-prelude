@@ -17,18 +17,6 @@ describe("Array", () => {
 			})
 		})
 	})
-	describe("#transpose", () => {
-		let arr = [[1, 2, 3, 4],
-							 [ 4, 5, 6, 7],
-							[ 7, 8, 9, 10]]
-		let zip = Lodash.zipArray(arr)
-		test("expect transpose", () => {
-			expect(zip[0])->toEqual(Some([1, 4, 7]))
-			expect(zip[1])->toEqual(Some([2, 5, 8]))
-			expect(zip[2])->toEqual(Some([3, 6, 9]))
-			expect(zip[3])->toEqual(Some([4, 7, 10]))
-		})
-	})
 
 	describe("#keepBind", () => {
 		// Some disparate values

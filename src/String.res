@@ -44,7 +44,7 @@ let getRandomString = (): t =>
 let makeUniq = (str: t, separator: t) =>
   str
   ->Js.String2.split(separator)
-  ->Lodash.uniq
+  ->Set.unique
   ->Array.joinWith(separator)
 
 let splitByComma = (str: t) =>

@@ -1,6 +1,6 @@
 {
   "name": "@nobleai/rescript-prelude",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "description": "NobleAI optinionated frame for unifying external core libraries",
   "main": "index.js",
   "repository": "https://github.com/noble-ai/rescript-prelude",
@@ -16,11 +16,7 @@
     "pub": "yarn publish --scope nobleai --access public"
   },
   "dependencies": {
-    "@nobleai/rescript-lodash": "^4.17.21",
     "rescript": "^10.1"
-  },
-  "peerDependencies": {
-    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@nobleai/rescript-documentation": "^0.7.1",
