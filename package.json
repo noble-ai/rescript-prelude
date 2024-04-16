@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@nobleai/rescript-lodash": "^4.17.21",
-    "numeral": "^2.0.6",
     "rescript": "^10.1"
   },
   "peerDependencies": {

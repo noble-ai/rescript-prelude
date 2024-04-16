@@ -24,14 +24,6 @@ let toPrecisionWithPrecision = Js.Float.toPrecisionWithPrecision
 let positiveInfinity: float = %raw(`Number.POSITIVE_INFINITY`)
 let negativeInfinity: float = %raw(`Number.NEGATIVE_INFINITY`)
 
-@module("./Float.js") external formatNumber: (float, string) => string = "formatNumber"
-@module("./Float.js") external formatNumberDefault: (float) => string = "formatNumber"
-
-let shortenLargeFloat = (num: float): string => {
-  num >= 1000.0 ? formatNumber(num, "0.0a") : formatNumber(num, "")
-}
-
-
 external unsafeFloatToInt: float => int = "%identity"
 let round: float => int = x => x->Js.Math.round->unsafeFloatToInt
 let ceil = Js.Math.ceil_int
