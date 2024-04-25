@@ -132,6 +132,7 @@ let filter: (t<'a>, 'a => bool) => t<'a>
 let filteri: (t<'a>, ('a, int) => bool) => t<'a>
 
 let keepMap: (t<'a>, 'a => option<'b>) => t<'b>
+let keepMapi: (t<'a>, ('a, int) => option<'b>) => t<'b>
 
 let catOptions: (t<option<'a>>) => t<'a>
 

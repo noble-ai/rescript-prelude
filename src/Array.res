@@ -150,6 +150,17 @@ let keepMap = (arr, fn) => {
   v
 }
 
+let keepMapi = (arr, fn) => {
+  let v = []
+  arr->forEachi((x, i) => {
+    switch fn(x, i) {
+    | Some(y) => v->Mut.push(y)->ignore
+    | None => ()
+    }
+  })
+  v
+}
+
 let catOptions: (t<option<'a>>) => t<'a> = keepMap(_, identity)
 
 let keepBind = (a: t<option<'a>>, fn: 'a => option<'b>): t<'b> =>
