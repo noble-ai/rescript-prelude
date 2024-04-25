@@ -5,7 +5,7 @@ type t<'a>
 
 @send external has: (t<'a>, 'a) => bool = "has"
 
-@module("./Set")
+@module("./Set.js")
 external toArray: (t<'a>) => array<'a> = "toArray"
 
 @send external size: (t<'a>) => int = "size"
