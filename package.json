@@ -1,6 +1,6 @@
 {
   "name": "@nobleai/rescript-prelude",
-  "version": "0.13.3",
+  "version": "0.13.4",
   "description": "NobleAI optinionated frame for unifying external core libraries",
   "main": "index.js",
   "repository": "https://github.com/noble-ai/rescript-prelude",
