@@ -307,3 +307,21 @@ let rec combinations = (arr: t<'a>, ~begin=[], ~size: int) => {
 }
 
 let generateCombinations = combinations
+
+let traverseTuple = (arr: t<'a>, fn: 'a => ('b, 'c)): (t<'b>, t<'c>) => {
+  let a = []
+  let b = []
+  arr->forEach(x => {
+    let (x, y) = fn(x)
+    a->Mut.push(x)->ignore
+    b->Mut.push(y)->ignore
+  })
+
+  (a, b)
+}
+
+let identity = x => x
+
+let sequenceTuple = (arr: t<('a, 'b)>): (t<'a>, t<'b>) => {
+  traverseTuple(arr, identity)
+}
