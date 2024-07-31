@@ -310,16 +310,17 @@ let generateCombinations = combinations
 
 external identity: 'a => 'a = "%identity"
 
-let traverseOption = (arr: t<'a>, fn: a => option<'b>): option<t<'b>> => {
+let traverseOption = (arr: t<'a>, fn: 'a => option<'b>): option<t<'b>> => {
   let v = []
   let all = ref(true)
   arr->forEach(x => {
     switch fn(x) {
-    | Some(y) => if all.current { v->Mut.push(y)->ignore } else { () }
-    | None => { all.current = false } 
+    | Some(y) => if all.contents { v->Mut.push(y)->ignore } else { () }
+    | None => { all.contents = false } 
     }
   })
-  if all.current {
+    
+  if all.contents {
     Some(v)
   } else {
     None
@@ -340,7 +341,6 @@ let traverseTuple = (arr: t<'a>, fn: 'a => ('b, 'c)): (t<'b>, t<'c>) => {
 
   (a, b)
 }
-
 
 let sequenceTuple = (arr: t<('a, 'b)>): (t<'a>, t<'b>) => 
   traverseTuple(arr, identity)
