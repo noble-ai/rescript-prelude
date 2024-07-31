@@ -249,5 +249,8 @@ let combinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>
 @deprecated("Use combinations instead")
 let generateCombinations: (t<'a>, ~begin: t<'a>=?, ~size: int) => t<t<'a>>
 
+let traverseOption: (t<'a>, 'a => option<'b>) => option<t<'b>>
+let sequenceOption: t<option<'a>> => option<t<'a>>
+
 let traverseTuple: (t<'a>, 'a => ('b, 'c)) => (t<'b>, t<'c>)
 let sequenceTuple: (t<('a, 'b)>) => (t<'a>, t<'b>)
