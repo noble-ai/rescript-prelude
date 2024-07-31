@@ -16,4 +16,5 @@ module Tap = Tap
 module Timeout = Timeout
 module Tuple = Tuple
 module Uri = Uri
-module Console = Js.Consolemodule Set = Set
+module Console = Js.Console
+module Set = Set
